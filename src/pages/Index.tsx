@@ -5,7 +5,6 @@ import Testimonials from "@/components/Testimonials";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
-import FloatingBookButton from "@/components/FloatingBookButton";
 
 const Index = () => {
   return (
@@ -17,7 +16,6 @@ const Index = () => {
       <ContactForm />
       <Footer />
       <Chatbot />
-      <FloatingBookButton />
     </div>
   );
 };

@@ -162,9 +162,11 @@ const Chatbot = () => {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 rounded-full h-16 w-16 shadow-lg z-50 hover:scale-110 transition-transform"
+        className="fixed bottom-6 right-6 z-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-full text-base font-semibold"
+        size="lg"
       >
-        <MessageCircle className="h-6 w-6" />
+        <CalendarIcon className="h-5 w-5 mr-2" />
+        {t('bookYourStall')}
       </Button>
     );
   }
@@ -173,8 +175,8 @@ const Chatbot = () => {
     <Card className="fixed bottom-6 right-6 w-full max-w-md max-h-[600px] flex flex-col shadow-xl z-50 animate-scale-in">
       <div className="bg-primary text-primary-foreground p-4 rounded-t-lg flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <MessageCircle className="h-5 w-5" />
-          <h3 className="font-semibold">{t('chatbotTitle')}</h3>
+          <CalendarIcon className="h-5 w-5" />
+          <h3 className="font-semibold">{t('chatbotHeader')}</h3>
         </div>
         <Button
           variant="ghost"
@@ -201,7 +203,7 @@ const Chatbot = () => {
               <p className="text-sm"><strong>{t('summaryDate')}:</strong> {formData.preferredDate ? format(formData.preferredDate, "PPP") : ""}</p>
             </div>
             <p className="text-sm text-muted-foreground mb-6">
-              {t('contactSoon')}
+              {t('bookingThankYou')}
             </p>
             <Button onClick={resetForm} className="w-full">{t('bookAnother')}</Button>
           </div>

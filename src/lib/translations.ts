@@ -10,6 +10,7 @@ export const translations = {
     heroSubtitle: "Connecting farmers, women entrepreneurs & consumers directly through weekly markets",
     bookStall: "Book a Stall",
     visitMarkets: "Visit Our Markets",
+    bookYourStall: "Book Your Stall",
     
     // Markets Section
     marketsTitle: "Our Markets in Pune and Mumbai",
@@ -59,6 +60,8 @@ export const translations = {
     
     // Chatbot
     chatbotTitle: "Wingrow Assistant - Book Your Stall",
+    chatbotHeader: "Book Your Stall at Wingrow Market",
+    bookingThankYou: "Thank you for booking! Our team will contact you soon.",
     farmerName: "Farmer / Business Name",
     address: "Address",
     phoneNumber: "Phone Number",
@@ -188,6 +191,7 @@ export const translations = {
     heroSubtitle: "साप्ताहिक बाजारांद्वारे शेतकरी, महिला उद्योजक आणि ग्राहकांना थेट जोडत आहोत",
     bookStall: "स्टॉल बुक करा",
     visitMarkets: "आमच्या बाजारांना भेट द्या",
+    bookYourStall: "तुमचे स्टॉल बुक करा",
     
     // Markets Section
     marketsTitle: "पुणे आणि मुंबईतील आमचे बाजार",
@@ -237,6 +241,8 @@ export const translations = {
     
     // Chatbot
     chatbotTitle: "विंग्रो सहाय्यक - तुमचे स्टॉल बुक करा",
+    chatbotHeader: "विंग्रो मार्केटमध्ये तुमचे स्टॉल बुक करा",
+    bookingThankYou: "बुकिंगसाठी धन्यवाद! आमची टीम लवकरच तुमच्याशी संपर्क साधेल.",
     farmerName: "शेतकरी / व्यवसाय नाव",
     address: "पत्ता",
     phoneNumber: "फोन नंबर",
@@ -366,6 +372,7 @@ export const translations = {
     heroSubtitle: "साप्ताहिक बाजारों के माध्यम से किसानों, महिला उद्यमियों और उपभोक्ताओं को सीधे जोड़ना",
     bookStall: "स्टॉल बुक करें",
     visitMarkets: "हमारे बाजारों में आएं",
+    bookYourStall: "अपना स्टॉल बुक करें",
     
     // Markets Section
     marketsTitle: "पुणे और मुंबई में हमारे बाजार",
@@ -415,6 +422,8 @@ export const translations = {
     
     // Chatbot
     chatbotTitle: "विंग्रो सहायक - अपना स्टॉल बुक करें",
+    chatbotHeader: "विंग्रो मार्केट में अपना स्टॉल बुक करें",
+    bookingThankYou: "बुकिंग के लिए धन्यवाद! हमारी टीम जल्द ही आपसे संपर्क करेगी.",
     farmerName: "किसान / व्यवसाय का नाम",
     address: "पता",
     phoneNumber: "फोन नंबर",
