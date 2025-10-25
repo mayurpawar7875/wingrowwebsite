@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar, CheckCircle2, MapPin, Sparkles, Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 interface StallOption {
   type: string;
@@ -121,7 +122,15 @@ const DiwaliMarkets = () => {
         <div className="text-center mb-16 animate-fade-in">
 
           {/* Hero Carousel */}
-          <Carousel className="max-w-5xl mx-auto mb-8" opts={{ loop: true, align: "start" }}>
+          <Carousel 
+            className="max-w-5xl mx-auto mb-8" 
+            opts={{ loop: true, align: "start" }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+          >
             <CarouselContent>
               {/* Slide 1 - Festive Shopping */}
               <CarouselItem>
