@@ -46,7 +46,7 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 pb-12 bg-background">
       <div className="container px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('testimonialsTitle')}</h2>
