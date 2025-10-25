@@ -84,20 +84,41 @@ const DiwaliMarkets = () => {
   return (
     <section id="diwali-markets" className="py-20 bg-gradient-to-b from-orange-50/50 to-white dark:from-orange-950/10 dark:to-background">
       <div className="container px-4">
+        {/* Diwali Banner */}
+        <div className="bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-orange-950/30 border border-orange-200 dark:border-orange-800 rounded-2xl p-6 mb-12 animate-fade-in">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3 text-center md:text-left">
+              <Sparkles className="h-8 w-8 text-orange-600 dark:text-orange-400 animate-pulse flex-shrink-0" />
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold text-foreground">
+                  Diwali Markets 2025 — Women Entrepreneurs Showcase
+                </h2>
+                <p className="text-sm md:text-base text-muted-foreground">
+                  Special festive stalls in Pune (Tue–Sun) & Mumbai (Wed–Sun). Apply now!
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-3 flex-shrink-0">
+              <Button
+                onClick={() => handleApply()}
+                className="bg-orange-600 hover:bg-orange-700 text-white"
+              >
+                <Calendar className="h-4 w-4 mr-2" />
+                Apply for Stall
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => document.getElementById('diwali-markets')?.scrollIntoView({ behavior: 'smooth' })}
+                className="border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950"
+              >
+                View Schedule
+              </Button>
+            </div>
+          </div>
+        </div>
+
         {/* Hero Section */}
         <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-block mb-4">
-            <Badge className="bg-orange-600 text-white px-4 py-2 text-base">
-              <Sparkles className="h-4 w-4 mr-2" />
-              Diwali Special 2025
-            </Badge>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
-            {t("diwaliHeroTitle")}
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            {t("diwaliHeroSubtitle")}
-          </p>
 
           {/* Hero Carousel */}
           <Carousel className="max-w-5xl mx-auto mb-8" opts={{ loop: true, align: "start" }}>
