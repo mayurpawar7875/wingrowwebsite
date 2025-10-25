@@ -39,6 +39,7 @@ const VisitorFeedbackForm = () => {
     setValue,
     watch,
     reset,
+    clearErrors,
   } = useForm<FeedbackFormData>({
     resolver: zodResolver(feedbackSchema),
     defaultValues: {
@@ -88,6 +89,7 @@ const VisitorFeedbackForm = () => {
         description: "We appreciate you taking the time to share your experience.",
       });
       reset();
+      clearErrors();
       setSelectedRating(0);
     } catch (error) {
       console.error("Error submitting feedback:", error);

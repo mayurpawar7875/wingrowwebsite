@@ -41,6 +41,7 @@ const MarketInvitationForm = () => {
     setValue,
     watch,
     reset,
+    clearErrors,
   } = useForm<InvitationFormData>({
     resolver: zodResolver(invitationSchema),
     defaultValues: {
@@ -97,6 +98,7 @@ const MarketInvitationForm = () => {
         description: "We're excited about the opportunity to organize a market at your venue.",
       });
       reset();
+      clearErrors();
     } catch (error) {
       console.error("Error submitting invitation:", error);
       toast.error("Failed to submit request. Please try again.");
