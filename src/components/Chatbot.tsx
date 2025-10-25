@@ -62,7 +62,10 @@ const Chatbot = () => {
         setFormData(prev => ({
           ...prev,
           city: e.detail.city || prev.city,
-          market: e.detail.market || prev.market
+          market: e.detail.market || prev.market,
+          producerType: e.detail.producerType || prev.producerType,
+          stallType: e.detail.stallType || prev.stallType,
+          preferredDate: e.detail.date ? new Date(e.detail.date) : prev.preferredDate
         }));
       }
     };

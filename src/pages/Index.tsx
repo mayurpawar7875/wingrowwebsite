@@ -1,4 +1,6 @@
 import Hero from "@/components/Hero";
+import DiwaliBanner from "@/components/DiwaliBanner";
+import DiwaliMarkets from "@/components/DiwaliMarkets";
 import Markets from "@/components/Markets";
 import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
@@ -9,7 +11,9 @@ import Chatbot from "@/components/Chatbot";
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <DiwaliBanner />
       <Hero />
+      <DiwaliMarkets />
       <Markets />
       <About />
       <Testimonials />
