@@ -437,8 +437,8 @@ const Markets = () => {
   );
 
   const handleGetDirections = useCallback((market: Market) => {
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${market.lat},${market.lng}`;
-    window.open(url, "_blank");
+    const url = `https://www.google.com/maps/search/?api=1&query=${market.lat},${market.lng}`;
+    window.open(url, "_blank", "noopener,noreferrer");
   }, []);
 
   const renderMarketCard = (market: Market, index: number) => (
