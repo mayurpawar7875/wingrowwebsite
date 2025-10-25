@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -36,6 +36,7 @@ const MarketInvitationForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     setValue,
     watch,
@@ -44,6 +45,7 @@ const MarketInvitationForm = () => {
     resolver: zodResolver(invitationSchema),
     defaultValues: {
       agree_to_contact: false,
+      frequency: "",
     },
   });
 
@@ -219,19 +221,23 @@ const MarketInvitationForm = () => {
 
           <div>
             <Label htmlFor="frequency">Frequency *</Label>
-            <Select
-              onValueChange={(value) => setValue("frequency", value, { shouldValidate: true })}
-            >
-              <SelectTrigger className="mt-2">
-                <SelectValue placeholder="Select frequency" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="One-time">One-time</SelectItem>
-                <SelectItem value="Weekly">Weekly</SelectItem>
-                <SelectItem value="Monthly">Monthly</SelectItem>
-                <SelectItem value="Festive/Seasonal">Festive/Seasonal</SelectItem>
-              </SelectContent>
-            </Select>
+            <Controller
+              name="frequency"
+              control={control}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="mt-2">
+                    <SelectValue placeholder="Select frequency" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="One-time">One-time</SelectItem>
+                    <SelectItem value="Weekly">Weekly</SelectItem>
+                    <SelectItem value="Monthly">Monthly</SelectItem>
+                    <SelectItem value="Festive/Seasonal">Festive/Seasonal</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
             {errors.frequency && (
               <p className="text-sm text-destructive mt-1">{errors.frequency.message}</p>
             )}

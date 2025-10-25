@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -34,6 +34,7 @@ const VisitorFeedbackForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     setValue,
     watch,
@@ -43,6 +44,7 @@ const VisitorFeedbackForm = () => {
     defaultValues: {
       rating: 0,
       agree_to_contact: false,
+      market_visited: "",
     },
   });
 
@@ -143,21 +145,25 @@ const VisitorFeedbackForm = () => {
 
         <div>
           <Label htmlFor="market-visited">Market Visited *</Label>
-          <Select
-            onValueChange={(value) => setValue("market_visited", value, { shouldValidate: true })}
-          >
-            <SelectTrigger className="mt-2">
-              <SelectValue placeholder="Select the market you visited" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Kharadi, Pune">Kharadi, Pune</SelectItem>
-              <SelectItem value="Hadapsar, Pune">Hadapsar, Pune</SelectItem>
-              <SelectItem value="Magarpatta, Pune">Magarpatta, Pune</SelectItem>
-              <SelectItem value="Baner, Pune">Baner, Pune</SelectItem>
-              <SelectItem value="Thane, Mumbai">Thane, Mumbai</SelectItem>
-              <SelectItem value="Mulund, Mumbai">Mulund, Mumbai</SelectItem>
-            </SelectContent>
-          </Select>
+          <Controller
+            name="market_visited"
+            control={control}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger className="mt-2">
+                  <SelectValue placeholder="Select the market you visited" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Kharadi, Pune">Kharadi, Pune</SelectItem>
+                  <SelectItem value="Hadapsar, Pune">Hadapsar, Pune</SelectItem>
+                  <SelectItem value="Magarpatta, Pune">Magarpatta, Pune</SelectItem>
+                  <SelectItem value="Baner, Pune">Baner, Pune</SelectItem>
+                  <SelectItem value="Thane, Mumbai">Thane, Mumbai</SelectItem>
+                  <SelectItem value="Mulund, Mumbai">Mulund, Mumbai</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
           {errors.market_visited && (
             <p className="text-sm text-destructive mt-1">{errors.market_visited.message}</p>
           )}
