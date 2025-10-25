@@ -311,40 +311,6 @@ const DiwaliMarkets = () => {
           </TabsContent>
         </Tabs>
 
-        {/* Stall Options */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-6 text-center">{t("stallOptions")}</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {stallOptions.map((stall) => (
-              <Card key={stall.type} className="hover:shadow-xl transition-shadow">
-                <CardHeader>
-                  <CardTitle>{t(stall.type as any)}</CardTitle>
-                  <CardDescription>
-                    {t("stallSize")}: {stall.size}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-3xl font-bold text-orange-600">{stall.price}</div>
-                  <p className="text-sm text-muted-foreground">{t("pricePerDay")}</p>
-                  <div className="space-y-2">
-                    <p className="font-semibold text-sm">{t("whatsIncluded")}:</p>
-                    <ul className="space-y-1">
-                      {stall.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm">
-                          <CheckCircle2 className="h-4 w-4 text-green-600" />
-                          {t(feature as any)}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Button onClick={() => handleApply()} variant="outline" className="w-full border-orange-600 text-orange-600 hover:bg-orange-50">
-                    {t("bookNow")}
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
 
         {/* FAQ Section */}
         <div className="max-w-3xl mx-auto">
