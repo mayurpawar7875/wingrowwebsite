@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Calendar, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
-import LanguageSwitcher from "./LanguageSwitcher";
 import heroImage1 from "@/assets/hero-market.jpg";
 import heroImage2 from "@/assets/hero-market-2.jpg";
 import heroImage3 from "@/assets/hero-market-3.jpg";
@@ -11,7 +10,6 @@ import heroImage5 from "@/assets/hero-market-5.jpg";
 import heroImage6 from "@/assets/hero-market-6.jpg";
 import heroImage7 from "@/assets/hero-market-7.jpg";
 import heroImage8 from "@/assets/hero-market-8.jpg";
-import wingrowLogo from "@/assets/wingrow-logo.png";
 
 const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4, heroImage5, heroImage6, heroImage7, heroImage8];
 
@@ -53,17 +51,7 @@ const Hero = () => {
         </div>
       ))}
 
-      {/* Language Switcher */}
-      <div className="absolute top-4 right-4 z-20">
-        <LanguageSwitcher />
-      </div>
-
-      {/* Logo */}
-      <div className="absolute top-4 left-4 z-20">
-        <img src={wingrowLogo} alt="Wingrow Market Logo" className="h-16 md:h-20 w-auto animate-fade-in" />
-      </div>
-      
-      <div className="container relative z-10 px-4 py-20 text-center">
+      <div className="container relative z-10 px-4 py-32 md:py-20 text-center">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent animate-scale-in">
           {t('heroTitle')}
         </h1>

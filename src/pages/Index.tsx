@@ -1,3 +1,4 @@
+import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import WomenMarkets from "@/components/WomenMarkets";
 import Markets from "@/components/Markets";
@@ -12,12 +13,25 @@ const Index = () => {
   return (
     <div className="min-h-screen relative">
       <FloatingProduceBackground density="medium" />
-      <Hero />
-      <Markets />
-      <WomenMarkets />
-      <About />
-      <Testimonials />
-      <ContactForm />
+      <Navigation />
+      <div id="hero">
+        <Hero />
+      </div>
+      <div id="markets">
+        <Markets />
+      </div>
+      <div id="women-markets">
+        <WomenMarkets />
+      </div>
+      <div id="about">
+        <About />
+      </div>
+      <div id="testimonials">
+        <Testimonials />
+      </div>
+      <div id="contact">
+        <ContactForm />
+      </div>
       <Footer />
       <Chatbot />
     </div>
