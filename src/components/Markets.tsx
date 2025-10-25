@@ -427,27 +427,39 @@ const Markets = () => {
 
   const visibleMarkets = filteredMarkets.slice(0, visibleCount);
 
-  /** Directions WITHOUT Google (Apple Maps / geo: / OpenStreetMap) */
+  /** Robust Directions opener with fallbacks */
   const handleGetDirections = useCallback((market: Market) => {
     const { lat, lng } = market;
 
+    // Primary: Google Maps web directions
+    const gmapsDir = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
+    // Fallback: Google Maps App short link
+    const gmapsShort = `https://maps.app.goo.gl/?link=https://www.google.com/maps/?q=${lat},${lng}`;
     // iOS: Apple Maps
     const appleMaps = `http://maps.apple.com/?daddr=${lat},${lng}`;
-    // Android: geo intent (opens default Maps app)
+    // Android: geo intent
     const androidGeo = `geo:${lat},${lng}?q=${lat},${lng}`;
-    // Desktop / fallback: OpenStreetMap
+    // No-Google fallback: OpenStreetMap
     const osm = `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=;${lat},${lng}`;
 
     const ua = navigator.userAgent || "";
     const isIOS = /iPad|iPhone|iPod/.test(ua);
     const isAndroid = /Android/.test(ua);
 
-    if (isIOS) {
-      openInNewTab(appleMaps);
-    } else if (isAndroid) {
-      openInNewTab(androidGeo);
-    } else {
-      openInNewTab(osm);
+    try {
+      openInNewTab(gmapsDir);
+    } catch {
+      try {
+        openInNewTab(gmapsShort);
+      } catch {
+        try {
+          openInNewTab(isIOS ? appleMaps : isAndroid ? androidGeo : osm);
+        } catch {
+          const link = `https://maps.google.com/?q=${lat},${lng}`;
+          navigator.clipboard?.writeText(link);
+          alert("Couldn’t open maps. A directions link was copied to your clipboard.");
+        }
+      }
     }
   }, []);
 
