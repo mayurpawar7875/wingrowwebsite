@@ -1,0 +1,84 @@
+import { Facebook, Instagram, Twitter, Mail } from "lucide-react";
+
+const Footer = () => {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <footer className="bg-card border-t py-12">
+      <div className="container px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <h3 className="text-2xl font-bold mb-4">Wingrow Market</h3>
+            <p className="text-muted-foreground text-sm">
+              Connecting farmers and consumers directly through weekly markets across Maharashtra.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-muted-foreground hover:text-primary transition-colors">
+                  Home
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('markets')} className="text-muted-foreground hover:text-primary transition-colors">
+                  Markets
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('contact')} className="text-muted-foreground hover:text-primary transition-colors">
+                  Book Stall
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('contact')} className="text-muted-foreground hover:text-primary transition-colors">
+                  Contact Us
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Markets</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>Pune Markets</li>
+              <li>Mumbai Markets</li>
+              <li>Weekly Schedule</li>
+              <li>Vendor Guidelines</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Connect With Us</h4>
+            <div className="flex gap-4 mb-4">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a href="mailto:info@wingrowmarket.com" className="text-muted-foreground hover:text-primary transition-colors">
+                <Mail className="h-5 w-5" />
+              </a>
+            </div>
+            <p className="text-sm text-muted-foreground">info@wingrowmarket.com</p>
+          </div>
+        </div>
+
+        <div className="border-t pt-8 text-center text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} Wingrow Market. All rights reserved. Founded by Vrunda Borkar and Mayur Pawar.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
