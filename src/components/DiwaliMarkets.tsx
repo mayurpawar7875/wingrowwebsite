@@ -100,35 +100,115 @@ const DiwaliMarkets = () => {
           </p>
 
           {/* Hero Carousel */}
-          <Carousel className="max-w-4xl mx-auto mb-8">
+          <Carousel className="max-w-5xl mx-auto mb-8" opts={{ loop: true, align: "start" }}>
             <CarouselContent>
+              {/* Slide 1 - Festive Shopping */}
               <CarouselItem>
-                <div className="h-[300px] bg-gradient-to-r from-orange-400 to-amber-400 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <Sparkles className="h-16 w-16 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold">Festive Shopping Experience</h3>
+                <div className="relative h-[400px] bg-gradient-to-br from-orange-400 via-amber-400 to-orange-500 rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none" />
+                  <div className="relative h-full flex flex-col items-center justify-center text-white px-8 animate-fade-in">
+                    <div className="mb-6 relative">
+                      <Sparkles className="h-24 w-24 animate-pulse drop-shadow-2xl" />
+                      <Sparkles className="h-8 w-8 absolute -top-2 -right-2 animate-bounce" />
+                    </div>
+                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
+                      Festive Shopping Experience
+                    </h3>
+                    <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
+                      Celebrate Diwali with handpicked products from talented women entrepreneurs
+                    </p>
                   </div>
                 </div>
               </CarouselItem>
+
+              {/* Slide 2 - Women Entrepreneurs */}
               <CarouselItem>
-                <div className="h-[300px] bg-gradient-to-r from-amber-400 to-orange-400 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <Users className="h-16 w-16 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold">Women-Led Brands</h3>
+                <div className="relative h-[400px] bg-gradient-to-br from-pink-500 via-rose-400 to-orange-500 rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.15),transparent)] pointer-events-none" />
+                  <div className="relative h-full flex flex-col items-center justify-center text-white px-8 animate-fade-in">
+                    <div className="mb-6 relative">
+                      <div className="h-24 w-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <Users className="h-16 w-16 drop-shadow-2xl" />
+                      </div>
+                    </div>
+                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
+                      Empowering Women Entrepreneurs
+                    </h3>
+                    <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
+                      Support local women-led businesses this festive season
+                    </p>
+                    <div className="mt-6 flex gap-4">
+                      <Badge className="bg-white/20 backdrop-blur-sm text-white text-lg px-6 py-2 border-white/30">
+                        <CheckCircle2 className="h-4 w-4 mr-2" />
+                        WSHG Certified
+                      </Badge>
+                      <Badge className="bg-white/20 backdrop-blur-sm text-white text-lg px-6 py-2 border-white/30">
+                        <CheckCircle2 className="h-4 w-4 mr-2" />
+                        Quality Products
+                      </Badge>
+                    </div>
                   </div>
                 </div>
               </CarouselItem>
+
+              {/* Slide 3 - Multiple Locations */}
               <CarouselItem>
-                <div className="h-[300px] bg-gradient-to-r from-orange-400 to-amber-400 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <MapPin className="h-16 w-16 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold">Multiple Locations</h3>
+                <div className="relative h-[400px] bg-gradient-to-br from-purple-500 via-indigo-400 to-blue-500 rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none" />
+                  <div className="relative h-full flex flex-col items-center justify-center text-white px-8 animate-fade-in">
+                    <div className="mb-6 relative">
+                      <div className="h-24 w-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center animate-pulse">
+                        <MapPin className="h-16 w-16 drop-shadow-2xl" />
+                      </div>
+                    </div>
+                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
+                      46 Markets Across Pune & Mumbai
+                    </h3>
+                    <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
+                      Find a Diwali market near you and shop local
+                    </p>
+                    <div className="mt-6 grid grid-cols-2 gap-4">
+                      <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-center">
+                        <div className="text-3xl font-bold">34</div>
+                        <div className="text-sm">Pune Markets</div>
+                      </div>
+                      <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-center">
+                        <div className="text-3xl font-bold">12</div>
+                        <div className="text-sm">Mumbai Markets</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              {/* Slide 4 - Limited Slots */}
+              <CarouselItem>
+                <div className="relative h-[400px] bg-gradient-to-br from-red-500 via-orange-500 to-amber-500 rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_60%,rgba(255,255,255,0.15),transparent)] pointer-events-none" />
+                  <div className="relative h-full flex flex-col items-center justify-center text-white px-8 animate-fade-in">
+                    <div className="mb-6">
+                      <Calendar className="h-24 w-24 drop-shadow-2xl animate-bounce" />
+                    </div>
+                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
+                      Limited Stalls Available!
+                    </h3>
+                    <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md mb-6">
+                      Book your festive stall today - slots filling fast
+                    </p>
+                    <Button 
+                      size="lg" 
+                      onClick={() => handleApply()}
+                      className="bg-white text-orange-600 hover:bg-orange-50 text-xl px-8 py-6 h-auto font-bold shadow-xl hover:scale-105 transition-transform"
+                    >
+                      <Sparkles className="h-5 w-5 mr-2" />
+                      Apply Now
+                    </Button>
                   </div>
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="left-4 h-12 w-12 bg-white/90 hover:bg-white" />
+            <CarouselNext className="right-4 h-12 w-12 bg-white/90 hover:bg-white" />
           </Carousel>
         </div>
 
