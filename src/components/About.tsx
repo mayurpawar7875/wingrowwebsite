@@ -1,26 +1,26 @@
 import { Users, TrendingUp, Heart, Store } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const About = () => {
+  const { t } = useTranslation();
+  
   const stats = [
-    { icon: Store, value: "47", label: "Weekly Markets" },
-    { icon: Users, value: "1,250+", label: "Farmers Connected" },
-    { icon: Heart, value: "56", label: "Women SHGs" },
-    { icon: TrendingUp, value: "₹200+ Cr", label: "Generated" },
+    { icon: Store, value: "47", label: t('weeklyMarkets') },
+    { icon: Users, value: "1,250+", label: t('farmers') },
+    { icon: Heart, value: "56", label: t('womenSHGs') },
+    { icon: TrendingUp, value: "₹200+ Cr", label: t('revenueGenerated') },
   ];
 
   return (
     <section className="py-20 bg-background">
       <div className="container px-4">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">About Wingrow Market</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">{t('aboutTitle')}</h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            Founded by Vrunda Borkar and Mayur Pawar, Wingrow Market was born from a simple yet powerful vision: 
-            to create direct connections between farmers, women entrepreneurs, and consumers. We believe in empowering 
-            local communities by eliminating middlemen and ensuring fair prices for both producers and consumers.
+            {t('aboutSubtitle')}
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            What started as a single market has grown into a movement spanning across Pune and Mumbai, creating 
-            sustainable livelihoods and bringing fresh, quality produce directly to your neighborhoods.
+            {t('aboutDescription')}
           </p>
         </div>
 

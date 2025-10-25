@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Play } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const videoTestimonials = [
   {
@@ -32,21 +33,22 @@ const googleReviews = [
 ];
 
 const Testimonials = () => {
+  const { t } = useTranslation();
   const [currentReview, setCurrentReview] = useState(0);
 
   return (
     <section className="py-20 bg-background">
       <div className="container px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">What Our Community Says</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('testimonialsTitle')}</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Real stories from farmers, entrepreneurs, and customers
+            {t('testimonialsSubtitle')}
           </p>
         </div>
 
         {/* Video Testimonials */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold mb-8 text-center">Video Testimonials</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center">{t('videoTestimonials')}</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {videoTestimonials.map((video, index) => (
               <Card key={index} className="overflow-hidden hover:shadow-medium transition-shadow group">
@@ -76,7 +78,7 @@ const Testimonials = () => {
 
         {/* Google Reviews */}
         <div>
-          <h3 className="text-2xl font-bold mb-8 text-center">Live Google Reviews</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center">{t('liveGoogleReviews')}</h3>
           <div className="max-w-4xl mx-auto">
             <Card className="p-8 shadow-medium">
               <div className="flex items-start gap-4">

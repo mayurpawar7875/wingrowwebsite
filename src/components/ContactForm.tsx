@@ -6,8 +6,10 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const ContactForm = () => {
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,7 +19,7 @@ const ContactForm = () => {
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    toast.success("Booking inquiry submitted successfully! We'll contact you soon.");
+    toast.success(t('submissionSuccess'));
     setIsSubmitting(false);
     (e.target as HTMLFormElement).reset();
   };
@@ -27,9 +29,9 @@ const ContactForm = () => {
       <div className="container px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Book Your Stall Today</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('contactTitle')}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Fill out the form below and we'll get back to you within 24 hours
+              {t('contactSubtitle')}
             </p>
           </div>
 
@@ -37,76 +39,76 @@ const ContactForm = () => {
             <div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <Label htmlFor="name">Full Name *</Label>
-                  <Input id="name" name="name" required placeholder="Enter your name" className="mt-2" />
+                  <Label htmlFor="name">{t('yourName')} *</Label>
+                  <Input id="name" name="name" required placeholder={t('enterYourName')} className="mt-2" />
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">Contact Number *</Label>
-                  <Input id="phone" name="phone" type="tel" required placeholder="Enter your phone number" className="mt-2" />
+                  <Label htmlFor="phone">{t('phoneNumber')} *</Label>
+                  <Input id="phone" name="phone" type="tel" required placeholder={t('tenDigitNumber')} className="mt-2" />
                 </div>
 
                 <div>
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input id="email" name="email" type="email" placeholder="Enter your email" className="mt-2" />
+                  <Label htmlFor="email">{t('yourEmail')}</Label>
+                  <Input id="email" name="email" type="email" placeholder={t('yourEmail')} className="mt-2" />
                 </div>
 
                 <div>
-                  <Label htmlFor="market">Preferred Market *</Label>
+                  <Label htmlFor="market">{t('selectMarket')} *</Label>
                   <Select name="market" required>
                     <SelectTrigger className="mt-2">
-                      <SelectValue placeholder="Select a market" />
+                      <SelectValue placeholder={t('chooseMarket')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="kharadi">Kharadi, Pune</SelectItem>
-                      <SelectItem value="hadapsar">Hadapsar, Pune</SelectItem>
-                      <SelectItem value="magarpatta">Magarpatta, Pune</SelectItem>
-                      <SelectItem value="baner">Baner, Pune</SelectItem>
-                      <SelectItem value="thane">Thane, Mumbai</SelectItem>
-                      <SelectItem value="mulund">Mulund, Mumbai</SelectItem>
+                      <SelectItem value="kharadi">Kharadi, {t('pune')}</SelectItem>
+                      <SelectItem value="hadapsar">Hadapsar, {t('pune')}</SelectItem>
+                      <SelectItem value="magarpatta">Magarpatta, {t('pune')}</SelectItem>
+                      <SelectItem value="baner">Baner, {t('pune')}</SelectItem>
+                      <SelectItem value="thane">Thane, {t('mumbai')}</SelectItem>
+                      <SelectItem value="mulund">Mulund, {t('mumbai')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label htmlFor="stallType">Stall Type *</Label>
+                  <Label htmlFor="stallType">{t('stallType')} *</Label>
                   <Select name="stallType" required>
                     <SelectTrigger className="mt-2">
-                      <SelectValue placeholder="Select stall type" />
+                      <SelectValue placeholder={t('selectStallType')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="farmer">Farmer - Fresh Produce</SelectItem>
-                      <SelectItem value="shg">Women SHG - Homemade Products</SelectItem>
-                      <SelectItem value="organic">Organic Products</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="farmer">{t('producerFarmer')}</SelectItem>
+                      <SelectItem value="shg">{t('producerWSHG')}</SelectItem>
+                      <SelectItem value="processor">{t('producerFoodProcessor')}</SelectItem>
+                      <SelectItem value="other">{t('producerOther')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label htmlFor="message">Additional Details</Label>
+                  <Label htmlFor="message">{t('notes')}</Label>
                   <Textarea 
                     id="message" 
                     name="message" 
-                    placeholder="Tell us about your products, special requirements, etc."
+                    placeholder={t('anySpecialRequirements')}
                     className="mt-2 min-h-[100px]"
                   />
                 </div>
 
                 <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Submitting..." : "Submit Booking Inquiry"}
+                  {isSubmitting ? t('submitting') : t('sendMessage')}
                 </Button>
               </form>
             </div>
 
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+                <h3 className="text-2xl font-bold mb-6">{t('contactInfo')}</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
                     <Mail className="h-6 w-6 text-primary mt-1" />
                     <div>
-                      <div className="font-semibold mb-1">Email</div>
+                      <div className="font-semibold mb-1">{t('email')}</div>
                       <a href="mailto:info@wingrowmarket.com" className="text-muted-foreground hover:text-primary">
                         info@wingrowmarket.com
                       </a>
@@ -116,7 +118,7 @@ const ContactForm = () => {
                   <div className="flex items-start gap-4">
                     <Phone className="h-6 w-6 text-primary mt-1" />
                     <div>
-                      <div className="font-semibold mb-1">Phone</div>
+                      <div className="font-semibold mb-1">{t('phone')}</div>
                       <div className="text-muted-foreground">+91 98765 43210</div>
                     </div>
                   </div>
@@ -124,7 +126,7 @@ const ContactForm = () => {
                   <div className="flex items-start gap-4">
                     <MapPin className="h-6 w-6 text-primary mt-1" />
                     <div>
-                      <div className="font-semibold mb-1">Headquarters</div>
+                      <div className="font-semibold mb-1">{t('headquarters')}</div>
                       <div className="text-muted-foreground">Pune, Maharashtra, India</div>
                     </div>
                   </div>
