@@ -92,10 +92,10 @@ const WomenMarkets = () => {
               <Sparkles className="h-8 w-8 text-orange-600 dark:text-orange-400 animate-pulse flex-shrink-0" />
               <div>
                 <h2 className="text-xl md:text-2xl font-bold text-foreground bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-clip-text text-transparent animate-scale-in">
-                  Women Markets 2025 — Women Entrepreneurs Showcase
+                  {t('womenMarketBannerTitle')}
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground">
-                  Special stalls in Pune (Tue–Sun) & Mumbai (Wed–Sun). Apply now!
+                  {t('womenMarketBannerSubtitle')}
                 </p>
               </div>
             </div>
@@ -105,14 +105,14 @@ const WomenMarkets = () => {
                 className="bg-orange-600 hover:bg-orange-700 text-white"
               >
                 <Calendar className="h-4 w-4 mr-2" />
-                Apply for Stall
+                {t('applyForStall')}
               </Button>
               <Button
                 variant="outline"
                 onClick={() => document.getElementById('women-markets')?.scrollIntoView({ behavior: 'smooth' })}
                 className="border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950"
               >
-                View Schedule
+                {t('viewSchedule')}
               </Button>
             </div>
           </div>
@@ -142,10 +142,10 @@ const WomenMarkets = () => {
                       <Sparkles className="h-8 w-8 absolute -top-2 -right-2 animate-bounce" />
                     </div>
                     <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      Shopping Experience
+                      {t('shopWomenMarketSpecials')}
                     </h3>
                     <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
-                      Discover handpicked products from talented women entrepreneurs
+                      {t('womenMarketHeroSubtitle')}
                     </p>
                   </div>
                 </div>
@@ -162,15 +162,15 @@ const WomenMarkets = () => {
                       </div>
                     </div>
                     <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      Empowering Women Entrepreneurs
+                      {t('womenMarketHeroTitle')}
                     </h3>
                     <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
-                      Support local women-led businesses this festive season
+                      {t('womenMarketHeroSubtitle')}
                     </p>
                     <div className="mt-6 flex gap-4">
                       <Badge className="bg-white/20 backdrop-blur-sm text-white text-lg px-6 py-2 border-white/30">
                         <CheckCircle2 className="h-4 w-4 mr-2" />
-                        WSHG Certified
+                        {t('wshgMember')}
                       </Badge>
                       <Badge className="bg-white/20 backdrop-blur-sm text-white text-lg px-6 py-2 border-white/30">
                         <CheckCircle2 className="h-4 w-4 mr-2" />
@@ -192,19 +192,19 @@ const WomenMarkets = () => {
                       </div>
                     </div>
                     <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      46 Markets Across Pune & Mumbai
+                      {t('womenMarketMapTitle')}
                     </h3>
                     <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
-                      Find a women's market near you and shop local
+                      {t('womenMarketHeroSubtitle')}
                     </p>
                     <div className="mt-6 grid grid-cols-2 gap-4">
                       <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-center">
                         <div className="text-3xl font-bold">34</div>
-                        <div className="text-sm">Pune Markets</div>
+                        <div className="text-sm">{t('puneMarkets', { count: '34' })}</div>
                       </div>
                       <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-center">
                         <div className="text-3xl font-bold">12</div>
-                        <div className="text-sm">Mumbai Markets</div>
+                        <div className="text-sm">{t('mumbaiMarkets', { count: '12' })}</div>
                       </div>
                     </div>
                   </div>
@@ -220,10 +220,10 @@ const WomenMarkets = () => {
                       <Calendar className="h-24 w-24 drop-shadow-2xl animate-bounce" />
                     </div>
                     <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      Limited Stalls Available!
+                      {t('limitedSlots')}!
                     </h3>
                     <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md mb-6">
-                      Book your stall today - slots filling fast
+                      {t('bookYourStall')}
                     </p>
                     <Button 
                       size="lg" 
@@ -231,7 +231,7 @@ const WomenMarkets = () => {
                       className="bg-white text-orange-600 hover:bg-orange-50 text-xl px-8 py-6 h-auto font-bold shadow-xl hover:scale-105 transition-transform"
                     >
                       <Sparkles className="h-5 w-5 mr-2" />
-                      Apply Now
+                      {t('applyNow')}
                     </Button>
                   </div>
                 </div>

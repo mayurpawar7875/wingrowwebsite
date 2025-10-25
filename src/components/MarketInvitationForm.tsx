@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const invitationSchema = z.object({
   contact_person_name: z.string().min(2, "Name must be at least 2 characters"),
@@ -31,6 +32,7 @@ const invitationSchema = z.object({
 type InvitationFormData = z.infer<typeof invitationSchema>;
 
 const MarketInvitationForm = () => {
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -94,14 +96,14 @@ const MarketInvitationForm = () => {
         // Don't fail the submission if email fails
       }
 
-      toast.success("Thanks! Our team will contact you shortly.", {
-        description: "We're excited about the opportunity to organize a market at your venue.",
+      toast.success(t('thankYouInvitation'), {
+        description: t('excitedOpportunity'),
       });
       reset();
       clearErrors();
     } catch (error) {
       console.error("Error submitting invitation:", error);
-      toast.error("Failed to submit request. Please try again.");
+      toast.error(t('failedInvitation'));
     } finally {
       setIsSubmitting(false);
     }
@@ -109,16 +111,16 @@ const MarketInvitationForm = () => {
 
   return (
     <div className="bg-card rounded-xl shadow-lg p-6 md:p-8 border border-border animate-fade-in">
-      <h3 className="text-2xl font-bold mb-2">Invite Wingrow to Your Venue</h3>
-      <p className="text-muted-foreground mb-6">Let us organize a market at your location</p>
+      <h3 className="text-2xl font-bold mb-2">{t('inviteWingrow')}</h3>
+      <p className="text-muted-foreground mb-6">{t('inviteDescription')}</p>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <div>
-          <Label htmlFor="contact-person">Contact Person Name *</Label>
+          <Label htmlFor="contact-person">{t('contactPersonName')} *</Label>
           <Input
             id="contact-person"
             {...register("contact_person_name")}
-            placeholder="Your full name"
+            placeholder={t('yourFullName')}
             className="mt-2"
           />
           {errors.contact_person_name && (
@@ -128,12 +130,12 @@ const MarketInvitationForm = () => {
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="invite-phone">Phone Number *</Label>
+            <Label htmlFor="invite-phone">{t('phoneNumber')} *</Label>
             <Input
               id="invite-phone"
               type="tel"
               {...register("phone_number")}
-              placeholder="10-digit number"
+              placeholder={t('tenDigitNumber')}
               className="mt-2"
             />
             {errors.phone_number && (
@@ -142,12 +144,12 @@ const MarketInvitationForm = () => {
           </div>
 
           <div>
-            <Label htmlFor="invite-email">Email *</Label>
+            <Label htmlFor="invite-email">{t('email')} *</Label>
             <Input
               id="invite-email"
               type="email"
               {...register("email")}
-              placeholder="your@email.com"
+              placeholder={t('enterEmail')}
               className="mt-2"
             />
             {errors.email && (
@@ -157,11 +159,11 @@ const MarketInvitationForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="organization">Organization / Society / Mall Name *</Label>
+          <Label htmlFor="organization">{t('organizationName')} *</Label>
           <Input
             id="organization"
             {...register("organization_name")}
-            placeholder="Organization name"
+            placeholder={t('organizationName')}
             className="mt-2"
           />
           {errors.organization_name && (
@@ -171,11 +173,11 @@ const MarketInvitationForm = () => {
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="city">City *</Label>
+            <Label htmlFor="city">{t('city')} *</Label>
             <Input
               id="city"
               {...register("city")}
-              placeholder="City name"
+              placeholder={t('cityName')}
               className="mt-2"
             />
             {errors.city && (
@@ -184,22 +186,22 @@ const MarketInvitationForm = () => {
           </div>
 
           <div>
-            <Label htmlFor="footfall">Expected Footfall</Label>
+            <Label htmlFor="footfall">{t('expectedFootfall')}</Label>
             <Input
               id="footfall"
               {...register("expected_footfall")}
-              placeholder="e.g., 500-1000 people"
+              placeholder={t('footfallPlaceholder')}
               className="mt-2"
             />
           </div>
         </div>
 
         <div>
-          <Label htmlFor="venue-address">Venue Address / Google Map Link *</Label>
+          <Label htmlFor="venue-address">{t('venueAddress')} *</Label>
           <Textarea
             id="venue-address"
             {...register("venue_address")}
-            placeholder="Detailed venue address or Google Maps link"
+            placeholder={t('venueAddressPlaceholder')}
             className="mt-2 min-h-[80px]"
           />
           {errors.venue_address && (
@@ -209,11 +211,11 @@ const MarketInvitationForm = () => {
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="preferred-dates">Preferred Dates *</Label>
+            <Label htmlFor="preferred-dates">{t('preferredDates')} *</Label>
             <Input
               id="preferred-dates"
               {...register("preferred_dates")}
-              placeholder="e.g., Every Sunday, 15th Jan onwards"
+              placeholder={t('preferredDatesPlaceholder')}
               className="mt-2"
             />
             {errors.preferred_dates && (
@@ -222,20 +224,20 @@ const MarketInvitationForm = () => {
           </div>
 
           <div>
-            <Label htmlFor="frequency">Frequency *</Label>
+            <Label htmlFor="frequency">{t('frequency')} *</Label>
             <Controller
               name="frequency"
               control={control}
               render={({ field }) => (
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className="mt-2">
-                    <SelectValue placeholder="Select frequency" />
+                    <SelectValue placeholder={t('selectFrequency')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="One-time">One-time</SelectItem>
-                    <SelectItem value="Weekly">Weekly</SelectItem>
-                    <SelectItem value="Monthly">Monthly</SelectItem>
-                    <SelectItem value="Festive/Seasonal">Festive/Seasonal</SelectItem>
+                    <SelectItem value="One-time">{t('oneTime')}</SelectItem>
+                    <SelectItem value="Weekly">{t('weekly')}</SelectItem>
+                    <SelectItem value="Monthly">{t('monthly')}</SelectItem>
+                    <SelectItem value="Festive/Seasonal">{t('festiveSeasonal')}</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -247,11 +249,11 @@ const MarketInvitationForm = () => {
         </div>
 
         <div>
-          <Label htmlFor="notes">Additional Notes</Label>
+          <Label htmlFor="notes">{t('additionalNotes')}</Label>
           <Textarea
             id="notes"
             {...register("additional_notes")}
-            placeholder="Any special requirements or preferences..."
+            placeholder={t('specialRequirements')}
             className="mt-2 min-h-[100px]"
           />
         </div>
@@ -263,7 +265,7 @@ const MarketInvitationForm = () => {
             onCheckedChange={(checked) => setValue("agree_to_contact", checked as boolean, { shouldValidate: true })}
           />
           <Label htmlFor="invite-agree" className="cursor-pointer leading-relaxed">
-            I agree to be contacted by Wingrow Market *
+            {t('agreeToContact')} *
           </Label>
         </div>
         {errors.agree_to_contact && (
@@ -271,7 +273,7 @@ const MarketInvitationForm = () => {
         )}
 
         <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Send Invitation Request"}
+          {isSubmitting ? t('submitting') : t('sendInvitation')}
         </Button>
       </form>
     </div>

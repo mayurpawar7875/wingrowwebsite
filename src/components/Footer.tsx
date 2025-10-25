@@ -58,17 +58,17 @@ const Footer = () => {
             
             <div className="relative z-10 text-center mb-6">
               <h3 className="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-primary via-foreground to-primary bg-clip-text text-transparent">
-                Stay Connected with Wingrow Market
+                {t('stayConnected')}
               </h3>
               <p className="text-muted-foreground">
-                Get updates on new markets, offers, and stories from our community
+                {t('newsletterDescription')}
               </p>
             </div>
             
             <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto relative z-10">
               <Input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('enterEmail')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -80,7 +80,7 @@ const Footer = () => {
                 className="rounded-full px-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
               >
                 <Send className="h-4 w-4 mr-2" />
-                Subscribe
+                {t('subscribe')}
               </Button>
             </form>
           </div>
@@ -94,7 +94,7 @@ const Footer = () => {
               <img src={wingrowLogo} alt="Wingrow Market" className="h-12 w-auto mb-3" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Connecting farmers, women entrepreneurs, and consumers directly through our weekly markets in Pune and Mumbai.
+              {t('connectingFarmers')}
             </p>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Phone className="h-4 w-4 text-primary" />
@@ -183,7 +183,7 @@ const Footer = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all hover:scale-105"
             >
               <Mail className="h-4 w-4" />
-              <span className="text-sm font-medium">Email Us</span>
+              <span className="text-sm font-medium">{t('email')}</span>
             </a>
           </div>
         </div>
@@ -196,11 +196,11 @@ const Footer = () => {
             </p>
             <div className="flex gap-6">
               <button className="relative hover:text-primary transition-colors group">
-                Privacy Policy
+                {t('privacyPolicy')}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
               </button>
               <button className="relative hover:text-primary transition-colors group">
-                Terms & Conditions
+                {t('termsConditions')}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
               </button>
             </div>
