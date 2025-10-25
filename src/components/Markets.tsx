@@ -494,33 +494,47 @@ const Markets = () => {
   const renderMarketCard = (market: Market, index: number) => (
     <Card
       key={index}
-      className={`hover:shadow-lg transition-all duration-300 hover-scale animate-fade-in cursor-pointer ${
-        selectedMarket?.nameKey === market.nameKey ? "ring-2 ring-primary" : ""
+      className={`group relative hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 
+                  hover:-translate-y-3 hover:scale-105 animate-fade-in cursor-pointer overflow-hidden
+                  border-2 ${
+        selectedMarket?.nameKey === market.nameKey 
+          ? "ring-2 ring-primary border-primary shadow-xl shadow-primary/30" 
+          : "border-border hover:border-primary/50"
       }`}
       style={{ animationDelay: `${index * 0.05}s` }}
       onClick={() => setSelectedMarket(market)}
     >
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 
+                    group-hover:from-primary/5 group-hover:via-primary/10 group-hover:to-primary/5 
+                    transition-all duration-500" />
+      
+      {/* Glowing border effect */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                    bg-gradient-to-r from-primary/10 via-primary/20 to-primary/10 
+                    blur-xl transition-opacity duration-500 -z-10" />
+      
+      <CardHeader className="relative z-10">
+        <CardTitle className="flex items-center gap-2 text-lg group-hover:text-primary transition-colors duration-300">
+          <MapPin className="h-5 w-5 text-primary flex-shrink-0 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300" />
           <span className="line-clamp-1">{t(market.nameKey)}</span>
         </CardTitle>
         <CardDescription className="space-y-1">
-          <div className="font-semibold text-foreground flex items-center gap-1">
-            <Calendar className="h-3 w-3" />
+          <div className="font-semibold text-foreground flex items-center gap-1 group-hover:text-primary transition-colors duration-300">
+            <Calendar className="h-3 w-3 group-hover:scale-110 transition-transform duration-300" />
             {t(market.day.toLowerCase() as any)}
           </div>
           <div className="text-sm">{market.time}</div>
           <div className="flex flex-wrap gap-1 mt-2">
             {market.category.slice(0, 2).map((cat, i) => (
-              <Badge key={i} variant="secondary" className="text-xs">
+              <Badge key={i} variant="secondary" className="text-xs group-hover:scale-105 transition-transform duration-300">
                 {cat}
               </Badge>
             ))}
           </div>
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid grid-cols-2 gap-2">
+      <CardContent className="grid grid-cols-2 gap-2 relative z-10">
         <Button
           variant="outline"
           size="sm"
@@ -528,7 +542,7 @@ const Markets = () => {
             e.stopPropagation();
             handleGetDirections(market);
           }}
-          className="text-xs"
+          className="text-xs hover:scale-105 transition-transform duration-300"
         >
           <Navigation className="h-3 w-3 mr-1" />
           {t("getDirections")}
@@ -539,7 +553,7 @@ const Markets = () => {
             e.stopPropagation();
             handleBookStall(market);
           }}
-          className="text-xs"
+          className="text-xs hover:scale-105 transition-transform duration-300"
         >
           {t("bookStallAt")}
         </Button>
@@ -550,18 +564,27 @@ const Markets = () => {
   const renderMarketList = (market: Market, index: number) => (
     <Card
       key={index}
-      className={`hover:shadow-md transition-all duration-200 cursor-pointer ${
-        selectedMarket?.nameKey === market.nameKey ? "ring-2 ring-primary" : ""
+      className={`group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 
+                  hover:-translate-x-2 cursor-pointer border-l-4 
+                  ${
+        selectedMarket?.nameKey === market.nameKey 
+          ? "ring-2 ring-primary border-l-primary shadow-lg shadow-primary/20" 
+          : "border-l-transparent hover:border-l-primary"
       }`}
       onClick={() => setSelectedMarket(market)}
     >
       <CardContent className="p-4">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 flex-1 min-w-0">
-            <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
+            <div className="p-2 rounded-full bg-primary/10 group-hover:bg-primary/20 
+                          group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+              <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
+            </div>
             <div className="flex-1 min-w-0">
-              <h4 className="font-semibold text-sm truncate">{t(market.nameKey)}</h4>
-              <p className="text-xs text-muted-foreground">
+              <h4 className="font-semibold text-sm truncate group-hover:text-primary transition-colors duration-300">
+                {t(market.nameKey)}
+              </h4>
+              <p className="text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                 {t(market.day.toLowerCase() as any)} • {market.time}
               </p>
             </div>
@@ -575,6 +598,7 @@ const Markets = () => {
                 handleGetDirections(market);
               }}
               aria-label={t("getDirections")}
+              className="hover:scale-110 transition-transform duration-300"
             >
               <Navigation className="h-4 w-4" />
             </Button>
@@ -584,6 +608,7 @@ const Markets = () => {
                 e.stopPropagation();
                 handleBookStall(market);
               }}
+              className="hover:scale-105 transition-transform duration-300"
             >
               {t("bookStallAt")}
             </Button>
