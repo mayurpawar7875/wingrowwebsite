@@ -424,7 +424,7 @@ const Markets = () => {
   const [selectedDay, setSelectedDay] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [visibleCount, setVisibleCount] = useState(9);
   const [selectedCity, setSelectedCity] = useState<"pune" | "mumbai">("pune");
   const [selectedMarket, setSelectedMarket] = useState<Market | null>(null); // keeps highlight
 
@@ -726,7 +726,7 @@ const Markets = () => {
                     })}
                   </p>
                   {visibleCount < filteredMarkets.length && (
-                    <Button variant="outline" onClick={() => setVisibleCount((prev) => prev + 8)}>
+                    <Button variant="outline" onClick={() => setVisibleCount((prev) => prev + 9)}>
                       {t("loadMore")}
                     </Button>
                   )}
