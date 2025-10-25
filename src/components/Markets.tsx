@@ -621,8 +621,10 @@ const Markets = () => {
   return (
     <section id="markets" className="py-20 bg-muted/30">
       <div className="container px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t("marketsTitle")}</h2>
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-foreground to-primary bg-clip-text text-transparent animate-scale-in">
+            {t("marketsTitle")}
+          </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {t("marketsSubtitle", { count: (puneMarkets.length + mumbaiMarkets.length).toString() })}
           </p>

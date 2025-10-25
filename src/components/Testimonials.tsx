@@ -48,8 +48,10 @@ const Testimonials = () => {
   return (
     <section className="py-20 pb-12 bg-background">
       <div className="container px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('testimonialsTitle')}</h2>
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary/70 to-primary bg-clip-text text-transparent animate-scale-in">
+            {t('testimonialsTitle')}
+          </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {t('testimonialsSubtitle')}
           </p>
@@ -57,7 +59,9 @@ const Testimonials = () => {
 
         {/* Video Testimonials */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold mb-8 text-center">{t('videoTestimonials')}</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent animate-fade-in">
+            {t('videoTestimonials')}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {videoTestimonials.map((video, index) => (
               <Card key={index} className="overflow-hidden hover:shadow-medium transition-shadow group">
@@ -87,7 +91,9 @@ const Testimonials = () => {
 
         {/* Google Reviews */}
         <div>
-          <h3 className="text-2xl font-bold mb-8 text-center">{t('liveGoogleReviews')}</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent animate-fade-in">
+            {t('liveGoogleReviews')}
+          </h3>
           <div className="max-w-4xl mx-auto">
             <Card className="p-8 shadow-medium relative overflow-hidden">
               {/* Animated background gradient */}

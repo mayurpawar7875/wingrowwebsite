@@ -91,7 +91,7 @@ const WomenMarkets = () => {
             <div className="flex items-center gap-3 text-center md:text-left">
               <Sparkles className="h-8 w-8 text-orange-600 dark:text-orange-400 animate-pulse flex-shrink-0" />
               <div>
-                <h2 className="text-xl md:text-2xl font-bold text-foreground">
+                <h2 className="text-xl md:text-2xl font-bold text-foreground bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-clip-text text-transparent animate-scale-in">
                   Women Markets 2025 — Women Entrepreneurs Showcase
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground">
@@ -314,7 +314,9 @@ const WomenMarkets = () => {
 
         {/* FAQ Section */}
         <div className="max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-center">{t("womenMarketFaqTitle")}</h3>
+          <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-orange-600 via-foreground to-orange-600 bg-clip-text text-transparent animate-fade-in">
+            {t("womenMarketFaqTitle")}
+          </h3>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger>{t("faqWhatCanISell")}</AccordionTrigger>

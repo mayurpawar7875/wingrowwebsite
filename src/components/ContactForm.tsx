@@ -8,8 +8,10 @@ const ContactForm = () => {
       <div className="container px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Connect with Wingrow Market</h2>
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-foreground to-primary bg-clip-text text-transparent animate-scale-in">
+              Connect with Wingrow Market
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               We'd love to hear from you or host a market at your venue
             </p>
