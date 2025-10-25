@@ -17,7 +17,7 @@ const DiwaliBanner = () => {
       new CustomEvent("openChatbot", {
         detail: {
           producerType: "Women Entrepreneur",
-          stallType: "Diwali Market",
+          stallType: "Women Market",
         },
       })
     );
@@ -31,10 +31,10 @@ const DiwaliBanner = () => {
             <Sparkles className="h-8 w-8 text-orange-600 dark:text-orange-400 animate-pulse flex-shrink-0" />
             <div>
               <h3 className="text-lg md:text-xl font-bold text-foreground">
-                {t("diwaliBannerTitle")}
+                {t("womenMarketBannerTitle")}
               </h3>
               <p className="text-sm text-muted-foreground">
-                {t("diwaliBannerSubtitle")}
+                {t("womenMarketBannerSubtitle")}
               </p>
             </div>
           </div>
@@ -48,7 +48,7 @@ const DiwaliBanner = () => {
             </Button>
             <Button
               variant="outline"
-              onClick={() => scrollToSection("diwali-markets")}
+              onClick={() => scrollToSection("women-markets")}
               className="border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950"
             >
               {t("viewSchedule")}

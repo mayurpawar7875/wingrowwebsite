@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import DiwaliMarkets from "@/components/DiwaliMarkets";
+import WomenMarkets from "@/components/WomenMarkets";
 import Markets from "@/components/Markets";
 import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
@@ -12,7 +12,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Hero />
       <Markets />
-      <DiwaliMarkets />
+      <WomenMarkets />
       <About />
       <Testimonials />
       <ContactForm />

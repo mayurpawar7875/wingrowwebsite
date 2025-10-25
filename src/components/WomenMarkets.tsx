@@ -16,7 +16,7 @@ interface StallOption {
   features: string[];
 }
 
-interface DiwaliDate {
+interface MarketDate {
   date: string;
   day: string;
   venue: string;
@@ -45,7 +45,7 @@ const stallOptions: StallOption[] = [
   },
 ];
 
-const puneDates: DiwaliDate[] = [
+const puneDates: MarketDate[] = [
   { date: "2025-10-15", day: "Tuesday", venue: "Kharadi IT Park", slotsTotal: 40, slotsRemaining: 28 },
   { date: "2025-10-16", day: "Wednesday", venue: "Magarpatta City", slotsTotal: 50, slotsRemaining: 35 },
   { date: "2025-10-17", day: "Thursday", venue: "Baner", slotsTotal: 45, slotsRemaining: 30 },
@@ -54,7 +54,7 @@ const puneDates: DiwaliDate[] = [
   { date: "2025-10-20", day: "Sunday", venue: "Aundh", slotsTotal: 60, slotsRemaining: 45 },
 ];
 
-const mumbaiDates: DiwaliDate[] = [
+const mumbaiDates: MarketDate[] = [
   { date: "2025-10-16", day: "Wednesday", venue: "Andheri", slotsTotal: 50, slotsRemaining: 32 },
   { date: "2025-10-17", day: "Thursday", venue: "Thane", slotsTotal: 45, slotsRemaining: 28 },
   { date: "2025-10-18", day: "Friday", venue: "Vashi", slotsTotal: 40, slotsRemaining: 22 },
@@ -62,18 +62,18 @@ const mumbaiDates: DiwaliDate[] = [
   { date: "2025-10-20", day: "Sunday", venue: "Powai", slotsTotal: 55, slotsRemaining: 40 },
 ];
 
-const DiwaliMarkets = () => {
+const WomenMarkets = () => {
   const { t } = useTranslation();
   const [selectedCity, setSelectedCity] = useState<"pune" | "mumbai">("pune");
 
   const currentDates = selectedCity === "pune" ? puneDates : mumbaiDates;
 
-  const handleApply = (date?: DiwaliDate) => {
+  const handleApply = (date?: MarketDate) => {
     window.dispatchEvent(
       new CustomEvent("openChatbot", {
         detail: {
           producerType: "Women Entrepreneur",
-          stallType: "Diwali Market",
+          stallType: "Women Market",
           city: selectedCity === "pune" ? "Pune" : "Mumbai",
           market: date?.venue,
           date: date?.date,
@@ -83,19 +83,19 @@ const DiwaliMarkets = () => {
   };
 
   return (
-    <section id="diwali-markets" className="py-20 bg-gradient-to-b from-orange-50/50 to-white dark:from-orange-950/10 dark:to-background">
+    <section id="women-markets" className="py-20 bg-gradient-to-b from-orange-50/50 to-white dark:from-orange-950/10 dark:to-background">
       <div className="container px-4">
-        {/* Diwali Banner */}
+        {/* Women Markets Banner */}
         <div className="bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-orange-950/30 border border-orange-200 dark:border-orange-800 rounded-2xl p-6 mb-12 animate-fade-in">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3 text-center md:text-left">
               <Sparkles className="h-8 w-8 text-orange-600 dark:text-orange-400 animate-pulse flex-shrink-0" />
               <div>
                 <h2 className="text-xl md:text-2xl font-bold text-foreground">
-                  Diwali Markets 2025 — Women Entrepreneurs Showcase
+                  Women Markets 2025 — Women Entrepreneurs Showcase
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground">
-                  Special festive stalls in Pune (Tue–Sun) & Mumbai (Wed–Sun). Apply now!
+                  Special stalls in Pune (Tue–Sun) & Mumbai (Wed–Sun). Apply now!
                 </p>
               </div>
             </div>
@@ -109,7 +109,7 @@ const DiwaliMarkets = () => {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => document.getElementById('diwali-markets')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('women-markets')?.scrollIntoView({ behavior: 'smooth' })}
                 className="border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950"
               >
                 View Schedule
@@ -142,10 +142,10 @@ const DiwaliMarkets = () => {
                       <Sparkles className="h-8 w-8 absolute -top-2 -right-2 animate-bounce" />
                     </div>
                     <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      Festive Shopping Experience
+                      Shopping Experience
                     </h3>
                     <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
-                      Celebrate Diwali with handpicked products from talented women entrepreneurs
+                      Discover handpicked products from talented women entrepreneurs
                     </p>
                   </div>
                 </div>
@@ -195,7 +195,7 @@ const DiwaliMarkets = () => {
                       46 Markets Across Pune & Mumbai
                     </h3>
                     <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
-                      Find a Diwali market near you and shop local
+                      Find a women's market near you and shop local
                     </p>
                     <div className="mt-6 grid grid-cols-2 gap-4">
                       <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-center">
@@ -223,7 +223,7 @@ const DiwaliMarkets = () => {
                       Limited Stalls Available!
                     </h3>
                     <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md mb-6">
-                      Book your festive stall today - slots filling fast
+                      Book your stall today - slots filling fast
                     </p>
                     <Button 
                       size="lg" 
@@ -270,7 +270,7 @@ const DiwaliMarkets = () => {
           </TabsList>
 
           <TabsContent value={selectedCity}>
-            <h3 className="text-2xl font-bold mb-6 text-center">{t("diwaliDates")}</h3>
+            <h3 className="text-2xl font-bold mb-6 text-center">{t("womenMarketDates")}</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {currentDates.map((dateInfo) => (
                 <Card key={dateInfo.date} className="hover:shadow-lg transition-all">
@@ -314,7 +314,7 @@ const DiwaliMarkets = () => {
 
         {/* FAQ Section */}
         <div className="max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-center">{t("diwaliFaqTitle")}</h3>
+          <h3 className="text-2xl font-bold mb-6 text-center">{t("womenMarketFaqTitle")}</h3>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger>{t("faqWhatCanISell")}</AccordionTrigger>
@@ -343,4 +343,4 @@ const DiwaliMarkets = () => {
   );
 };
 
-export default DiwaliMarkets;
+export default WomenMarkets;
