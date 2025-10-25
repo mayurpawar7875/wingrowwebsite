@@ -4,55 +4,55 @@ import { MapPin } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const puneMarkets = [
-  { name: "Kharadi Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Hadapsar Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Magarpatta Market", day: "Saturday", time: "7 AM - 1 PM" },
-  { name: "Ivy Estate Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Baner Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Wakad Market", day: "Sunday", time: "7 AM - 1 PM" },
-  { name: "Aundh Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Pimple Saudagar", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Kalyani Nagar", day: "Saturday", time: "7 AM - 1 PM" },
-  { name: "Viman Nagar", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Kothrud Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Shivaji Nagar", day: "Sunday", time: "7 AM - 1 PM" },
-  { name: "Katraj Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Warje Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Undri Market", day: "Saturday", time: "7 AM - 1 PM" },
-  { name: "Kondhwa Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Hinjewadi Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Pashan Market", day: "Sunday", time: "7 AM - 1 PM" },
-  { name: "Bavdhan Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Sus Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Pimpri Market", day: "Saturday", time: "7 AM - 1 PM" },
-  { name: "Chinchwad Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Nigdi Market", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "kharadiMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "hadapsarMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "magarpattaMarket", day: "Saturday", time: "7 AM - 1 PM" },
+  { nameKey: "ivyEstateMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "banerMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "wakadMarket", day: "Sunday", time: "7 AM - 1 PM" },
+  { nameKey: "aundhMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "pimpleSaudagarMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "kalyaniNagarMarket", day: "Saturday", time: "7 AM - 1 PM" },
+  { nameKey: "vimanNagarMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "kothrudMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "shivajiNagarMarket", day: "Sunday", time: "7 AM - 1 PM" },
+  { nameKey: "katrajMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "warjeMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "undriMarket", day: "Saturday", time: "7 AM - 1 PM" },
+  { nameKey: "kondhwaMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "hinjewadiMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "pashanMarket", day: "Sunday", time: "7 AM - 1 PM" },
+  { nameKey: "bavdhanMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "susMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "pimpriMarket", day: "Saturday", time: "7 AM - 1 PM" },
+  { nameKey: "chinchwadMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "nigdiMarket", day: "Saturday", time: "7 AM - 12 PM" },
 ];
 
 const mumbaiMarkets = [
-  { name: "Dombivli Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Thane Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Mulund Market", day: "Sunday", time: "7 AM - 1 PM" },
-  { name: "Ghatkopar Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Borivali Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Chembur Market", day: "Saturday", time: "7 AM - 1 PM" },
-  { name: "Andheri Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Kandivali Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Malad Market", day: "Sunday", time: "7 AM - 1 PM" },
-  { name: "Goregaon Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Dahisar Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Mira Road Market", day: "Saturday", time: "7 AM - 1 PM" },
-  { name: "Bhandup Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Vikhroli Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Powai Market", day: "Sunday", time: "7 AM - 1 PM" },
-  { name: "Kurla Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Vashi Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Kharghar Market", day: "Saturday", time: "7 AM - 1 PM" },
-  { name: "Panvel Market", day: "Sunday", time: "7 AM - 12 PM" },
-  { name: "Nerul Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Airoli Market", day: "Sunday", time: "7 AM - 1 PM" },
-  { name: "Sanpada Market", day: "Saturday", time: "7 AM - 12 PM" },
-  { name: "Kopar Khairane", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "dombivliMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "thaneMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "mulundMarket", day: "Sunday", time: "7 AM - 1 PM" },
+  { nameKey: "ghatkoperMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "borivaliMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "chemburMarket", day: "Saturday", time: "7 AM - 1 PM" },
+  { nameKey: "andheriMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "kandivaliMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "maladMarket", day: "Sunday", time: "7 AM - 1 PM" },
+  { nameKey: "goregaonMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "dahisarMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "miraRoadMarket", day: "Saturday", time: "7 AM - 1 PM" },
+  { nameKey: "bhandupMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "vikhroliMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "powaiMarket", day: "Sunday", time: "7 AM - 1 PM" },
+  { nameKey: "kurlaMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "vashiMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "khargharMarket", day: "Saturday", time: "7 AM - 1 PM" },
+  { nameKey: "panvelMarket", day: "Sunday", time: "7 AM - 12 PM" },
+  { nameKey: "nerulMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "airoliMarket", day: "Sunday", time: "7 AM - 1 PM" },
+  { nameKey: "sanpadaMarket", day: "Saturday", time: "7 AM - 12 PM" },
+  { nameKey: "koparKhairaneMarket", day: "Sunday", time: "7 AM - 12 PM" },
 ];
 
 const Markets = () => {
@@ -80,7 +80,7 @@ const Markets = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-primary" />
-                    {market.name}
+                    {t(market.nameKey)}
                   </CardTitle>
                   <CardDescription className="text-base">
                     <div className="font-semibold text-foreground mt-2">{t(market.day.toLowerCase() as 'saturday' | 'sunday')}</div>
@@ -107,7 +107,7 @@ const Markets = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-primary" />
-                    {market.name}
+                    {t(market.nameKey)}
                   </CardTitle>
                   <CardDescription className="text-base">
                     <div className="font-semibold text-foreground mt-2">{t(market.day.toLowerCase() as 'saturday' | 'sunday')}</div>
