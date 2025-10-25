@@ -14,7 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      market_invitations: {
+        Row: {
+          additional_notes: string | null
+          agree_to_contact: boolean
+          city: string
+          contact_person_name: string
+          created_at: string
+          email: string
+          expected_footfall: string | null
+          frequency: string
+          id: string
+          organization_name: string
+          phone_number: string
+          preferred_dates: string
+          venue_address: string
+        }
+        Insert: {
+          additional_notes?: string | null
+          agree_to_contact?: boolean
+          city: string
+          contact_person_name: string
+          created_at?: string
+          email: string
+          expected_footfall?: string | null
+          frequency: string
+          id?: string
+          organization_name: string
+          phone_number: string
+          preferred_dates: string
+          venue_address: string
+        }
+        Update: {
+          additional_notes?: string | null
+          agree_to_contact?: boolean
+          city?: string
+          contact_person_name?: string
+          created_at?: string
+          email?: string
+          expected_footfall?: string | null
+          frequency?: string
+          id?: string
+          organization_name?: string
+          phone_number?: string
+          preferred_dates?: string
+          venue_address?: string
+        }
+        Relationships: []
+      }
+      visitor_feedback: {
+        Row: {
+          agree_to_contact: boolean
+          created_at: string
+          email: string | null
+          feedback_message: string
+          id: string
+          market_visited: string
+          name: string
+          phone: string | null
+          rating: number
+        }
+        Insert: {
+          agree_to_contact?: boolean
+          created_at?: string
+          email?: string | null
+          feedback_message: string
+          id?: string
+          market_visited: string
+          name: string
+          phone?: string | null
+          rating: number
+        }
+        Update: {
+          agree_to_contact?: boolean
+          created_at?: string
+          email?: string | null
+          feedback_message?: string
+          id?: string
+          market_visited?: string
+          name?: string
+          phone?: string | null
+          rating?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
