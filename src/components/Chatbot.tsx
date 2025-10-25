@@ -54,11 +54,23 @@ const Chatbot = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const handleOpenChatbot = () => setIsOpen(true);
-    window.addEventListener('openChatbot', handleOpenChatbot);
+    const handleOpenChatbot = (e?: CustomEvent) => {
+      setIsOpen(true);
+      
+      // Prefill data if provided
+      if (e && e.detail) {
+        setFormData(prev => ({
+          ...prev,
+          city: e.detail.city || prev.city,
+          market: e.detail.market || prev.market
+        }));
+      }
+    };
+    
+    window.addEventListener('openChatbot', handleOpenChatbot as EventListener);
 
     return () => {
-      window.removeEventListener('openChatbot', handleOpenChatbot);
+      window.removeEventListener('openChatbot', handleOpenChatbot as EventListener);
     };
   }, []);
 
