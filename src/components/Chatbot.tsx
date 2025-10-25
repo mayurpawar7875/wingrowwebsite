@@ -12,6 +12,7 @@ import { X, MessageCircle, Calendar as CalendarIcon, CheckCircle2 } from "lucide
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const GOOGLE_SHEETS_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"; // Replace with actual URL
 
@@ -35,6 +36,7 @@ const Chatbot = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [referenceId, setReferenceId] = useState("");
+  const { t } = useTranslation();
   
   const [formData, setFormData] = useState({
     farmerName: "",
@@ -52,33 +54,26 @@ const Chatbot = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!isOpen && !showSuccess) {
-        setIsOpen(true);
-      }
-    }, 10000);
-
     const handleOpenChatbot = () => setIsOpen(true);
     window.addEventListener('openChatbot', handleOpenChatbot);
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('openChatbot', handleOpenChatbot);
     };
-  }, [isOpen, showSuccess]);
+  }, []);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.farmerName.trim()) newErrors.farmerName = "Name is required";
-    if (!formData.address.trim()) newErrors.address = "Address is required";
-    if (!formData.phone.match(/^\d{10}$/)) newErrors.phone = "Valid 10-digit phone number required";
-    if (!formData.producerType) newErrors.producerType = "Producer type is required";
-    if (!formData.stallType) newErrors.stallType = "Stall type is required";
-    if (!formData.city) newErrors.city = "City is required";
-    if (!formData.market) newErrors.market = "Market is required";
-    if (!formData.preferredDate) newErrors.preferredDate = "Preferred date is required";
-    if (!formData.consent) newErrors.consent = "You must agree to be contacted";
+    if (!formData.farmerName.trim()) newErrors.farmerName = t('nameRequired');
+    if (!formData.address.trim()) newErrors.addressRequired = t('addressRequired');
+    if (!formData.phone.match(/^\d{10}$/)) newErrors.phone = t('validPhoneRequired');
+    if (!formData.producerType) newErrors.producerType = t('producerTypeRequired');
+    if (!formData.stallType) newErrors.stallType = t('stallTypeRequired');
+    if (!formData.city) newErrors.city = t('cityRequired');
+    if (!formData.market) newErrors.market = t('marketRequired');
+    if (!formData.preferredDate) newErrors.preferredDate = t('dateRequired');
+    if (!formData.consent) newErrors.consent = t('consentRequired');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -107,7 +102,7 @@ const Chatbot = () => {
 
   const handleSubmit = async () => {
     if (!validateForm()) {
-      toast.error("Please fill all required fields correctly");
+      toast.error(t('fillAllFields'));
       return;
     }
 
@@ -133,9 +128,9 @@ const Chatbot = () => {
     if (result.success) {
       setReferenceId(refId);
       setShowSuccess(true);
-      toast.success("Booking submitted successfully!");
+      toast.success(t('submissionSuccess'));
     } else {
-      toast.error("Submission failed. Please try again or contact us directly.");
+      toast.error(t('submissionFailed'));
     }
 
     setIsSubmitting(false);
@@ -179,7 +174,7 @@ const Chatbot = () => {
       <div className="bg-primary text-primary-foreground p-4 rounded-t-lg flex items-center justify-between">
         <div className="flex items-center gap-2">
           <MessageCircle className="h-5 w-5" />
-          <h3 className="font-semibold">Wingrow Assistant - Book Your Stall</h3>
+          <h3 className="font-semibold">{t('chatbotTitle')}</h3>
         </div>
         <Button
           variant="ghost"
@@ -195,103 +190,103 @@ const Chatbot = () => {
         {showSuccess ? (
           <div className="text-center py-8">
             <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-2">Booking Successful!</h3>
-            <p className="text-muted-foreground mb-4">Your reference ID:</p>
+            <h3 className="text-2xl font-bold mb-2">{t('bookingSuccessful')}</h3>
+            <p className="text-muted-foreground mb-4">{t('yourReferenceId')}</p>
             <p className="text-xl font-mono font-bold text-primary mb-6">{referenceId}</p>
             <div className="bg-muted p-4 rounded-lg mb-6 text-left">
-              <p className="font-semibold mb-2">Booking Summary:</p>
-              <p className="text-sm"><strong>Name:</strong> {formData.farmerName}</p>
-              <p className="text-sm"><strong>Phone:</strong> {formData.phone}</p>
-              <p className="text-sm"><strong>Market:</strong> {formData.market}, {formData.city}</p>
-              <p className="text-sm"><strong>Date:</strong> {formData.preferredDate ? format(formData.preferredDate, "PPP") : ""}</p>
+              <p className="font-semibold mb-2">{t('bookingSummary')}</p>
+              <p className="text-sm"><strong>{t('summaryName')}:</strong> {formData.farmerName}</p>
+              <p className="text-sm"><strong>{t('summaryPhone')}:</strong> {formData.phone}</p>
+              <p className="text-sm"><strong>{t('summaryMarket')}:</strong> {formData.market}, {formData.city}</p>
+              <p className="text-sm"><strong>{t('summaryDate')}:</strong> {formData.preferredDate ? format(formData.preferredDate, "PPP") : ""}</p>
             </div>
             <p className="text-sm text-muted-foreground mb-6">
-              We'll contact you soon to confirm your booking details.
+              {t('contactSoon')}
             </p>
-            <Button onClick={resetForm} className="w-full">Book Another Stall</Button>
+            <Button onClick={resetForm} className="w-full">{t('bookAnother')}</Button>
           </div>
         ) : (
           <div className="space-y-4">
             <div>
-              <Label htmlFor="farmerName">Farmer / Business Name *</Label>
+              <Label htmlFor="farmerName">{t('farmerName')} *</Label>
               <Input
                 id="farmerName"
                 value={formData.farmerName}
                 onChange={(e) => setFormData({ ...formData, farmerName: e.target.value })}
-                placeholder="Enter your name"
+                placeholder={t('enterYourName')}
                 className={errors.farmerName ? "border-destructive" : ""}
               />
               {errors.farmerName && <p className="text-xs text-destructive mt-1">{errors.farmerName}</p>}
             </div>
 
             <div>
-              <Label htmlFor="address">Address *</Label>
+              <Label htmlFor="address">{t('address')} *</Label>
               <Textarea
                 id="address"
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                placeholder="Enter your full address"
+                placeholder={t('enterYourAddress')}
                 className={errors.address ? "border-destructive" : ""}
               />
               {errors.address && <p className="text-xs text-destructive mt-1">{errors.address}</p>}
             </div>
 
             <div>
-              <Label htmlFor="phone">Phone Number *</Label>
+              <Label htmlFor="phone">{t('phoneNumber')} *</Label>
               <Input
                 id="phone"
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, "").slice(0, 10) })}
-                placeholder="10-digit mobile number"
+                placeholder={t('tenDigitNumber')}
                 className={errors.phone ? "border-destructive" : ""}
               />
               {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone}</p>}
             </div>
 
             <div>
-              <Label>Producer Type *</Label>
+              <Label>{t('producerType')} *</Label>
               <Select value={formData.producerType} onValueChange={(value) => setFormData({ ...formData, producerType: value })}>
                 <SelectTrigger className={errors.producerType ? "border-destructive" : ""}>
-                  <SelectValue placeholder="Select producer type" />
+                  <SelectValue placeholder={t('selectProducerType')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Farmer">Farmer</SelectItem>
-                  <SelectItem value="WSHG">Women Self-Help Group</SelectItem>
-                  <SelectItem value="Food Processor">Food Processor</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
+                  <SelectItem value="Farmer">{t('producerFarmer')}</SelectItem>
+                  <SelectItem value="WSHG">{t('producerWSHG')}</SelectItem>
+                  <SelectItem value="Food Processor">{t('producerFoodProcessor')}</SelectItem>
+                  <SelectItem value="Other">{t('producerOther')}</SelectItem>
                 </SelectContent>
               </Select>
               {errors.producerType && <p className="text-xs text-destructive mt-1">{errors.producerType}</p>}
             </div>
 
             <div>
-              <Label>Stall Type *</Label>
+              <Label>{t('stallType')} *</Label>
               <Select value={formData.stallType} onValueChange={(value) => setFormData({ ...formData, stallType: value })}>
                 <SelectTrigger className={errors.stallType ? "border-destructive" : ""}>
-                  <SelectValue placeholder="Select stall type" />
+                  <SelectValue placeholder={t('selectStallType')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Vegetables">Vegetables</SelectItem>
-                  <SelectItem value="Fruits">Fruits</SelectItem>
-                  <SelectItem value="Grains/Pulses">Grains/Pulses</SelectItem>
-                  <SelectItem value="Millets">Millets</SelectItem>
-                  <SelectItem value="Processed Foods">Processed Foods</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
+                  <SelectItem value="Vegetables">{t('stallVegetables')}</SelectItem>
+                  <SelectItem value="Fruits">{t('stallFruits')}</SelectItem>
+                  <SelectItem value="Grains/Pulses">{t('stallGrainsPulses')}</SelectItem>
+                  <SelectItem value="Millets">{t('stallMillets')}</SelectItem>
+                  <SelectItem value="Processed Foods">{t('stallProcessedFoods')}</SelectItem>
+                  <SelectItem value="Other">{t('stallOther')}</SelectItem>
                 </SelectContent>
               </Select>
               {errors.stallType && <p className="text-xs text-destructive mt-1">{errors.stallType}</p>}
             </div>
 
             <div>
-              <Label>Select City *</Label>
+              <Label>{t('selectCity')} *</Label>
               <Select value={formData.city} onValueChange={handleCityChange}>
                 <SelectTrigger className={errors.city ? "border-destructive" : ""}>
-                  <SelectValue placeholder="Choose city" />
+                  <SelectValue placeholder={t('chooseCity')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Pune">Pune</SelectItem>
-                  <SelectItem value="Mumbai">Mumbai</SelectItem>
+                  <SelectItem value="Pune">{t('pune')}</SelectItem>
+                  <SelectItem value="Mumbai">{t('mumbai')}</SelectItem>
                 </SelectContent>
               </Select>
               {errors.city && <p className="text-xs text-destructive mt-1">{errors.city}</p>}
@@ -299,10 +294,10 @@ const Chatbot = () => {
 
             {formData.city && (
               <div>
-                <Label>Select Market *</Label>
+                <Label>{t('selectMarket')} *</Label>
                 <Select value={formData.market} onValueChange={(value) => setFormData({ ...formData, market: value })}>
                   <SelectTrigger className={errors.market ? "border-destructive" : ""}>
-                    <SelectValue placeholder="Choose market location" />
+                    <SelectValue placeholder={t('chooseMarket')} />
                   </SelectTrigger>
                   <SelectContent>
                     {cityMarkets[formData.city as keyof typeof cityMarkets]?.map((market) => (
@@ -315,7 +310,7 @@ const Chatbot = () => {
             )}
 
             <div>
-              <Label>Preferred Market Date *</Label>
+              <Label>{t('preferredDate')} *</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -327,7 +322,7 @@ const Chatbot = () => {
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.preferredDate ? format(formData.preferredDate, "PPP") : "Pick a date"}
+                    {formData.preferredDate ? format(formData.preferredDate, "PPP") : t('pickDate')}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
@@ -345,12 +340,12 @@ const Chatbot = () => {
             </div>
 
             <div>
-              <Label htmlFor="notes">Additional Notes (Optional)</Label>
+              <Label htmlFor="notes">{t('notes')}</Label>
               <Textarea
                 id="notes"
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                placeholder="Any special requirements or questions?"
+                placeholder={t('anySpecialRequirements')}
               />
             </div>
 
@@ -361,7 +356,7 @@ const Chatbot = () => {
                 onCheckedChange={(checked) => setFormData({ ...formData, consent: checked as boolean })}
               />
               <label htmlFor="consent" className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                I agree to be contacted by Wingrow Market regarding my stall booking. *
+                {t('consent')} *
               </label>
             </div>
             {errors.consent && <p className="text-xs text-destructive">{errors.consent}</p>}
@@ -371,7 +366,7 @@ const Chatbot = () => {
               className="w-full" 
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Submitting..." : "Submit Booking"}
+              {isSubmitting ? t('submitting') : t('submitBooking')}
             </Button>
           </div>
         )}

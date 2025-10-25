@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "./LanguageSwitcher";
 import heroImage1 from "@/assets/hero-market.jpg";
 import heroImage2 from "@/assets/hero-market-2.jpg";
 import heroImage3 from "@/assets/hero-market-3.jpg";
@@ -10,6 +12,7 @@ const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4];
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,13 +47,18 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
         </div>
       ))}
+
+      {/* Language Switcher */}
+      <div className="absolute top-4 right-4 z-20">
+        <LanguageSwitcher />
+      </div>
       
       <div className="container relative z-10 px-4 py-20 text-center">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-          Fresh. Local. Sustainable.
+          {t('heroTitle')}
         </h1>
         <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
-          Connecting farmers, women entrepreneurs & consumers directly through weekly markets
+          {t('heroSubtitle')}
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
@@ -60,7 +68,7 @@ const Hero = () => {
             onClick={openChatbot}
           >
             <Calendar className="mr-2 h-5 w-5" />
-            Book a Stall
+            {t('bookStall')}
           </Button>
           <Button 
             size="lg" 
@@ -69,7 +77,7 @@ const Hero = () => {
             onClick={() => scrollToSection('markets')}
           >
             <ShoppingBag className="mr-2 h-5 w-5" />
-            Visit Our Markets
+            {t('visitMarkets')}
           </Button>
         </div>
 
