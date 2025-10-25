@@ -690,7 +690,12 @@ const Markets = () => {
           <h3 className="text-3xl font-bold mb-8 text-center">{t("findUsOnMap")}</h3>
           <div className="rounded-lg overflow-hidden shadow-lg">
             <iframe
-              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d${selectedCity === "pune" ? "242096" : "120000"}!2d${selectedCity === "pune" ? "73.8567" : "72.8777"}!3d${selectedCity === "pune" ? "18.5204" : "19.0760"}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c14df5c70e0d%3A0x2d19689e09e2fced!2s${selectedCity === "pune" ? "Pune" : "Mumbai"}%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin`}
+              key={selectedMarket ? `${selectedMarket.lat}-${selectedMarket.lng}` : selectedCity}
+              src={
+                selectedMarket
+                  ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${selectedMarket.lat},${selectedMarket.lng}&zoom=16`
+                  : `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d${selectedCity === "pune" ? "242096" : "120000"}!2d${selectedCity === "pune" ? "73.8567" : "72.8777"}!3d${selectedCity === "pune" ? "18.5204" : "19.0760"}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c14df5c70e0d%3A0x2d19689e09e2fced!2s${selectedCity === "pune" ? "Pune" : "Mumbai"}%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin`
+              }
               width="100%"
               height="500"
               style={{ border: 0 }}
@@ -701,7 +706,14 @@ const Markets = () => {
             />
           </div>
           <div className="mt-4 text-center">
-            <p className="text-sm text-muted-foreground mb-2">Click on any market card to highlight it on the map</p>
+            <p className="text-sm text-muted-foreground mb-2">
+              {selectedMarket ? `Showing: ${t(selectedMarket.nameKey)}` : "Click on any market card to zoom into it on the map"}
+            </p>
+            {selectedMarket && (
+              <Button variant="outline" size="sm" onClick={() => setSelectedMarket(null)} className="mt-2">
+                Show All Markets
+              </Button>
+            )}
           </div>
         </div>
       </div>
