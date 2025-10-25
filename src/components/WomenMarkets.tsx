@@ -68,6 +68,19 @@ const WomenMarkets = () => {
 
   const currentDates = selectedCity === "pune" ? puneDates : mumbaiDates;
 
+  const translateDay = (day: string) => {
+    const dayMap: { [key: string]: string } = {
+      'Monday': 'monday',
+      'Tuesday': 'tuesday',
+      'Wednesday': 'wednesday',
+      'Thursday': 'thursday',
+      'Friday': 'friday',
+      'Saturday': 'saturday',
+      'Sunday': 'sunday',
+    };
+    return t(dayMap[day] as any) || day;
+  };
+
   const handleApply = (date?: MarketDate) => {
     window.dispatchEvent(
       new CustomEvent("openChatbot", {
@@ -174,7 +187,7 @@ const WomenMarkets = () => {
                       </Badge>
                       <Badge className="bg-white/20 backdrop-blur-sm text-white text-lg px-6 py-2 border-white/30">
                         <CheckCircle2 className="h-4 w-4 mr-2" />
-                        Quality Products
+                        {t('qualityProducts')}
                       </Badge>
                     </div>
                   </div>
@@ -277,7 +290,7 @@ const WomenMarkets = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Calendar className="h-5 w-5 text-orange-600" />
-                      {dateInfo.day}
+                      {translateDay(dateInfo.day)}
                     </CardTitle>
                     <CardDescription>
                       {new Date(dateInfo.date).toLocaleDateString("en-US", {
