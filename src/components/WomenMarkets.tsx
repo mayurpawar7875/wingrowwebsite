@@ -83,7 +83,7 @@ const WomenMarkets = () => {
   };
 
   return (
-    <section id="women-markets" className="py-20 bg-gradient-to-b from-orange-50/50 to-white dark:from-orange-950/10 dark:to-background">
+    <section id="women-markets" className="pt-8 pb-20 bg-gradient-to-b from-orange-50/50 to-white dark:from-orange-950/10 dark:to-background">
       <div className="container px-4">
         {/* Women Markets Banner */}
         <div className="bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-orange-950/30 border border-orange-200 dark:border-orange-800 rounded-2xl p-6 mb-12 animate-fade-in">
