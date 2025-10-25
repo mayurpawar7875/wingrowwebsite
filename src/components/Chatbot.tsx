@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/hooks/useTranslation";
+import { supabase } from "@/integrations/supabase/client";
 
 const GOOGLE_SHEETS_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"; // Replace with actual URL
 
@@ -141,6 +142,26 @@ const Chatbot = () => {
     const result = await submitToGoogleSheets(submissionData);
 
     if (result.success) {
+      // Send email notification
+      try {
+        await supabase.functions.invoke('send-booking-email', {
+          body: {
+            referenceId: refId,
+            name: formData.farmerName,
+            phone: formData.phone,
+            email: formData.address,
+            city: formData.city,
+            market: formData.market,
+            stallSize: formData.stallType,
+            preferredDates: formData.preferredDate ? format(formData.preferredDate, "yyyy-MM-dd") : "",
+            hasElectricity: false,
+            additionalRequirements: formData.notes
+          }
+        });
+      } catch (emailError) {
+        console.error("Failed to send email notification:", emailError);
+      }
+      
       setReferenceId(refId);
       setShowSuccess(true);
       toast.success(t('submissionSuccess'));
