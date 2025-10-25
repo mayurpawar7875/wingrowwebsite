@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Play } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const videoTestimonials = [
@@ -35,6 +35,15 @@ const googleReviews = [
 const Testimonials = () => {
   const { t } = useTranslation();
   const [currentReview, setCurrentReview] = useState(0);
+
+  // Auto-rotate reviews every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentReview((prev) => (prev + 1) % googleReviews.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="py-20 bg-background">
@@ -80,12 +89,19 @@ const Testimonials = () => {
         <div>
           <h3 className="text-2xl font-bold mb-8 text-center">{t('liveGoogleReviews')}</h3>
           <div className="max-w-4xl mx-auto">
-            <Card className="p-8 shadow-medium">
-              <div className="flex items-start gap-4">
+            <Card className="p-8 shadow-medium relative overflow-hidden">
+              {/* Animated background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 animate-pulse" />
+              
+              <div className="relative z-10 flex items-start gap-4 animate-fade-in" key={currentReview}>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-4">
                     {[...Array(googleReviews[currentReview].rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+                      <Star 
+                        key={i} 
+                        className="h-5 w-5 fill-primary text-primary animate-scale-in" 
+                        style={{ animationDelay: `${i * 0.1}s` }}
+                      />
                     ))}
                   </div>
                   <p className="text-lg mb-4 text-foreground">"{googleReviews[currentReview].text}"</p>
@@ -102,8 +118,8 @@ const Testimonials = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentReview(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    currentReview === index ? 'w-8 bg-primary' : 'w-2 bg-muted'
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    currentReview === index ? 'w-8 bg-primary' : 'w-2 bg-muted hover:bg-muted-foreground/50'
                   }`}
                   aria-label={`View review ${index + 1}`}
                 />
