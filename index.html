@@ -21,6 +21,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Hind:wght@400;500;600;700&family=Mukta:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Anti-clipping fixes for Devanagari headings -->
+    <style>
+      :root{
+        --wg-font-display: "Poppins","Hind","Mukta","Noto Sans Devanagari",system-ui,-apple-system,"Segoe UI",sans-serif;
+      }
+      html{
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      body{ font-family: var(--wg-font-display); }
+
+      /* Safer metrics for big headings (Marathi/Devanagari) */
+      h1, h2, h3, h4{
+        line-height: 1.18;         /* 1.15–1.2 is safe */
+        padding-bottom: 0.08em;    /* room for matras/descenders */
+        overflow: visible;         /* don't crop glyphs */
+        letter-spacing: 0;         /* avoid negative tracking */
+      }
+
+      /* Catch common framework heading classes too */
+      [class*="title"], [class*="heading"], [class*="Heading"]{
+        line-height: 1.18;
+        padding-bottom: 0.08em;
+        overflow: visible;
+      }
+
+      /* If you use gradient/clip text on headings */
+      .heading-gradient{
+        display: inline-block;                 /* prevents baseline clipping */
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+    </style>
   </head>
 
   <body>
