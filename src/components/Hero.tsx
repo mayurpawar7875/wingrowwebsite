@@ -7,8 +7,12 @@ import heroImage1 from "@/assets/hero-market.jpg";
 import heroImage2 from "@/assets/hero-market-2.jpg";
 import heroImage3 from "@/assets/hero-market-3.jpg";
 import heroImage4 from "@/assets/hero-market-4.jpg";
+import heroImage5 from "@/assets/hero-market-5.jpg";
+import heroImage6 from "@/assets/hero-market-6.jpg";
+import heroImage7 from "@/assets/hero-market-7.jpg";
+import heroImage8 from "@/assets/hero-market-8.jpg";
 
-const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4];
+const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4, heroImage5, heroImage6, heroImage7, heroImage8];
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
