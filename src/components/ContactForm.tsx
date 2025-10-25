@@ -4,7 +4,7 @@ import MarketInvitationForm from "./MarketInvitationForm";
 
 const ContactForm = () => {
   return (
-    <section id="contact" className="pt-8 pb-20 bg-background">
+    <section id="contact" className="pt-8 pb-4 bg-background">
       <div className="container px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}

@@ -49,7 +49,7 @@ const Footer = () => {
         <Leaf className="h-16 w-16 text-accent rotate-45 animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
-      <div className="container px-4 pt-20 pb-8">
+      <div className="container px-4 pt-12 pb-8">
         {/* Newsletter Section */}
         <div className="max-w-3xl mx-auto mb-16 animate-fade-in">
           <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-8 border border-primary/20 shadow-lg relative overflow-hidden group">
