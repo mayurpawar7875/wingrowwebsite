@@ -6,10 +6,12 @@ import Testimonials from "@/components/Testimonials";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
+import FloatingProduceBackground from "@/components/FloatingProduceBackground";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      <FloatingProduceBackground density="medium" />
       <Hero />
       <Markets />
       <WomenMarkets />
