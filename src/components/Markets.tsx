@@ -398,10 +398,24 @@ const mumbaiMarkets: Market[] = [
   },
 ];
 
-/** open URL safely */
+/** open URL safely - handles iframe context */
 function openInNewTab(url: string) {
+  // Try to open in parent/top window first (handles iframe case)
+  try {
+    if (window.top && window.top !== window) {
+      window.top.open(url, "_blank", "noopener,noreferrer");
+      return;
+    }
+  } catch (e) {
+    // Cross-origin iframe - fallback to current window
+  }
+  
+  // Regular window.open
   const win = window.open(url, "_blank", "noopener,noreferrer");
-  if (!win) window.location.href = url; // popup blocked → same tab
+  if (!win) {
+    // Popup blocked - try direct navigation
+    window.location.href = url;
+  }
 }
 
 const Markets = () => {
