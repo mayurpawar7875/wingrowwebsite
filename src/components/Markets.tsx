@@ -398,6 +398,12 @@ const mumbaiMarkets: Market[] = [
   },
 ];
 
+/** open URL safely */
+function openInNewTab(url: string) {
+  const win = window.open(url, "_blank", "noopener,noreferrer");
+  if (!win) window.location.href = url; // popup blocked → same tab
+}
+
 const Markets = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
@@ -406,7 +412,7 @@ const Markets = () => {
   const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
   const [visibleCount, setVisibleCount] = useState(9);
   const [selectedCity, setSelectedCity] = useState<"pune" | "mumbai">("pune");
-  const [selectedMarket, setSelectedMarket] = useState<Market | null>(null);
+  const [selectedMarket, setSelectedMarket] = useState<Market | null>(null); // keeps highlight
 
   const currentMarkets = selectedCity === "pune" ? puneMarkets : mumbaiMarkets;
 
@@ -421,9 +427,44 @@ const Markets = () => {
 
   const visibleMarkets = filteredMarkets.slice(0, visibleCount);
 
+  /** Robust Directions opener with fallbacks */
+  const handleGetDirections = useCallback((market: Market) => {
+    const { lat, lng } = market;
+
+    // Primary: Google Maps web directions
+    const gmapsDir = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
+    // Fallback: Google Maps App short link
+    const gmapsShort = `https://maps.app.goo.gl/?link=https://www.google.com/maps/?q=${lat},${lng}`;
+    // iOS: Apple Maps
+    const appleMaps = `http://maps.apple.com/?daddr=${lat},${lng}`;
+    // Android: geo intent
+    const androidGeo = `geo:${lat},${lng}?q=${lat},${lng}`;
+    // No-Google fallback: OpenStreetMap
+    const osm = `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=;${lat},${lng}`;
+
+    const ua = navigator.userAgent || "";
+    const isIOS = /iPad|iPhone|iPod/.test(ua);
+    const isAndroid = /Android/.test(ua);
+
+    try {
+      openInNewTab(gmapsDir);
+    } catch {
+      try {
+        openInNewTab(gmapsShort);
+      } catch {
+        try {
+          openInNewTab(isIOS ? appleMaps : isAndroid ? androidGeo : osm);
+        } catch {
+          const link = `https://maps.google.com/?q=${lat},${lng}`;
+          navigator.clipboard?.writeText(link);
+          alert("Couldn’t open maps. A directions link was copied to your clipboard.");
+        }
+      }
+    }
+  }, []);
+
   const handleBookStall = useCallback(
     (market: Market) => {
-      // Trigger chatbot to open with prefilled data
       window.dispatchEvent(
         new CustomEvent("openChatbot", {
           detail: {
@@ -435,11 +476,6 @@ const Markets = () => {
     },
     [selectedCity, t],
   );
-
-  const handleGetDirections = useCallback((market: Market) => {
-    const url = `https://www.google.com/maps/search/?api=1&query=${market.lat},${market.lng}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  }, []);
 
   const renderMarketCard = (market: Market, index: number) => (
     <Card
@@ -524,6 +560,7 @@ const Markets = () => {
                 e.stopPropagation();
                 handleGetDirections(market);
               }}
+              aria-label={t("getDirections")}
             >
               <Navigation className="h-4 w-4" />
             </Button>
@@ -684,38 +721,6 @@ const Markets = () => {
             )}
           </TabsContent>
         </Tabs>
-
-        {/* Interactive Map */}
-        <div className="mt-16">
-          <h3 className="text-3xl font-bold mb-8 text-center">{t("findUsOnMap")}</h3>
-          <div className="rounded-lg overflow-hidden shadow-lg">
-            <iframe
-              key={selectedMarket ? `${selectedMarket.lat}-${selectedMarket.lng}` : selectedCity}
-              src={
-                selectedMarket
-                  ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${selectedMarket.lat},${selectedMarket.lng}&zoom=16`
-                  : `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d${selectedCity === "pune" ? "242096" : "120000"}!2d${selectedCity === "pune" ? "73.8567" : "72.8777"}!3d${selectedCity === "pune" ? "18.5204" : "19.0760"}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c14df5c70e0d%3A0x2d19689e09e2fced!2s${selectedCity === "pune" ? "Pune" : "Mumbai"}%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin`
-              }
-              width="100%"
-              height="500"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={`Wingrow Markets in ${selectedCity === "pune" ? "Pune" : "Mumbai"}`}
-            />
-          </div>
-          <div className="mt-4 text-center">
-            <p className="text-sm text-muted-foreground mb-2">
-              {selectedMarket ? `Showing: ${t(selectedMarket.nameKey)}` : "Click on any market card to zoom into it on the map"}
-            </p>
-            {selectedMarket && (
-              <Button variant="outline" size="sm" onClick={() => setSelectedMarket(null)} className="mt-2">
-                Show All Markets
-              </Button>
-            )}
-          </div>
-        </div>
       </div>
     </section>
   );
