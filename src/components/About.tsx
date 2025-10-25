@@ -1,4 +1,4 @@
-import { Users, TrendingUp, Heart, Store } from "lucide-react";
+import { Users, TrendingUp, Heart, Store, Package, FileCheck, ShoppingBag, Briefcase } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const About = () => {
@@ -9,6 +9,10 @@ const About = () => {
     { icon: Users, value: "1,250+", label: t('farmers') },
     { icon: Heart, value: "56", label: t('womenSHGs') },
     { icon: TrendingUp, value: "₹200+ Cr", label: t('revenueGenerated') },
+    { icon: Package, value: "40K MT", label: t('fruitsVegetablesSold') },
+    { icon: FileCheck, value: "6", label: t('airforceTenders') },
+    { icon: ShoppingBag, value: "12,000+", label: t('customerBase') },
+    { icon: Briefcase, value: "1,500+", label: t('employmentGeneration') },
   ];
 
   return (
@@ -24,7 +28,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <div
               key={index}

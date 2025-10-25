@@ -58,6 +58,10 @@ export const translations = {
     farmers: "Farmers",
     womenSHGs: "Women SHGs",
     revenueGenerated: "Revenue Generated",
+    fruitsVegetablesSold: "Fruits & Vegetables Sold",
+    airforceTenders: "Airforce Tenders",
+    customerBase: "Customer Base",
+    employmentGeneration: "Employment Generation",
     
     // Testimonials Section
     testimonialsTitle: "What Our Community Says",
@@ -345,6 +349,10 @@ export const translations = {
     farmers: "शेतकरी",
     womenSHGs: "महिला SHG",
     revenueGenerated: "उत्पन्न निर्माण",
+    fruitsVegetablesSold: "फळे आणि भाज्या विकल्या",
+    airforceTenders: "वायुसेना निविदा",
+    customerBase: "ग्राहक आधार",
+    employmentGeneration: "रोजगार निर्मिती",
     
     // Testimonials Section
     testimonialsTitle: "आमचा समुदाय काय म्हणतो",
@@ -632,6 +640,10 @@ export const translations = {
     farmers: "किसान",
     womenSHGs: "महिला SHG",
     revenueGenerated: "राजस्व उत्पन्न",
+    fruitsVegetablesSold: "फल और सब्जियां बेची गईं",
+    airforceTenders: "वायुसेना निविदाएं",
+    customerBase: "ग्राहक आधार",
+    employmentGeneration: "रोजगार सृजन",
     
     // Testimonials Section
     testimonialsTitle: "हमारा समुदाय क्या कहता है",
