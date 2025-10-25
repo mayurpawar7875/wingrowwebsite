@@ -69,6 +69,28 @@ const MarketInvitationForm = () => {
 
       if (error) throw error;
 
+      // Send email notification
+      try {
+        await supabase.functions.invoke("send-form-notifications", {
+          body: {
+            type: "invitation",
+            contact_person_name: data.contact_person_name,
+            phone_number: data.phone_number,
+            email: data.email,
+            organization_name: data.organization_name,
+            city: data.city,
+            venue_address: data.venue_address,
+            expected_footfall: data.expected_footfall || undefined,
+            preferred_dates: data.preferred_dates,
+            frequency: data.frequency,
+            additional_notes: data.additional_notes || undefined,
+          },
+        });
+      } catch (emailError) {
+        console.error("Failed to send email notification:", emailError);
+        // Don't fail the submission if email fails
+      }
+
       toast.success("Thanks! Our team will contact you shortly.", {
         description: "We're excited about the opportunity to organize a market at your venue.",
       });

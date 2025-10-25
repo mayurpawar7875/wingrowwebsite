@@ -64,6 +64,24 @@ const VisitorFeedbackForm = () => {
 
       if (error) throw error;
 
+      // Send email notification
+      try {
+        await supabase.functions.invoke("send-form-notifications", {
+          body: {
+            type: "feedback",
+            name: data.name,
+            email: data.email || undefined,
+            phone: data.phone || undefined,
+            market_visited: data.market_visited,
+            rating: data.rating,
+            feedback_message: data.feedback_message,
+          },
+        });
+      } catch (emailError) {
+        console.error("Failed to send email notification:", emailError);
+        // Don't fail the submission if email fails
+      }
+
       toast.success("Thank you for your feedback! 🎉", {
         description: "We appreciate you taking the time to share your experience.",
       });
