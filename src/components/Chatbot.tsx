@@ -158,11 +158,11 @@ const Chatbot = () => {
         // Validate day of week based on city
         const dayOfWeek = formData.preferredDate.getDay();
         if (formData.city === 'Pune' && dayOfWeek === 1) {
-          setStepError("Markets in Pune are closed on Mondays. Please select Tuesday-Sunday.");
+          setStepError(t('puneClosedMonday'));
           return false;
         }
         if (formData.city === 'Mumbai' && (dayOfWeek === 1 || dayOfWeek === 2)) {
-          setStepError("Markets in Mumbai are closed on Monday-Tuesday. Please select Wednesday-Sunday.");
+          setStepError(t('mumbaiClosedMondayTuesday'));
           return false;
         }
         return true;
@@ -328,13 +328,13 @@ const Chatbot = () => {
         <div className="text-center py-8 px-4">
           <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-4" />
           <h3 className="text-2xl font-bold mb-2">{t('bookingSuccessful')}</h3>
-          <p className="text-muted-foreground mb-4">Reference: <span className="font-mono font-bold text-primary">{referenceId}</span></p>
+          <p className="text-muted-foreground mb-4">{t('yourReferenceId')} <span className="font-mono font-bold text-primary">{referenceId}</span></p>
           <p className="text-sm text-muted-foreground mb-6">
-            {t('bookingThankYou') || "Our team will contact you soon."}
+            {t('bookingThankYou')}
           </p>
           <div className="flex gap-2">
-            <Button onClick={handleClose} variant="outline" className="flex-1">Close</Button>
-            <Button onClick={bookAnother} className="flex-1">Book Another Stall</Button>
+            <Button onClick={handleClose} variant="outline" className="flex-1">{t('close')}</Button>
+            <Button onClick={bookAnother} className="flex-1">{t('bookAnotherStall')}</Button>
           </div>
         </div>
       );
@@ -344,21 +344,21 @@ const Chatbot = () => {
       case 0: // Greeting
         return (
           <div className="text-center py-8 px-4">
-            <h3 className="text-xl font-semibold mb-4">Welcome to Wingrow Market 👋</h3>
-            <p className="text-muted-foreground mb-6">Please book your stall with us.</p>
-            <Button onClick={handleNext} className="w-full">Start</Button>
+            <h3 className="text-xl font-semibold mb-4">{t('welcomeMessage')}</h3>
+            <p className="text-muted-foreground mb-6">{t('startBooking')}</p>
+            <Button onClick={handleNext} className="w-full">{t('start')}</Button>
           </div>
         );
       
       case 1: // Farmer Name
         return (
           <div className="space-y-4">
-            <Label htmlFor="farmerName">Farmer / Brand Name *</Label>
+            <Label htmlFor="farmerName">{t('farmerName')} *</Label>
             <Input
               id="farmerName"
               value={formData.farmerName}
               onChange={(e) => setFormData({ ...formData, farmerName: e.target.value })}
-              placeholder="Enter your name or brand"
+              placeholder={t('enterYourName')}
               autoFocus
             />
           </div>
@@ -367,14 +367,14 @@ const Chatbot = () => {
       case 2: // Phone
         return (
           <div className="space-y-4">
-            <Label htmlFor="phone">Phone Number *</Label>
+            <Label htmlFor="phone">{t('phoneNumber')} *</Label>
             <Input
               id="phone"
               type="tel"
               inputMode="numeric"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, "").slice(0, 10) })}
-              placeholder="10-digit phone number"
+              placeholder={t('tenDigitNumber')}
               autoFocus
             />
           </div>
@@ -383,14 +383,14 @@ const Chatbot = () => {
       case 3: // City
         return (
           <div className="space-y-4">
-            <Label>City *</Label>
+            <Label>{t('selectCity')} *</Label>
             <Select value={formData.city} onValueChange={(value) => setFormData({ ...formData, city: value, market: "" })}>
               <SelectTrigger>
-                <SelectValue placeholder="Select city" />
+                <SelectValue placeholder={t('chooseCity')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Pune">Pune</SelectItem>
-                <SelectItem value="Mumbai">Mumbai</SelectItem>
+                <SelectItem value="Pune">{t('pune')}</SelectItem>
+                <SelectItem value="Mumbai">{t('mumbai')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -399,10 +399,10 @@ const Chatbot = () => {
       case 4: // Market
         return (
           <div className="space-y-4">
-            <Label>Market *</Label>
+            <Label>{t('selectMarket')} *</Label>
             <Select value={formData.market} onValueChange={(value) => setFormData({ ...formData, market: value })}>
               <SelectTrigger>
-                <SelectValue placeholder="Select market" />
+                <SelectValue placeholder={t('chooseMarket')} />
               </SelectTrigger>
               <SelectContent className="max-h-[200px]">
                 {cityMarkets[formData.city as keyof typeof cityMarkets]?.map((market) => (
@@ -416,12 +416,12 @@ const Chatbot = () => {
       case 5: // Address
         return (
           <div className="space-y-4">
-            <Label htmlFor="address">Address *</Label>
+            <Label htmlFor="address">{t('address')} *</Label>
             <Textarea
               id="address"
               value={formData.address}
               onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              placeholder="Enter your full address"
+              placeholder={t('enterYourAddress')}
               rows={3}
               autoFocus
             />
@@ -431,17 +431,17 @@ const Chatbot = () => {
       case 6: // Producer Type
         return (
           <div className="space-y-4">
-            <Label>Producer Type *</Label>
+            <Label>{t('producerType')} *</Label>
             <Select value={formData.producerType} onValueChange={(value) => setFormData({ ...formData, producerType: value })}>
               <SelectTrigger>
-                <SelectValue placeholder="Select producer type" />
+                <SelectValue placeholder={t('selectProducerType')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Farmer">Farmer</SelectItem>
-                <SelectItem value="WSHG">WSHG</SelectItem>
+                <SelectItem value="Farmer">{t('producerFarmer')}</SelectItem>
+                <SelectItem value="WSHG">{t('producerWSHG')}</SelectItem>
                 <SelectItem value="Women Entrepreneur">Women Entrepreneur</SelectItem>
-                <SelectItem value="Food Processor">Food Processor</SelectItem>
-                <SelectItem value="Other">Other</SelectItem>
+                <SelectItem value="Food Processor">{t('producerFoodProcessor')}</SelectItem>
+                <SelectItem value="Other">{t('producerOther')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -450,17 +450,17 @@ const Chatbot = () => {
       case 7: // Stall Type
         return (
           <div className="space-y-4">
-            <Label>Stall Type *</Label>
+            <Label>{t('stallType')} *</Label>
             <Select value={formData.stallType} onValueChange={(value) => setFormData({ ...formData, stallType: value })}>
               <SelectTrigger>
-                <SelectValue placeholder="Select stall type" />
+                <SelectValue placeholder={t('selectStallType')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Vegetables">Vegetables</SelectItem>
-                <SelectItem value="Fruits">Fruits</SelectItem>
-                <SelectItem value="Millets">Millets</SelectItem>
-                <SelectItem value="Processed Foods">Processed Foods</SelectItem>
-                <SelectItem value="Other">Other</SelectItem>
+                <SelectItem value="Vegetables">{t('stallVegetables')}</SelectItem>
+                <SelectItem value="Fruits">{t('stallFruits')}</SelectItem>
+                <SelectItem value="Millets">{t('stallMillets')}</SelectItem>
+                <SelectItem value="Processed Foods">{t('stallProcessedFoods')}</SelectItem>
+                <SelectItem value="Other">{t('stallOther')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -469,7 +469,7 @@ const Chatbot = () => {
       case 8: // Preferred Date
         return (
           <div className="space-y-4">
-            <Label>Preferred Market Date *</Label>
+            <Label>{t('preferredDate')} *</Label>
             <Calendar
               mode="single"
               selected={formData.preferredDate}
@@ -480,7 +480,7 @@ const Chatbot = () => {
             />
             {formData.city && (
               <p className="text-xs text-muted-foreground">
-                {formData.city === 'Pune' ? 'Markets open Tuesday-Sunday' : 'Markets open Wednesday-Sunday'}
+                {formData.city === 'Pune' ? t('puneMarketsOpen') : t('mumbaiMarketsOpen')}
               </p>
             )}
           </div>
@@ -489,12 +489,12 @@ const Chatbot = () => {
       case 9: // Notes
         return (
           <div className="space-y-4">
-            <Label htmlFor="notes">Additional Notes (Optional)</Label>
+            <Label htmlFor="notes">{t('notes')}</Label>
             <Textarea
               id="notes"
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-              placeholder="Any special requirements?"
+              placeholder={t('anySpecialRequirements')}
               rows={3}
               autoFocus
             />
@@ -511,7 +511,7 @@ const Chatbot = () => {
                 onCheckedChange={(checked) => setFormData({ ...formData, consent: checked as boolean })}
               />
               <label htmlFor="consent" className="text-sm leading-relaxed">
-                I agree to be contacted by Wingrow Market. *
+                {t('consent')} *
               </label>
             </div>
           </div>
@@ -532,7 +532,7 @@ const Chatbot = () => {
         size="lg"
       >
         <CalendarIcon className="h-5 w-5 mr-2" />
-        Book Your Stall
+        {t('bookYourStall')}
       </Button>
 
       {/* Modal */}
@@ -545,7 +545,7 @@ const Chatbot = () => {
           <div className="bg-primary text-primary-foreground p-4 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2">
               <CalendarIcon className="h-5 w-5" />
-              <h3 className="font-semibold">Book Your Stall</h3>
+              <h3 className="font-semibold">{t('chatbotHeader')}</h3>
             </div>
           </div>
 
@@ -553,7 +553,7 @@ const Chatbot = () => {
           {!showSuccess && currentStep > 0 && (
             <div className="px-6 pt-4 shrink-0">
               <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-                <span>Step {currentStep} of {TOTAL_STEPS}</span>
+                <span>{t('step')} {currentStep} of {TOTAL_STEPS}</span>
                 <span>{Math.round((currentStep / TOTAL_STEPS) * 100)}%</span>
               </div>
               <div className="h-2 bg-muted rounded-full overflow-hidden">
@@ -588,7 +588,7 @@ const Chatbot = () => {
                   className="flex-1"
                 >
                   <ChevronLeft className="h-4 w-4 mr-1" />
-                  Back
+                  {t('back')}
                 </Button>
               )}
               <Button
@@ -597,12 +597,12 @@ const Chatbot = () => {
                 className="flex-1"
               >
                 {isSubmitting ? (
-                  "Submitting..."
+                  t('submitting')
                 ) : currentStep === TOTAL_STEPS ? (
-                  "Submit"
+                  t('submit')
                 ) : (
                   <>
-                    Next
+                    {t('next')}
                     <ChevronRight className="h-4 w-4 ml-1" />
                   </>
                 )}

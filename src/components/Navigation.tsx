@@ -31,12 +31,12 @@ const Navigation = () => {
   };
 
   const menuItems = [
-    { label: t('home') || 'Home', onClick: () => scrollToSection('hero') },
-    { label: t('about') || 'About', onClick: () => scrollToSection('about') },
-    { label: t('markets') || 'Markets', onClick: () => scrollToSection('markets') },
-    { label: t('womenMarkets') || 'Women Markets', onClick: () => scrollToSection('women-markets') },
-    { label: t('testimonials') || 'Testimonials', onClick: () => scrollToSection('testimonials') },
-    { label: t('contact') || 'Contact', onClick: () => scrollToSection('contact') },
+    { label: t('home'), onClick: () => scrollToSection('hero') },
+    { label: t('about'), onClick: () => scrollToSection('about') },
+    { label: t('markets'), onClick: () => scrollToSection('markets') },
+    { label: t('womenMarkets'), onClick: () => scrollToSection('women-markets') },
+    { label: t('testimonials'), onClick: () => scrollToSection('testimonials') },
+    { label: t('contact'), onClick: () => scrollToSection('contact') },
   ];
 
   return (
