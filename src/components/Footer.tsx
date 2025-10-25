@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
+import wingrowLogo from "@/assets/wingrow-logo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -42,10 +43,10 @@ const Footer = () => {
 
       {/* Floating decorative elements */}
       <div className="absolute top-20 right-10 opacity-10">
-        <Leaf className="h-24 w-24 text-primary animate-pulse" />
+        <Leaf className="h-24 w-24 text-accent animate-pulse" />
       </div>
       <div className="absolute bottom-40 left-10 opacity-10">
-        <Leaf className="h-16 w-16 text-primary rotate-45 animate-pulse" style={{ animationDelay: '1s' }} />
+        <Leaf className="h-16 w-16 text-accent rotate-45 animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="container px-4 pt-20 pb-8">
@@ -89,9 +90,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* About Wingrow Market */}
           <div className="animate-fade-in space-y-4" style={{ animationDelay: '0.1s' }}>
-            <div className="flex items-center gap-2 mb-4">
-              <Leaf className="h-6 w-6 text-primary animate-pulse" />
-              <h3 className="text-xl font-bold">Wingrow Market</h3>
+            <div className="mb-4">
+              <img src={wingrowLogo} alt="Wingrow Market" className="h-12 w-auto mb-3" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Connecting farmers, women entrepreneurs, and consumers directly through our weekly markets in Pune and Mumbai.

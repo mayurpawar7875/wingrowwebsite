@@ -11,6 +11,7 @@ import heroImage5 from "@/assets/hero-market-5.jpg";
 import heroImage6 from "@/assets/hero-market-6.jpg";
 import heroImage7 from "@/assets/hero-market-7.jpg";
 import heroImage8 from "@/assets/hero-market-8.jpg";
+import wingrowLogo from "@/assets/wingrow-logo.png";
 
 const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4, heroImage5, heroImage6, heroImage7, heroImage8];
 
@@ -55,6 +56,11 @@ const Hero = () => {
       {/* Language Switcher */}
       <div className="absolute top-4 right-4 z-20">
         <LanguageSwitcher />
+      </div>
+
+      {/* Logo */}
+      <div className="absolute top-4 left-4 z-20">
+        <img src={wingrowLogo} alt="Wingrow Market Logo" className="h-16 md:h-20 w-auto animate-fade-in" />
       </div>
       
       <div className="container relative z-10 px-4 py-20 text-center">

@@ -73,11 +73,11 @@ const ProduceIcons = {
 };
 
 const colors = [
-  "text-[#D86B46]", // primary orange
-  "text-[#8FBF5A]", // leaf green
-  "text-[#F2C94C]", // yellow
-  "text-[#EA7362]", // tomato
-  "text-[#6E7F5B]", // olive
+  "text-[#FF1654]", // primary pink/magenta
+  "text-[#8FD400]", // leaf green
+  "text-[#FF69B4]", // hot pink
+  "text-[#7FD700]", // bright green
+  "text-[#FF4081]", // deep pink
 ];
 
 const FloatingProduceBackground = ({
