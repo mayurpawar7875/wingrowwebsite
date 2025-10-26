@@ -8,6 +8,13 @@ import { useTranslation } from "@/hooks/useTranslation";
 import puneMarketBg from "@/assets/pune-market-bg.jpg";
 import mumbaiMarketBg from "@/assets/mumbai-market-bg.jpg";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -743,32 +750,24 @@ const Markets = () => {
               </div>
 
               {/* Filters */}
-              <div className="flex flex-wrap items-center justify-center gap-3">
+              <div className="flex flex-wrap items-center justify-center gap-4">
                 <div className="flex gap-2 items-center">
                   <span className="text-sm font-medium">{t("filterByDay")}:</span>
-                  <div className="flex gap-2">
-                    <Badge
-                      variant={selectedDay === "all" ? "default" : "outline"}
-                      className="cursor-pointer"
-                      onClick={() => setSelectedDay("all")}
-                    >
-                      {t("allDays")}
-                    </Badge>
-                    <Badge
-                      variant={selectedDay === "Saturday" ? "default" : "outline"}
-                      className="cursor-pointer"
-                      onClick={() => setSelectedDay("Saturday")}
-                    >
-                      {t("saturday")}
-                    </Badge>
-                    <Badge
-                      variant={selectedDay === "Sunday" ? "default" : "outline"}
-                      className="cursor-pointer"
-                      onClick={() => setSelectedDay("Sunday")}
-                    >
-                      {t("sunday")}
-                    </Badge>
-                  </div>
+                  <Select value={selectedDay} onValueChange={setSelectedDay}>
+                    <SelectTrigger className="w-[180px] bg-background">
+                      <SelectValue placeholder={t("allDays")} />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background z-50">
+                      <SelectItem value="all">{t("allDays")}</SelectItem>
+                      <SelectItem value="Monday">{t("monday")}</SelectItem>
+                      <SelectItem value="Tuesday">{t("tuesday")}</SelectItem>
+                      <SelectItem value="Wednesday">{t("wednesday")}</SelectItem>
+                      <SelectItem value="Thursday">{t("thursday")}</SelectItem>
+                      <SelectItem value="Friday">{t("friday")}</SelectItem>
+                      <SelectItem value="Saturday">{t("saturday")}</SelectItem>
+                      <SelectItem value="Sunday">{t("sunday")}</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
 
