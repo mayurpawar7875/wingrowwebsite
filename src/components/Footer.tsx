@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Mail, Phone, Youtube } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import wingrowLogo from "@/assets/wingrow-logo.png";
+import footerBg from "@/assets/footer-farming-bg.jpg";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -12,8 +13,12 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-muted/30">
-      <div className="container px-4 py-6">
+    <footer className="relative bg-muted/30 overflow-hidden">
+      <div 
+        className="absolute inset-0 opacity-20 bg-cover bg-center"
+        style={{ backgroundImage: `url(${footerBg})` }}
+      />
+      <div className="container relative px-4 py-6">
         {/* Compact grid: 2 cols on md+, stack on mobile */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           {/* About */}
