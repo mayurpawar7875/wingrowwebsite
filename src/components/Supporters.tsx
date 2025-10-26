@@ -47,11 +47,11 @@ const Supporters = () => {
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-accent/0 hover:from-primary/5 hover:via-accent/5 hover:to-primary/5 transition-all duration-300" />
-              <div className="relative z-10 flex items-center justify-center h-full">
+              <div className="relative z-10 flex items-center justify-center h-full p-4">
                 <img
                   src={supporter.logo}
                   alt={supporter.name}
-                  className="max-h-full max-w-full object-contain"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </div>
