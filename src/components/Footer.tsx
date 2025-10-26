@@ -4,16 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 import wingrowLogo from "@/assets/wingrow-logo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
   
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,14 +112,14 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-4">{t('quickLinks')}</h4>
             <ul className="space-y-3">
               {[
-                { label: t('home'), action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
-                { label: t('markets'), action: () => scrollToSection('markets') },
-                { label: t('bookAStall'), action: () => scrollToSection('contact') },
-                { label: t('contactUs'), action: () => scrollToSection('contact') },
+                { label: t('home'), path: '/' },
+                { label: t('markets'), path: '/markets' },
+                { label: t('bookAStall'), path: '/contact' },
+                { label: t('contactUs'), path: '/contact' },
               ].map((link, index) => (
                 <li key={index}>
-                  <button
-                    onClick={link.action}
+                  <Link
+                    to={link.path}
                     className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all hover:translate-x-1"
                   >
                     <ChevronRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -130,7 +127,7 @@ const Footer = () => {
                       {link.label}
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
                     </span>
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -141,22 +138,22 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-4">{t('markets')}</h4>
             <ul className="space-y-3">
               <li>
-                <button
-                  onClick={() => scrollToSection('markets')}
+                <Link
+                  to="/markets"
                   className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all"
                 >
                   <MapPin className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
                   <span>Pune (24 Markets)</span>
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => scrollToSection('markets')}
+                <Link
+                  to="/markets"
                   className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all"
                 >
                   <MapPin className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
                   <span>Mumbai (23 Markets)</span>
-                </button>
+                </Link>
               </li>
             </ul>
           </div>

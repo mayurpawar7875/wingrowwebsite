@@ -1,19 +1,21 @@
 import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
+import Markets from "@/components/Markets";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
 import FloatingProduceBackground from "@/components/FloatingProduceBackground";
 
-const Index = () => {
+const MarketsPage = () => {
   return (
     <div className="min-h-screen relative">
-      <FloatingProduceBackground density="medium" />
+      <FloatingProduceBackground density="low" />
       <Navigation />
-      <Hero />
+      <div className="pt-20">
+        <Markets />
+      </div>
       <Footer />
       <Chatbot />
     </div>
   );
 };
 
-export default Index;
+export default MarketsPage;

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Link } from "react-router-dom";
 import heroImage1 from "@/assets/hero-market.jpg";
 import heroImage2 from "@/assets/hero-market-2.jpg";
 import heroImage3 from "@/assets/hero-market-3.jpg";
@@ -24,10 +25,6 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const openChatbot = () => {
     const event = new CustomEvent('openChatbot');
@@ -72,10 +69,12 @@ const Hero = () => {
             size="lg" 
             variant="outline" 
             className="text-lg px-8 py-6 shadow-soft hover:scale-105 transition-transform bg-card/80 backdrop-blur-sm"
-            onClick={() => scrollToSection('markets')}
+            asChild
           >
-            <ShoppingBag className="mr-2 h-5 w-5" />
-            {t('visitMarkets')}
+            <Link to="/markets">
+              <ShoppingBag className="mr-2 h-5 w-5" />
+              {t('visitMarkets')}
+            </Link>
           </Button>
         </div>
 

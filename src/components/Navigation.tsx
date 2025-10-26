@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Link, useLocation } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import wingrowLogo from "@/assets/wingrow-logo.png";
 
@@ -9,6 +10,7 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t } = useTranslation();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,9 +20,7 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
+  const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
 
@@ -31,13 +31,15 @@ const Navigation = () => {
   };
 
   const menuItems = [
-    { label: t('home'), onClick: () => scrollToSection('hero') },
-    { label: t('about'), onClick: () => scrollToSection('about') },
-    { label: t('markets'), onClick: () => scrollToSection('markets') },
-    { label: t('womenMarkets'), onClick: () => scrollToSection('women-markets') },
-    { label: t('testimonials'), onClick: () => scrollToSection('testimonials') },
-    { label: t('contact'), onClick: () => scrollToSection('contact') },
+    { label: t('home'), path: '/' },
+    { label: t('about'), path: '/about' },
+    { label: t('markets'), path: '/markets' },
+    { label: t('womenMarkets'), path: '/women-markets' },
+    { label: t('testimonials'), path: '/testimonials' },
+    { label: t('contact'), path: '/contact' },
   ];
+
+  const isActivePath = (path: string) => location.pathname === path;
 
   return (
     <nav
@@ -50,17 +52,14 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <div 
-            className="flex items-center cursor-pointer"
-            onClick={() => scrollToSection('hero')}
-          >
+          <Link to="/" className="flex items-center">
             <img
               src={wingrowLogo}
               alt="Wingrow Market"
               className="h-12 md:h-16 w-auto"
               style={{ mixBlendMode: 'multiply' }}
             />
-          </div>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-1">
@@ -68,10 +67,12 @@ const Navigation = () => {
               <Button
                 key={index}
                 variant="ghost"
-                onClick={item.onClick}
-                className="text-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                asChild
+                className={`text-foreground hover:text-primary hover:bg-primary/10 transition-colors ${
+                  isActivePath(item.path) ? 'text-primary bg-primary/10' : ''
+                }`}
               >
-                {item.label}
+                <Link to={item.path}>{item.label}</Link>
               </Button>
             ))}
           </div>
@@ -113,10 +114,13 @@ const Navigation = () => {
                 <Button
                   key={index}
                   variant="ghost"
-                  onClick={item.onClick}
-                  className="w-full justify-start text-foreground hover:text-primary hover:bg-primary/10"
+                  asChild
+                  className={`w-full justify-start text-foreground hover:text-primary hover:bg-primary/10 ${
+                    isActivePath(item.path) ? 'text-primary bg-primary/10' : ''
+                  }`}
+                  onClick={closeMobileMenu}
                 >
-                  {item.label}
+                  <Link to={item.path}>{item.label}</Link>
                 </Button>
               ))}
               <Button
