@@ -56,7 +56,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          {/* <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <h4 className="font-bold text-base mb-3">{t('quickLinks')}</h4>
             <ul className="space-y-2">
               {[
@@ -79,7 +79,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div> */}
+          </div>
 
           /* {/* Markets */}
           <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
@@ -104,7 +104,7 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div> */
+          </div> */}
 
           {/* Follow Us / Contact */}
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
