@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Search, Grid3x3, List, Navigation, Calendar } from "lucide-react";
+import { MapPin, Search, Grid3x3, List, Navigation, Calendar, Clock } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import puneMarketBg from "@/assets/pune-market-bg.jpg";
 import mumbaiMarketBg from "@/assets/mumbai-market-bg.jpg";
@@ -524,6 +524,10 @@ const Markets = () => {
             <Calendar className="h-3 w-3 group-hover:scale-110 transition-transform duration-300" />
             {t(market.day.toLowerCase() as any)}
           </div>
+          <div className="text-xs text-muted-foreground flex items-center gap-1">
+            <Clock className="h-3 w-3" />
+            {market.time}
+          </div>
         </CardDescription>
       </CardHeader>
       <CardContent className="relative z-10">
@@ -558,7 +562,7 @@ const Markets = () => {
                 {t(market.nameKey)}
               </h4>
               <p className="text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                {t(market.day.toLowerCase() as any)}
+                {t(market.day.toLowerCase() as any)} • {market.time}
               </p>
             </div>
           </div>
