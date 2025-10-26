@@ -1,26 +1,10 @@
-import { Facebook, Instagram, Twitter, Mail, Leaf, MapPin, Phone, Youtube, Send, ChevronRight } from "lucide-react";
+import { Facebook, Instagram, Twitter, Mail, Leaf, MapPin, Phone, Youtube, ChevronRight } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import wingrowLogo from "@/assets/wingrow-logo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
-  const [email, setEmail] = useState("");
-  
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      toast.success("Thank you for subscribing!", {
-        description: "You'll receive updates about new markets and offers.",
-      });
-      setEmail("");
-    }
-  };
 
   const socialLinks = [
     { icon: Facebook, href: "https://facebook.com", label: "Facebook", color: "hover:bg-blue-600" },
@@ -47,42 +31,6 @@ const Footer = () => {
       </div>
 
       <div className="container px-4 pt-12 pb-8">
-        {/* Newsletter Section */}
-        <div className="max-w-3xl mx-auto mb-16 animate-fade-in">
-          <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-8 border border-primary/20 shadow-lg relative overflow-hidden group">
-            {/* Animated background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            <div className="relative z-10 text-center mb-6">
-              <h3 className="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-primary via-foreground to-primary bg-clip-text text-transparent">
-                {t('stayConnected')}
-              </h3>
-              <p className="text-muted-foreground">
-                {t('newsletterDescription')}
-              </p>
-            </div>
-            
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto relative z-10">
-              <Input
-                type="email"
-                placeholder={t('enterEmail')}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-1 rounded-full px-6 py-6 shadow-lg focus:shadow-xl focus:shadow-primary/20 transition-all"
-              />
-              <Button 
-                type="submit" 
-                size="lg"
-                className="rounded-full px-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-              >
-                <Send className="h-4 w-4 mr-2" />
-                {t('subscribe')}
-              </Button>
-            </form>
-          </div>
-        </div>
-
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* About Wingrow Market */}
