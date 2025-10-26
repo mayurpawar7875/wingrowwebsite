@@ -1,4 +1,5 @@
 import { useTranslation } from "@/hooks/useTranslation";
+import sahyadriLogo from "@/assets/sahyadri-logo.png";
 
 const Supporters = () => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ const Supporters = () => {
     },
     {
       name: "Sahyadri Farms",
-      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200&h=100&fit=crop",
+      logo: sahyadriLogo,
     },
     {
       name: "Y Combinator",
