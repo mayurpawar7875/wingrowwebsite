@@ -17,10 +17,10 @@ const ContactForm = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-foreground to-primary bg-clip-text text-transparent animate-scale-in">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-foreground to-primary bg-clip-text text-transparent animate-scale-in">
               {t('connectWithWingrow')}
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
               {t('connectDescription')}
             </p>
           </div>
@@ -36,8 +36,8 @@ const ContactForm = () => {
                       <MessageSquare className="h-8 w-8 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-2">Visitor Feedback</h3>
-                      <p className="text-muted-foreground">Share your market experience with us</p>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">Visitor Feedback</h3>
+                      <p className="text-sm sm:text-base text-muted-foreground">Share your market experience with us</p>
                     </div>
                   </div>
                 </Card>
@@ -59,8 +59,8 @@ const ContactForm = () => {
                       <Building2 className="h-8 w-8 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-2">Invite Wingrow to Your Venue</h3>
-                      <p className="text-muted-foreground">Let us organize a market at your location</p>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">Invite Wingrow to Your Venue</h3>
+                      <p className="text-sm sm:text-base text-muted-foreground">Let us organize a market at your location</p>
                     </div>
                   </div>
                 </Card>
@@ -78,7 +78,7 @@ const ContactForm = () => {
           <div className="bg-card rounded-xl shadow-lg p-8 border border-border">
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-2xl font-bold mb-6">{t('contactInformation')}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold mb-6 animate-fade-in">{t('contactInformation')}</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
                     <Mail className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
@@ -117,7 +117,7 @@ const ContactForm = () => {
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold mb-6">{t('whyChooseWingrow')}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold mb-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>{t('whyChooseWingrow')}</h3>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <span className="text-primary font-bold mt-0.5">✓</span>

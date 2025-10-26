@@ -19,10 +19,10 @@ const About = () => {
     <section className="py-12 bg-background">
       <div className="container px-4">
         <div className="max-w-4xl mx-auto text-center mb-12 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 pb-2 leading-tight bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent animate-scale-in">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 pb-2 leading-tight bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent animate-scale-in">
             {t('aboutTitle')}
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: '0.1s' }}>
             {t('aboutSubtitle')}
           </p>
         </div>
@@ -53,11 +53,11 @@ const About = () => {
                               transition-all duration-300 mb-4 group-hover:scale-110 group-hover:rotate-6">
                   <stat.icon className="h-10 w-10 text-primary group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-primary/70 
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-primary/70 
                               bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground group-hover:text-foreground 
+                <div className="text-xs sm:text-sm text-muted-foreground group-hover:text-foreground 
                               transition-colors duration-300 font-medium">
                   {stat.label}
                 </div>
