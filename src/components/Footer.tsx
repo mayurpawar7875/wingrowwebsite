@@ -43,20 +43,20 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Phone className="h-4 w-4 text-primary" />
-              <a href="tel:+917776003700" className="hover:text-primary transition-colors">
-                +91 7776003700
+              <a href="tel:+919876543210" className="hover:text-primary transition-colors">
+                +91 98765 43210
               </a>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Mail className="h-4 w-4 text-primary" />
-              <a href="mailto:connect@wingrowagritech.com" className="hover:text-primary transition-colors">
-                connect@wingrowagritech.com
+              <a href="mailto:info@wingrowmarket.com" className="hover:text-primary transition-colors">
+                info@wingrowmarket.com
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          {/* <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <h4 className="font-bold text-base mb-3">{t('quickLinks')}</h4>
             <ul className="space-y-2">
               {[
@@ -79,9 +79,9 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
-          {/* Markets */}
+          /* {/* Markets */}
           <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <h4 className="font-bold text-base mb-3">{t('markets')}</h4>
             <ul className="space-y-2">
@@ -104,7 +104,7 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */
 
           {/* Follow Us / Contact */}
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
