@@ -2,7 +2,6 @@ import { useState, useMemo, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Search, Grid3x3, List, Navigation, Calendar } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -425,19 +424,19 @@ const Markets = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
   const [visibleCount, setVisibleCount] = useState(9);
-  const [selectedCity, setSelectedCity] = useState<"pune" | "mumbai">("pune");
-  const [selectedMarket, setSelectedMarket] = useState<Market | null>(null); // keeps highlight
+  const [selectedCity, setSelectedCity] = useState<"pune" | "mumbai" | null>(null);
 
-  const currentMarkets = selectedCity === "pune" ? puneMarkets : mumbaiMarkets;
+  const currentMarkets = selectedCity === "pune" ? puneMarkets : selectedCity === "mumbai" ? mumbaiMarkets : [];
 
   const filteredMarkets = useMemo(() => {
+    if (!selectedCity) return [];
     return currentMarkets.filter((market) => {
       const matchesSearch = t(market.nameKey).toLowerCase().includes(searchQuery.toLowerCase());
       const matchesDay = selectedDay === "all" || market.day === selectedDay;
       const matchesCategory = selectedCategory === "all" || market.category.includes(selectedCategory);
       return matchesSearch && matchesDay && matchesCategory;
     });
-  }, [currentMarkets, searchQuery, selectedDay, selectedCategory, t]);
+  }, [currentMarkets, searchQuery, selectedDay, selectedCategory, t, selectedCity]);
 
   const visibleMarkets = filteredMarkets.slice(0, visibleCount);
 
@@ -477,32 +476,13 @@ const Markets = () => {
     }
   }, []);
 
-  const handleBookStall = useCallback(
-    (market: Market) => {
-      window.dispatchEvent(
-        new CustomEvent("openChatbot", {
-          detail: {
-            city: selectedCity === "pune" ? "Pune" : "Mumbai",
-            market: t(market.nameKey),
-          },
-        }),
-      );
-    },
-    [selectedCity, t],
-  );
-
   const renderMarketCard = (market: Market, index: number) => (
     <Card
       key={index}
-      className={`group relative hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 
-                  hover:-translate-y-3 hover:scale-105 animate-fade-in cursor-pointer overflow-hidden
-                  border-2 ${
-        selectedMarket?.nameKey === market.nameKey 
-          ? "ring-2 ring-primary border-primary shadow-xl shadow-primary/30" 
-          : "border-border hover:border-primary/50"
-      }`}
+      className="group relative hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 
+                  hover:-translate-y-3 hover:scale-105 animate-fade-in overflow-hidden
+                  border-2 border-border hover:border-primary/50"
       style={{ animationDelay: `${index * 0.05}s` }}
-      onClick={() => setSelectedMarket(market)}
     >
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 
@@ -524,38 +504,17 @@ const Markets = () => {
             <Calendar className="h-3 w-3 group-hover:scale-110 transition-transform duration-300" />
             {t(market.day.toLowerCase() as any)}
           </div>
-          <div className="text-sm">{market.time}</div>
-          <div className="flex flex-wrap gap-1 mt-2">
-            {market.category.slice(0, 2).map((cat, i) => (
-              <Badge key={i} variant="secondary" className="text-xs group-hover:scale-105 transition-transform duration-300">
-                {cat}
-              </Badge>
-            ))}
-          </div>
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid grid-cols-2 gap-2 relative z-10">
+      <CardContent className="relative z-10">
         <Button
           variant="outline"
           size="sm"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleGetDirections(market);
-          }}
-          className="text-xs hover:scale-105 transition-transform duration-300"
+          onClick={() => handleGetDirections(market)}
+          className="w-full text-xs hover:scale-105 transition-transform duration-300"
         >
           <Navigation className="h-3 w-3 mr-1" />
           {t("getDirections")}
-        </Button>
-        <Button
-          size="sm"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleBookStall(market);
-          }}
-          className="text-xs hover:scale-105 transition-transform duration-300"
-        >
-          {t("bookStallAt")}
         </Button>
       </CardContent>
     </Card>
@@ -564,14 +523,8 @@ const Markets = () => {
   const renderMarketList = (market: Market, index: number) => (
     <Card
       key={index}
-      className={`group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 
-                  hover:-translate-x-2 cursor-pointer border-l-4 
-                  ${
-        selectedMarket?.nameKey === market.nameKey 
-          ? "ring-2 ring-primary border-l-primary shadow-lg shadow-primary/20" 
-          : "border-l-transparent hover:border-l-primary"
-      }`}
-      onClick={() => setSelectedMarket(market)}
+      className="group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 
+                  hover:-translate-x-2 border-l-4 border-l-transparent hover:border-l-primary"
     >
       <CardContent className="p-4">
         <div className="flex items-center justify-between gap-4">
@@ -585,32 +538,19 @@ const Markets = () => {
                 {t(market.nameKey)}
               </h4>
               <p className="text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                {t(market.day.toLowerCase() as any)} • {market.time}
+                {t(market.day.toLowerCase() as any)}
               </p>
             </div>
           </div>
-          <div className="flex gap-2 flex-shrink-0">
+          <div className="flex-shrink-0">
             <Button
               variant="ghost"
               size="sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleGetDirections(market);
-              }}
+              onClick={() => handleGetDirections(market)}
               aria-label={t("getDirections")}
               className="hover:scale-110 transition-transform duration-300"
             >
               <Navigation className="h-4 w-4" />
-            </Button>
-            <Button
-              size="sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleBookStall(market);
-              }}
-              className="hover:scale-105 transition-transform duration-300"
-            >
-              {t("bookStallAt")}
             </Button>
           </div>
         </div>
@@ -630,107 +570,177 @@ const Markets = () => {
           </p>
         </div>
 
-        <Tabs value={selectedCity} onValueChange={(v) => setSelectedCity(v as "pune" | "mumbai")} className="mb-8">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
-            <TabsTrigger value="pune">{t("puneMarkets", { count: puneMarkets.length.toString() })}</TabsTrigger>
-            <TabsTrigger value="mumbai">{t("mumbaiMarkets", { count: mumbaiMarkets.length.toString() })}</TabsTrigger>
-          </TabsList>
-
-          <div className="space-y-6 mb-8">
-            {/* Search Bar */}
-            <div className="relative max-w-xl mx-auto">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input
-                placeholder={t("searchMarkets")}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-
-            {/* Filters */}
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <div className="flex gap-2 items-center">
-                <span className="text-sm font-medium">{t("filterByDay")}:</span>
-                <div className="flex gap-2">
-                  <Badge
-                    variant={selectedDay === "all" ? "default" : "outline"}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedDay("all")}
-                  >
-                    {t("allDays")}
-                  </Badge>
-                  <Badge
-                    variant={selectedDay === "Saturday" ? "default" : "outline"}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedDay("Saturday")}
-                  >
-                    {t("saturday")}
-                  </Badge>
-                  <Badge
-                    variant={selectedDay === "Sunday" ? "default" : "outline"}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedDay("Sunday")}
-                  >
-                    {t("sunday")}
-                  </Badge>
+        {/* City Selection - Show when no city is selected */}
+        {!selectedCity && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Pune City Card */}
+            <Card 
+              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden"
+              onClick={() => setSelectedCity("pune")}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 
+                            group-hover:from-primary/10 group-hover:via-primary/20 group-hover:to-primary/10 
+                            transition-all duration-500" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                            bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 
+                            blur-2xl transition-opacity duration-500 -z-10" />
+              <CardHeader className="text-center relative z-10 py-12">
+                <div className="mx-auto mb-4 p-6 rounded-full bg-primary/10 group-hover:bg-primary/20 
+                              group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 w-fit">
+                  <MapPin className="h-12 w-12 text-primary" />
                 </div>
-              </div>
+                <CardTitle className="text-3xl md:text-4xl font-bold group-hover:text-primary transition-colors duration-300">
+                  Pune
+                </CardTitle>
+                <CardDescription className="text-lg mt-4">
+                  {t("puneMarkets", { count: puneMarkets.length.toString() })}
+                </CardDescription>
+              </CardHeader>
+            </Card>
 
-              <div className="flex gap-2 items-center">
-                <span className="text-sm font-medium">{t("filterByCategory")}:</span>
-                <div className="flex gap-2 flex-wrap">
-                  <Badge
-                    variant={selectedCategory === "all" ? "default" : "outline"}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedCategory("all")}
-                  >
-                    All
-                  </Badge>
-                  <Badge
-                    variant={selectedCategory === "Vegetables" ? "default" : "outline"}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedCategory("Vegetables")}
-                  >
-                    {t("vegetables")}
-                  </Badge>
-                  <Badge
-                    variant={selectedCategory === "Fruits" ? "default" : "outline"}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedCategory("Fruits")}
-                  >
-                    {t("fruits")}
-                  </Badge>
-                  <Badge
-                    variant={selectedCategory === "Millets" ? "default" : "outline"}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedCategory("Millets")}
-                  >
-                    {t("millets")}
-                  </Badge>
+            {/* Mumbai City Card */}
+            <Card 
+              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden"
+              onClick={() => setSelectedCity("mumbai")}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 
+                            group-hover:from-primary/10 group-hover:via-primary/20 group-hover:to-primary/10 
+                            transition-all duration-500" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                            bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 
+                            blur-2xl transition-opacity duration-500 -z-10" />
+              <CardHeader className="text-center relative z-10 py-12">
+                <div className="mx-auto mb-4 p-6 rounded-full bg-primary/10 group-hover:bg-primary/20 
+                              group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 w-fit">
+                  <MapPin className="h-12 w-12 text-primary" />
                 </div>
-              </div>
-
-              <div className="flex gap-2 ml-auto">
-                <Button
-                  variant={viewMode === "list" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode("list")}
-                >
-                  <List className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant={viewMode === "grid" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode("grid")}
-                >
-                  <Grid3x3 className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+                <CardTitle className="text-3xl md:text-4xl font-bold group-hover:text-primary transition-colors duration-300">
+                  Mumbai
+                </CardTitle>
+                <CardDescription className="text-lg mt-4">
+                  {t("mumbaiMarkets", { count: mumbaiMarkets.length.toString() })}
+                </CardDescription>
+              </CardHeader>
+            </Card>
           </div>
+        )}
 
-          <TabsContent value={selectedCity} className="mt-0">
+        {/* Markets View - Show when city is selected */}
+        {selectedCity && (
+          <>
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  setSelectedCity(null);
+                  setSearchQuery("");
+                  setSelectedDay("all");
+                  setSelectedCategory("all");
+                  setVisibleCount(9);
+                }}
+                className="hover:scale-105 transition-transform"
+              >
+                ← {t("backToCities") || "Back to Cities"}
+              </Button>
+              <h3 className="text-2xl font-bold">
+                {selectedCity === "pune" ? "Pune" : "Mumbai"} {t("markets") || "Markets"}
+              </h3>
+            </div>
+
+            <div className="space-y-6 mb-8">
+              {/* Search Bar */}
+              <div className="relative max-w-xl mx-auto">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                  placeholder={t("searchMarkets")}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+
+              {/* Filters */}
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <div className="flex gap-2 items-center">
+                  <span className="text-sm font-medium">{t("filterByDay")}:</span>
+                  <div className="flex gap-2">
+                    <Badge
+                      variant={selectedDay === "all" ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedDay("all")}
+                    >
+                      {t("allDays")}
+                    </Badge>
+                    <Badge
+                      variant={selectedDay === "Saturday" ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedDay("Saturday")}
+                    >
+                      {t("saturday")}
+                    </Badge>
+                    <Badge
+                      variant={selectedDay === "Sunday" ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedDay("Sunday")}
+                    >
+                      {t("sunday")}
+                    </Badge>
+                  </div>
+                </div>
+
+                <div className="flex gap-2 items-center">
+                  <span className="text-sm font-medium">{t("filterByCategory")}:</span>
+                  <div className="flex gap-2 flex-wrap">
+                    <Badge
+                      variant={selectedCategory === "all" ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedCategory("all")}
+                    >
+                      All
+                    </Badge>
+                    <Badge
+                      variant={selectedCategory === "Vegetables" ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedCategory("Vegetables")}
+                    >
+                      {t("vegetables")}
+                    </Badge>
+                    <Badge
+                      variant={selectedCategory === "Fruits" ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedCategory("Fruits")}
+                    >
+                      {t("fruits")}
+                    </Badge>
+                    <Badge
+                      variant={selectedCategory === "Millets" ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedCategory("Millets")}
+                    >
+                      {t("millets")}
+                    </Badge>
+                  </div>
+                </div>
+
+                <div className="flex gap-2 ml-auto">
+                  <Button
+                    variant={viewMode === "list" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setViewMode("list")}
+                  >
+                    <List className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === "grid" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setViewMode("grid")}
+                  >
+                    <Grid3x3 className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+
             {filteredMarkets.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-muted-foreground">{t("noMarketsFound")}</p>
@@ -760,8 +770,8 @@ const Markets = () => {
                 </div>
               </>
             )}
-          </TabsContent>
-        </Tabs>
+          </>
+        )}
       </div>
     </section>
   );
