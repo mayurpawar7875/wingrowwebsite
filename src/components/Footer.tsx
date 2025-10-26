@@ -2,6 +2,7 @@ import { Facebook, Instagram, Twitter, Mail, Leaf, MapPin, Phone, Youtube, Chevr
 import { useTranslation } from "@/hooks/useTranslation";
 import { Link } from "react-router-dom";
 import wingrowLogo from "@/assets/wingrow-logo.png";
+import farmingBg from "@/assets/footer-farming-bg.jpg";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -14,7 +15,13 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-background via-muted/30 to-muted/50 overflow-hidden">
+    <footer className="relative overflow-hidden">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0 z-0">
+        <img src={farmingBg} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95" />
+      </div>
+
       {/* Decorative wave separator */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
         <svg className="relative block w-full h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -30,7 +37,7 @@ const Footer = () => {
         <Leaf className="h-16 w-16 text-accent rotate-45 animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
-      <div className="container px-4 pt-8 pb-6">
+      <div className="container px-4 pt-8 pb-6 relative z-10">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* About Wingrow Market */}
@@ -43,14 +50,14 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Phone className="h-4 w-4 text-primary" />
-              <a href="tel:+919876543210" className="hover:text-primary transition-colors">
-                +91 98765 43210
+              <a href="tel:+917776003700" className="hover:text-primary transition-colors">
+                +91 77760 03700
               </a>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Mail className="h-4 w-4 text-primary" />
-              <a href="mailto:info@wingrowmarket.com" className="hover:text-primary transition-colors">
-                info@wingrowmarket.com
+              <a href="mailto:connect@wingrowagritech.com" className="hover:text-primary transition-colors">
+                connect@wingrowagritech.com
               </a>
             </div>
           </div>
@@ -124,7 +131,7 @@ const Footer = () => {
               ))}
             </div>
             <a
-              href="mailto:info@wingrowmarket.com"
+              href="mailto:connect@wingrowagritech.com"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all hover:scale-105"
             >
               <Mail className="h-4 w-4" />
