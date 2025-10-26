@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Poppins"', '"Hind"', '"Mukta"', '"Noto Sans Devanagari"', 'sans-serif'],
-        heading: ['"Poppins"', '"Hind"', '"Mukta"', '"Noto Sans Devanagari"', 'sans-serif'],
+        sans: ['"Comic Sans MS"', '"Comic Sans"', 'cursive'],
+        heading: ['"Comic Sans MS"', '"Comic Sans"', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
