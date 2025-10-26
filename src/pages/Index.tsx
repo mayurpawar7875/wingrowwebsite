@@ -12,8 +12,8 @@ const Index = () => {
       <FloatingProduceBackground density="medium" />
       <Navigation />
       <Hero />
-      <Supporters />
       <About />
+      <Supporters />
       <Footer />
       <Chatbot />
     </div>
