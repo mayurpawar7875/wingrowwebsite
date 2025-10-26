@@ -39,8 +39,11 @@ const Supporters = () => {
           {supporters.map((supporter, index) => (
             <div
               key={index}
-              className="bg-card rounded-[3rem] p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-fade-in border border-border/50 aspect-[2/1]"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="bg-card p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-fade-in border border-border/50 aspect-[2/1]"
+              style={{ 
+                animationDelay: `${index * 0.1}s`,
+                borderRadius: '100px 20px 20px 100px'
+              }}
             >
               <div className="flex items-center justify-center h-full">
                 <img
