@@ -3,7 +3,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 import { Calendar, CheckCircle2, MapPin, Sparkles, Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -297,36 +297,6 @@ const WomenMarkets = () => {
             </div>
           </div>
         )}
-
-
-        {/* FAQ Section */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-0">
-          <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center bg-gradient-to-r from-orange-600 via-foreground to-orange-600 bg-clip-text text-transparent animate-fade-in">
-            {t("womenMarketFaqTitle")}
-          </h3>
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqWhatCanISell")}</AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm">{t("faqWhatCanISellAnswer")}</AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqLicenses")}</AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm">{t("faqLicensesAnswer")}</AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqTimings")}</AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm">{t("faqTimingsAnswer")}</AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-4">
-              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqRefund")}</AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm">{t("faqRefundAnswer")}</AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-5">
-              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqPower")}</AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm">{t("faqPowerAnswer")}</AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
       </div>
     </section>
   );
