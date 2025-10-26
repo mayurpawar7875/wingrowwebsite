@@ -26,7 +26,7 @@ const ContactForm = () => {
           </div>
 
           {/* Two Clickable Form Tiles */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {/* Visitor Feedback Tile */}
             <Dialog open={feedbackOpen} onOpenChange={setFeedbackOpen}>
               <DialogTrigger asChild>
