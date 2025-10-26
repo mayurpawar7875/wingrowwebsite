@@ -573,8 +573,16 @@ const Markets = () => {
     </Card>
   );
 
+  const carouselTexts = [
+    { title: "Fresh Organic Vegetables", subtitle: "Farm-to-table produce at your local market" },
+    { title: "Seasonal Fruits", subtitle: "Handpicked fresh fruits daily" },
+    { title: "Empowering Women Farmers", subtitle: "Supporting local women entrepreneurs" },
+    { title: "Traditional Grains & Millets", subtitle: "Healthy and nutritious whole grains" },
+    { title: "Vibrant Market Community", subtitle: "Where farmers meet families" }
+  ];
+
   return (
-    <section id="markets" className="py-20 bg-muted/30">
+    <section id="markets" className="pt-24 pb-20 bg-muted/30">
       <div className="container px-4">
         {/* Carousel Section */}
         <div className="mb-12 animate-fade-in">
@@ -593,13 +601,23 @@ const Markets = () => {
             <CarouselContent>
               {[marketCarousel1, marketCarousel2, marketCarousel3, marketCarousel4, marketCarousel5].map((image, index) => (
                 <CarouselItem key={index}>
-                  <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
+                  <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden group">
                     <img
                       src={image}
                       alt={`Market scene ${index + 1}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                    
+                    {/* Text Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
+                      <h3 className="text-2xl md:text-4xl font-bold mb-2 animate-fade-in drop-shadow-lg">
+                        {carouselTexts[index].title}
+                      </h3>
+                      <p className="text-sm md:text-lg text-white/90 drop-shadow-md animate-fade-in" style={{ animationDelay: "0.1s" }}>
+                        {carouselTexts[index].subtitle}
+                      </p>
+                    </div>
                   </div>
                 </CarouselItem>
               ))}
