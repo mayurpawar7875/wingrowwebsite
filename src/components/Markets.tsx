@@ -17,7 +17,29 @@ interface Market {
   category: string[];
 }
 
-/* ... Pune & Mumbai arrays unchanged ... */
+const puneMarkets: Market[] = [
+  { nameKey: "marketKothrud", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 18.5074, lng: 73.8077, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketKarveNagar", day: "Sunday", time: "7:00 AM - 1:00 PM", lat: 18.4867, lng: 73.8199, category: ["Vegetables", "Fruits", "Millets"] },
+  { nameKey: "marketBanerGaon", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 18.5590, lng: 73.7794, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketWarje", day: "Sunday", time: "7:00 AM - 1:00 PM", lat: 18.4800, lng: 73.8058, category: ["Vegetables"] },
+  { nameKey: "marketNarhe", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 18.4646, lng: 73.7679, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketDhayari", day: "Sunday", time: "7:00 AM - 1:00 PM", lat: 18.4429, lng: 73.8124, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketShivaneGaon", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 18.4580, lng: 73.8520, category: ["Vegetables"] },
+  { nameKey: "marketUndriGaon", day: "Sunday", time: "7:00 AM - 1:00 PM", lat: 18.4698, lng: 73.8919, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketMundhwa", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 18.5362, lng: 73.9323, category: ["Vegetables", "Fruits", "Millets"] },
+];
+
+const mumbaiMarkets: Market[] = [
+  { nameKey: "marketAndheriWest", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 19.1136, lng: 72.8459, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketBorivali", day: "Sunday", time: "7:00 AM - 1:00 PM", lat: 19.2304, lng: 72.8588, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketMalad", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 19.1867, lng: 72.8481, category: ["Vegetables"] },
+  { nameKey: "marketKandivali", day: "Sunday", time: "7:00 AM - 1:00 PM", lat: 19.2030, lng: 72.8529, category: ["Vegetables", "Fruits", "Millets"] },
+  { nameKey: "marketGoregaon", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 19.1660, lng: 72.8494, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketJogeshwari", day: "Sunday", time: "7:00 AM - 1:00 PM", lat: 19.1368, lng: 72.8478, category: ["Vegetables"] },
+  { nameKey: "marketVile Parle", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 19.0992, lng: 72.8451, category: ["Vegetables", "Fruits"] },
+  { nameKey: "marketSantacruz", day: "Sunday", time: "7:00 AM - 1:00 PM", lat: 19.0810, lng: 72.8412, category: ["Vegetables", "Fruits", "Millets"] },
+  { nameKey: "marketBandra", day: "Saturday", time: "7:00 AM - 1:00 PM", lat: 19.0596, lng: 72.8295, category: ["Vegetables", "Fruits"] },
+];
 
 /** open URL safely - handles iframe context */
 function openInNewTab(url: string) {
