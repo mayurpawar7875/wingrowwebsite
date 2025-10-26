@@ -24,7 +24,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.4955875049347,
     lng: 73.8184985846566,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "godrejPranaMarket",
@@ -32,7 +32,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.4552920362542,
     lng: 73.9138772153433,
-    // category: ["Vegetables", "Fruits", "Millets"],
+    category: ["Vegetables", "Fruits", "Millets"],
   },
   {
     nameKey: "dhanoriMarket",
@@ -40,7 +40,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.6019938625116,
     lng: 73.9041310441791,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "morjaiMarket",
@@ -48,7 +48,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.6331504479689,
     lng: 73.8046165423283,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "sadesataraNaliMarket",
@@ -56,7 +56,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5307967846815,
     lng: 73.9325030576716,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "gorejHorizonMarket",
@@ -64,7 +64,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.4551160050207,
     lng: 73.9192969079398,
-    // category: ["Vegetables", "Millets"],
+    category: ["Vegetables", "Millets"],
   },
   {
     nameKey: "geraKharadiMarket",
@@ -72,7 +72,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5630503126476,
     lng: 73.9573710236524,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "gujarwadiMarket",
@@ -80,7 +80,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.4376332533761,
     lng: 73.8689091360955,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "kharadiItParkMarket",
@@ -88,7 +88,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5588062236668,
     lng: 73.9480621576716,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "manjariMarket",
@@ -96,7 +96,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5383084959545,
     lng: 73.980659,
-    // category: ["Vegetables", "Fruits", "Millets"],
+    category: ["Vegetables", "Fruits", "Millets"],
   },
   {
     nameKey: "bopodiMarket",
@@ -104,7 +104,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5736670082045,
     lng: 73.8308716081672,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "morecornerMarket",
@@ -112,7 +112,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5904561199073,
     lng: 73.9663471576716,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "bramhasunMarket",
@@ -120,7 +120,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5470747230474,
     lng: 73.9193005962982,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "kothrudMarket",
@@ -128,7 +128,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5019837832919,
     lng: 73.8215053066613,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "navsahyadriMarket",
@@ -136,7 +136,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.4957004073687,
     lng: 73.8281300576716,
-    // category: ["Vegetables", "Millets"],
+    category: ["Vegetables", "Millets"],
   },
   {
     nameKey: "bhavadiRoadMarket",
@@ -144,7 +144,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5888319455885,
     lng: 73.9879499350319,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "grandeurUndriMarket",
@@ -152,7 +152,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.4497232044554,
     lng: 73.9135035711641,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "baifRoadMarket",
@@ -160,7 +160,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5754071126094,
     lng: 73.9766730525318,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "gangaConstellaMarket",
@@ -168,7 +168,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5566933178482,
     lng: 73.949274311137,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "magarpattaMarket",
@@ -176,7 +176,7 @@ const puneMarkets: Market[] = [
     time: "8 AM - 1 PM",
     lat: 18.5227060131992,
     lng: 73.92773909603,
-    // category: ["Vegetables", "Millets"],
+    category: ["Vegetables", "Millets"],
   },
   {
     nameKey: "kumarKurtiMarket",
@@ -184,7 +184,7 @@ const puneMarkets: Market[] = [
     time: "8 AM - 1 PM",
     lat: 18.5477584162186,
     lng: 73.9114329865075,
-    // category: ["Vegetables", "Millets"],
+    category: ["Vegetables", "Millets"],
   },
   {
     nameKey: "amanoraMarket",
@@ -192,7 +192,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5149195426023,
     lng: 73.9453898,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "ivyEstateMarket",
@@ -200,7 +200,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.5842656420482,
     lng: 74.0031701,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "moreBaugMarket",
@@ -208,7 +208,7 @@ const puneMarkets: Market[] = [
     time: "4 PM - 9 PM",
     lat: 18.4569785927258,
     lng: 73.8548221137411,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
 ];
 
@@ -219,7 +219,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.2183,
     lng: 73.0868,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "thaneMarket",
@@ -227,7 +227,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.2183,
     lng: 72.9781,
-    // category: ["Vegetables", "Fruits", "Millets"],
+    category: ["Vegetables", "Fruits", "Millets"],
   },
   {
     nameKey: "mulundMarket",
@@ -235,7 +235,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 1 PM",
     lat: 19.1722,
     lng: 72.9565,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "ghatkoperMarket",
@@ -243,7 +243,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.086,
     lng: 72.9081,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "borivaliMarket",
@@ -251,7 +251,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.2304,
     lng: 72.8573,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "chemburMarket",
@@ -259,7 +259,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 1 PM",
     lat: 19.0632,
     lng: 72.8997,
-    // category: ["Vegetables", "Millets"],
+    category: ["Vegetables", "Millets"],
   },
   {
     nameKey: "andheriMarket",
@@ -267,7 +267,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.1136,
     lng: 72.8697,
-    // category: ["Vegetables", "Fruits", "Processed Foods"],
+    category: ["Vegetables", "Fruits", "Processed Foods"],
   },
   {
     nameKey: "kandivaliMarket",
@@ -275,7 +275,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.2094,
     lng: 72.8538,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "maladMarket",
@@ -283,7 +283,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 1 PM",
     lat: 19.1867,
     lng: 72.8481,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "goregaonMarket",
@@ -291,7 +291,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.1646,
     lng: 72.8493,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "dahisarMarket",
@@ -299,7 +299,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.2546,
     lng: 72.864,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "miraRoadMarket",
@@ -307,7 +307,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 1 PM",
     lat: 19.2814,
     lng: 72.8729,
-    // category: ["Vegetables", "Millets"],
+    category: ["Vegetables", "Millets"],
   },
   {
     nameKey: "bhandupMarket",
@@ -315,7 +315,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.1527,
     lng: 72.9375,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "vikhroliMarket",
@@ -323,7 +323,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.1104,
     lng: 72.9313,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "powaiMarket",
@@ -331,7 +331,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 1 PM",
     lat: 19.1177,
     lng: 72.906,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "kurlaMarket",
@@ -339,7 +339,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.0728,
     lng: 72.8826,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "vashiMarket",
@@ -347,7 +347,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.0701,
     lng: 72.9977,
-    // category: ["Vegetables", "Fruits", "Millets"],
+    category: ["Vegetables", "Fruits", "Millets"],
   },
   {
     nameKey: "khargharMarket",
@@ -355,7 +355,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 1 PM",
     lat: 19.0433,
     lng: 73.0677,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "panvelMarket",
@@ -363,7 +363,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 18.9894,
     lng: 73.1178,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
   {
     nameKey: "nerulMarket",
@@ -371,7 +371,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.033,
     lng: 73.0169,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "airoliMarket",
@@ -379,7 +379,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 1 PM",
     lat: 19.1571,
     lng: 72.9985,
-    // category: ["Vegetables", "Millets"],
+    category: ["Vegetables", "Millets"],
   },
   {
     nameKey: "sanpadaMarket",
@@ -387,7 +387,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.071,
     lng: 73.0057,
-    // category: ["Vegetables", "Fruits"],
+    category: ["Vegetables", "Fruits"],
   },
   {
     nameKey: "koparKhairaneMarket",
@@ -395,7 +395,7 @@ const mumbaiMarkets: Market[] = [
     time: "7 AM - 12 PM",
     lat: 19.1014,
     lng: 73.0036,
-    // category: ["Vegetables", "Processed Foods"],
+    category: ["Vegetables", "Processed Foods"],
   },
 ];
 
