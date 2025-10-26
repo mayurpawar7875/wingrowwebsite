@@ -3,11 +3,12 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar, CheckCircle2, MapPin, Sparkles, Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import puneMarketBg from "@/assets/pune-market-bg.jpg";
+import mumbaiMarketBg from "@/assets/mumbai-market-bg.jpg";
 
 interface StallOption {
   type: string;
@@ -64,9 +65,9 @@ const mumbaiDates: MarketDate[] = [
 
 const WomenMarkets = () => {
   const { t } = useTranslation();
-  const [selectedCity, setSelectedCity] = useState<"pune" | "mumbai">("pune");
+  const [selectedCity, setSelectedCity] = useState<"pune" | "mumbai" | null>(null);
 
-  const currentDates = selectedCity === "pune" ? puneDates : mumbaiDates;
+  const currentDates = selectedCity === "pune" ? puneDates : selectedCity === "mumbai" ? mumbaiDates : [];
 
   const translateDay = (day: string) => {
     const dayMap: { [key: string]: string } = {
@@ -99,23 +100,23 @@ const WomenMarkets = () => {
     <section id="women-markets" className="pt-8 pb-20 bg-gradient-to-b from-orange-50/50 to-white dark:from-orange-950/10 dark:to-background">
       <div className="container px-4">
         {/* Women Markets Banner */}
-        <div className="bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-orange-950/30 border border-orange-200 dark:border-orange-800 rounded-2xl p-6 mb-12 animate-fade-in">
+        <div className="bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-orange-950/30 border border-orange-200 dark:border-orange-800 rounded-2xl p-4 md:p-6 mb-8 md:mb-12 animate-fade-in">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3 text-center md:text-left">
-              <Sparkles className="h-8 w-8 text-orange-600 dark:text-orange-400 animate-pulse flex-shrink-0" />
+            <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left w-full md:w-auto">
+              <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-orange-600 dark:text-orange-400 animate-pulse flex-shrink-0" />
               <div>
-                <h2 className="text-xl md:text-2xl font-bold text-foreground bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-clip-text text-transparent animate-scale-in">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-clip-text text-transparent animate-scale-in">
                   {t('womenMarketBannerTitle')}
                 </h2>
-                <p className="text-sm md:text-base text-muted-foreground">
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
                   {t('womenMarketBannerSubtitle')}
                 </p>
               </div>
             </div>
-            <div className="flex gap-3 flex-shrink-0">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 flex-shrink-0 w-full sm:w-auto">
               <Button
                 onClick={() => handleApply()}
-                className="bg-orange-600 hover:bg-orange-700 text-white"
+                className="bg-orange-600 hover:bg-orange-700 text-white text-sm sm:text-base w-full sm:w-auto"
               >
                 <Calendar className="h-4 w-4 mr-2" />
                 {t('applyForStall')}
@@ -123,7 +124,7 @@ const WomenMarkets = () => {
               <Button
                 variant="outline"
                 onClick={() => document.getElementById('women-markets')?.scrollIntoView({ behavior: 'smooth' })}
-                className="border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950"
+                className="border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950 text-sm sm:text-base w-full sm:w-auto"
               >
                 {t('viewSchedule')}
               </Button>
@@ -131,168 +132,141 @@ const WomenMarkets = () => {
           </div>
         </div>
 
-        {/* Hero Section */}
-        <div className="text-center mb-16 animate-fade-in">
+        {/* City Selection - Show when no city is selected */}
+        {!selectedCity && (
+          <div className="mb-12">
+            <div className="text-center mb-8 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-orange-600 via-foreground to-orange-600 bg-clip-text text-transparent animate-scale-in">
+                {t('womenMarketBannerTitle')}
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                {t('womenMarketBannerSubtitle')}
+              </p>
+            </div>
 
-          {/* Hero Carousel */}
-          <Carousel 
-            className="max-w-5xl mx-auto mb-8" 
-            opts={{ loop: true, align: "start" }}
-            plugins={[
-              Autoplay({
-                delay: 4000,
-              }),
-            ]}
-          >
-            <CarouselContent>
-              {/* Slide 1 - Festive Shopping */}
-              <CarouselItem>
-                <div className="relative h-[400px] bg-gradient-to-br from-orange-400 via-amber-400 to-orange-500 rounded-2xl overflow-hidden shadow-2xl">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none" />
-                  <div className="relative h-full flex flex-col items-center justify-center text-white px-8 animate-fade-in">
-                    <div className="mb-6 relative">
-                      <Sparkles className="h-24 w-24 animate-pulse drop-shadow-2xl" />
-                      <Sparkles className="h-8 w-8 absolute -top-2 -right-2 animate-bounce" />
-                    </div>
-                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      {t('shopWomenMarketSpecials')}
-                    </h3>
-                    <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
-                      {t('womenMarketHeroSubtitle')}
-                    </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl mx-auto mb-12">
+              {/* Pune City Card */}
+              <Card 
+                className="group cursor-pointer hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-500 hover:-translate-y-2 hover:scale-105 border-2 border-border hover:border-orange-600 overflow-hidden relative h-[200px] sm:h-[240px]"
+                onClick={() => setSelectedCity("pune")}
+              >
+                {/* Background Image */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${puneMarketBg})` }}
+                />
+                
+                {/* Overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30 
+                              group-hover:from-black/70 group-hover:via-black/40 group-hover:to-black/20
+                              transition-all duration-500" />
+                
+                {/* Glowing border effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                              bg-gradient-to-r from-orange-500/20 via-orange-500/30 to-orange-500/20 
+                              blur-2xl transition-opacity duration-500 -z-10" />
+                
+                <CardHeader className="text-center relative z-10 py-6 flex flex-col items-center justify-center h-full">
+                  <div className="mx-auto mb-3 p-3 sm:p-4 rounded-full bg-white/20 backdrop-blur-sm group-hover:bg-white/30 
+                                group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 w-fit">
+                    <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                   </div>
-                </div>
-              </CarouselItem>
-
-              {/* Slide 2 - Women Entrepreneurs */}
-              <CarouselItem>
-                <div className="relative h-[400px] bg-gradient-to-br from-pink-500 via-rose-400 to-orange-500 rounded-2xl overflow-hidden shadow-2xl">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.15),transparent)] pointer-events-none" />
-                  <div className="relative h-full flex flex-col items-center justify-center text-white px-8 animate-fade-in">
-                    <div className="mb-6 relative">
-                      <div className="h-24 w-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <Users className="h-16 w-16 drop-shadow-2xl" />
-                      </div>
-                    </div>
-                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      {t('womenMarketHeroTitle')}
-                    </h3>
-                    <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
-                      {t('womenMarketHeroSubtitle')}
-                    </p>
-                    <div className="mt-6 flex gap-4">
-                      <Badge className="bg-white/20 backdrop-blur-sm text-white text-lg px-6 py-2 border-white/30">
-                        <CheckCircle2 className="h-4 w-4 mr-2" />
-                        {t('wshgMember')}
-                      </Badge>
-                      <Badge className="bg-white/20 backdrop-blur-sm text-white text-lg px-6 py-2 border-white/30">
-                        <CheckCircle2 className="h-4 w-4 mr-2" />
-                        {t('qualityProducts')}
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
-
-              {/* Slide 3 - Multiple Locations */}
-              <CarouselItem>
-                <div className="relative h-[400px] bg-gradient-to-br from-purple-500 via-indigo-400 to-blue-500 rounded-2xl overflow-hidden shadow-2xl">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] pointer-events-none" />
-                  <div className="relative h-full flex flex-col items-center justify-center text-white px-8 animate-fade-in">
-                    <div className="mb-6 relative">
-                      <div className="h-24 w-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center animate-pulse">
-                        <MapPin className="h-16 w-16 drop-shadow-2xl" />
-                      </div>
-                    </div>
-                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      {t('womenMarketMapTitle')}
-                    </h3>
-                    <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md">
-                      {t('womenMarketHeroSubtitle')}
-                    </p>
-                    <div className="mt-6 grid grid-cols-2 gap-4">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-center">
-                        <div className="text-3xl font-bold">34</div>
-                        <div className="text-sm">{t('puneMarkets', { count: '34' })}</div>
-                      </div>
-                      <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-center">
-                        <div className="text-3xl font-bold">12</div>
-                        <div className="text-sm">{t('mumbaiMarkets', { count: '12' })}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
-
-              {/* Slide 4 - Limited Slots */}
-              <CarouselItem>
-                <div className="relative h-[400px] bg-gradient-to-br from-red-500 via-orange-500 to-amber-500 rounded-2xl overflow-hidden shadow-2xl">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_60%,rgba(255,255,255,0.15),transparent)] pointer-events-none" />
-                  <div className="relative h-full flex flex-col items-center justify-center text-white px-8 animate-fade-in">
-                    <div className="mb-6">
-                      <Calendar className="h-24 w-24 drop-shadow-2xl animate-bounce" />
-                    </div>
-                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-center drop-shadow-lg">
-                      {t('limitedSlots')}!
-                    </h3>
-                    <p className="text-xl md:text-2xl text-center max-w-2xl text-white/90 drop-shadow-md mb-6">
-                      {t('bookYourStall')}
-                    </p>
-                    <Button 
-                      size="lg" 
-                      onClick={() => handleApply()}
-                      className="bg-white text-orange-600 hover:bg-orange-50 text-xl px-8 py-6 h-auto font-bold shadow-xl hover:scale-105 transition-transform"
-                    >
-                      <Sparkles className="h-5 w-5 mr-2" />
-                      {t('applyNow')}
-                    </Button>
-                  </div>
-                </div>
-              </CarouselItem>
-            </CarouselContent>
-            <CarouselPrevious className="left-4 h-12 w-12 bg-white/90 hover:bg-white" />
-            <CarouselNext className="right-4 h-12 w-12 bg-white/90 hover:bg-white" />
-          </Carousel>
-        </div>
-
-        {/* Vendor Eligibility */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-6 text-center">{t("vendorEligibility")}</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {[
-              { icon: CheckCircle2, label: "womenLedBrand" },
-              { icon: Users, label: "wshgMember" },
-              { icon: CheckCircle2, label: "fssaiRequired" },
-              { icon: CheckCircle2, label: "posOptional" },
-            ].map(({ icon: Icon, label }) => (
-              <Card key={label} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="pt-6">
-                  <Icon className="h-8 w-8 mx-auto mb-2 text-orange-600" />
-                  <p className="text-sm font-medium">{t(label as any)}</p>
-                </CardContent>
+                  <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-white group-hover:text-orange-400 transition-colors duration-300 drop-shadow-lg">
+                    Pune
+                  </CardTitle>
+                  <CardDescription className="text-sm sm:text-base mt-2 text-white/90 font-semibold drop-shadow-md">
+                    {puneDates.length} {t('womenMarketDates')}
+                  </CardDescription>
+                </CardHeader>
               </Card>
-            ))}
+
+              {/* Mumbai City Card */}
+              <Card 
+                className="group cursor-pointer hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-500 hover:-translate-y-2 hover:scale-105 border-2 border-border hover:border-orange-600 overflow-hidden relative h-[200px] sm:h-[240px]"
+                onClick={() => setSelectedCity("mumbai")}
+              >
+                {/* Background Image */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${mumbaiMarketBg})` }}
+                />
+                
+                {/* Overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30 
+                              group-hover:from-black/70 group-hover:via-black/40 group-hover:to-black/20
+                              transition-all duration-500" />
+                
+                {/* Glowing border effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                              bg-gradient-to-r from-orange-500/20 via-orange-500/30 to-orange-500/20 
+                              blur-2xl transition-opacity duration-500 -z-10" />
+                
+                <CardHeader className="text-center relative z-10 py-6 flex flex-col items-center justify-center h-full">
+                  <div className="mx-auto mb-3 p-3 sm:p-4 rounded-full bg-white/20 backdrop-blur-sm group-hover:bg-white/30 
+                                group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 w-fit">
+                    <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-white group-hover:text-orange-400 transition-colors duration-300 drop-shadow-lg">
+                    Mumbai
+                  </CardTitle>
+                  <CardDescription className="text-sm sm:text-base mt-2 text-white/90 font-semibold drop-shadow-md">
+                    {mumbaiDates.length} {t('womenMarketDates')}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* City Tabs & Dates */}
-        <Tabs value={selectedCity} onValueChange={(v) => setSelectedCity(v as "pune" | "mumbai")} className="mb-16">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
-            <TabsTrigger value="pune">{t("pune")}</TabsTrigger>
-            <TabsTrigger value="mumbai">{t("mumbai")}</TabsTrigger>
-          </TabsList>
+        {/* Vendor Eligibility - Show when no city is selected */}
+        {!selectedCity && (
+          <div className="mb-12">
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center">{t("vendorEligibility")}</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
+              {[
+                { icon: CheckCircle2, label: "womenLedBrand" },
+                { icon: Users, label: "wshgMember" },
+                { icon: CheckCircle2, label: "fssaiRequired" },
+                { icon: CheckCircle2, label: "posOptional" },
+              ].map(({ icon: Icon, label }) => (
+                <Card key={label} className="text-center hover:shadow-lg transition-shadow">
+                  <CardContent className="pt-4 sm:pt-6 pb-4 px-2 sm:px-4">
+                    <Icon className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-2 text-orange-600" />
+                    <p className="text-xs sm:text-sm font-medium">{t(label as any)}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
 
-          <TabsContent value={selectedCity}>
-            <h3 className="text-2xl font-bold mb-6 text-center">{t("womenMarketDates")}</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {/* Market Schedule - Show when city is selected */}
+        {selectedCity && (
+          <div className="mb-12">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  setSelectedCity(null);
+                }}
+                className="hover:scale-105 transition-transform w-full sm:w-auto"
+              >
+                ← {t("backToCities") || "Back to Cities"}
+              </Button>
+              <h3 className="text-xl sm:text-2xl font-bold">
+                {selectedCity === "pune" ? "Pune" : "Mumbai"} {t("womenMarketDates")}
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
               {currentDates.map((dateInfo) => (
                 <Card key={dateInfo.date} className="hover:shadow-lg transition-all">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Calendar className="h-5 w-5 text-orange-600" />
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                      <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600 flex-shrink-0" />
                       {translateDay(dateInfo.day)}
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-xs sm:text-sm">
                       {new Date(dateInfo.date).toLocaleDateString("en-US", {
                         month: "long",
                         day: "numeric",
@@ -301,55 +275,55 @@ const WomenMarkets = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm">
-                      <MapPin className="h-4 w-4 text-muted-foreground" />
+                    <div className="flex items-center gap-2 text-xs sm:text-sm">
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground flex-shrink-0" />
                       <span>{dateInfo.venue}</span>
                     </div>
                     <div className="space-y-1">
                       <p className="text-xs font-medium text-muted-foreground">{t("limitedSlots")}</p>
-                      <p className="text-sm font-semibold text-orange-600">
+                      <p className="text-xs sm:text-sm font-semibold text-orange-600">
                         {t("slotsRemaining", {
                           remaining: dateInfo.slotsRemaining.toString(),
                           total: dateInfo.slotsTotal.toString(),
                         })}
                       </p>
                     </div>
-                    <Button onClick={() => handleApply(dateInfo)} className="w-full bg-orange-600 hover:bg-orange-700">
+                    <Button onClick={() => handleApply(dateInfo)} className="w-full bg-orange-600 hover:bg-orange-700 text-sm sm:text-base">
                       {t("applyNow")}
                     </Button>
                   </CardContent>
                 </Card>
               ))}
             </div>
-          </TabsContent>
-        </Tabs>
+          </div>
+        )}
 
 
         {/* FAQ Section */}
-        <div className="max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-orange-600 via-foreground to-orange-600 bg-clip-text text-transparent animate-fade-in">
+        <div className="max-w-3xl mx-auto px-4 sm:px-0">
+          <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center bg-gradient-to-r from-orange-600 via-foreground to-orange-600 bg-clip-text text-transparent animate-fade-in">
             {t("womenMarketFaqTitle")}
           </h3>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
-              <AccordionTrigger>{t("faqWhatCanISell")}</AccordionTrigger>
-              <AccordionContent>{t("faqWhatCanISellAnswer")}</AccordionContent>
+              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqWhatCanISell")}</AccordionTrigger>
+              <AccordionContent className="text-xs sm:text-sm">{t("faqWhatCanISellAnswer")}</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-              <AccordionTrigger>{t("faqLicenses")}</AccordionTrigger>
-              <AccordionContent>{t("faqLicensesAnswer")}</AccordionContent>
+              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqLicenses")}</AccordionTrigger>
+              <AccordionContent className="text-xs sm:text-sm">{t("faqLicensesAnswer")}</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger>{t("faqTimings")}</AccordionTrigger>
-              <AccordionContent>{t("faqTimingsAnswer")}</AccordionContent>
+              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqTimings")}</AccordionTrigger>
+              <AccordionContent className="text-xs sm:text-sm">{t("faqTimingsAnswer")}</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
-              <AccordionTrigger>{t("faqRefund")}</AccordionTrigger>
-              <AccordionContent>{t("faqRefundAnswer")}</AccordionContent>
+              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqRefund")}</AccordionTrigger>
+              <AccordionContent className="text-xs sm:text-sm">{t("faqRefundAnswer")}</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
-              <AccordionTrigger>{t("faqPower")}</AccordionTrigger>
-              <AccordionContent>{t("faqPowerAnswer")}</AccordionContent>
+              <AccordionTrigger className="text-left text-sm sm:text-base">{t("faqPower")}</AccordionTrigger>
+              <AccordionContent className="text-xs sm:text-sm">{t("faqPowerAnswer")}</AccordionContent>
             </AccordionItem>
           </Accordion>
         </div>
