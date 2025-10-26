@@ -1,10 +1,15 @@
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageSquare, Building2 } from "lucide-react";
 import VisitorFeedbackForm from "./VisitorFeedbackForm";
 import MarketInvitationForm from "./MarketInvitationForm";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useState } from "react";
 
 const ContactForm = () => {
   const { t } = useTranslation();
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [invitationOpen, setInvitationOpen] = useState(false);
   
   return (
     <section id="contact" className="pt-8 pb-4 bg-background">
@@ -20,10 +25,53 @@ const ContactForm = () => {
             </p>
           </div>
 
-          {/* Two Forms Side by Side */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-12">
-            <VisitorFeedbackForm />
-            <MarketInvitationForm />
+          {/* Two Clickable Form Tiles */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {/* Visitor Feedback Tile */}
+            <Dialog open={feedbackOpen} onOpenChange={setFeedbackOpen}>
+              <DialogTrigger asChild>
+                <Card className="p-8 cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-primary group">
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <MessageSquare className="h-8 w-8 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Visitor Feedback</h3>
+                      <p className="text-muted-foreground">Share your market experience with us</p>
+                    </div>
+                  </div>
+                </Card>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl">Visitor Feedback</DialogTitle>
+                </DialogHeader>
+                <VisitorFeedbackForm onSuccess={() => setFeedbackOpen(false)} />
+              </DialogContent>
+            </Dialog>
+
+            {/* Market Invitation Tile */}
+            <Dialog open={invitationOpen} onOpenChange={setInvitationOpen}>
+              <DialogTrigger asChild>
+                <Card className="p-8 cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-primary group">
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <Building2 className="h-8 w-8 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Invite Wingrow to Your Venue</h3>
+                      <p className="text-muted-foreground">Let us organize a market at your location</p>
+                    </div>
+                  </div>
+                </Card>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl">Market Invitation</DialogTitle>
+                </DialogHeader>
+                <MarketInvitationForm onSuccess={() => setInvitationOpen(false)} />
+              </DialogContent>
+            </Dialog>
           </div>
 
           {/* Contact Information Panel */}

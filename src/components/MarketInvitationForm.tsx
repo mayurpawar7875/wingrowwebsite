@@ -31,7 +31,11 @@ const invitationSchema = z.object({
 
 type InvitationFormData = z.infer<typeof invitationSchema>;
 
-const MarketInvitationForm = () => {
+interface MarketInvitationFormProps {
+  onSuccess?: () => void;
+}
+
+const MarketInvitationForm = ({ onSuccess }: MarketInvitationFormProps = {}) => {
   const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -101,6 +105,7 @@ const MarketInvitationForm = () => {
       });
       reset();
       clearErrors();
+      onSuccess?.();
     } catch (error) {
       console.error("Error submitting invitation:", error);
       toast.error(t('failedInvitation'));
@@ -110,12 +115,8 @@ const MarketInvitationForm = () => {
   };
 
   return (
-    <div className="bg-card rounded-xl shadow-lg p-6 md:p-8 border border-border animate-fade-in">
-      <h3 className="text-2xl font-bold mb-2">{t('inviteWingrow')}</h3>
-      <p className="text-muted-foreground mb-6">{t('inviteDescription')}</p>
-      
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        <div>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <div>
           <Label htmlFor="contact-person">{t('contactPersonName')} *</Label>
           <Input
             id="contact-person"
@@ -276,7 +277,6 @@ const MarketInvitationForm = () => {
           {isSubmitting ? t('submitting') : t('sendInvitation')}
         </Button>
       </form>
-    </div>
   );
 };
 

@@ -27,7 +27,11 @@ const feedbackSchema = z.object({
 
 type FeedbackFormData = z.infer<typeof feedbackSchema>;
 
-const VisitorFeedbackForm = () => {
+interface VisitorFeedbackFormProps {
+  onSuccess?: () => void;
+}
+
+const VisitorFeedbackForm = ({ onSuccess }: VisitorFeedbackFormProps = {}) => {
   const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hoveredStar, setHoveredStar] = useState(0);
@@ -93,6 +97,7 @@ const VisitorFeedbackForm = () => {
       reset();
       clearErrors();
       setSelectedRating(0);
+      onSuccess?.();
     } catch (error) {
       console.error("Error submitting feedback:", error);
       toast.error(t('failedFeedback'));
@@ -102,12 +107,8 @@ const VisitorFeedbackForm = () => {
   };
 
   return (
-    <div className="bg-card rounded-xl shadow-lg p-6 md:p-8 border border-border animate-fade-in">
-      <h3 className="text-2xl font-bold mb-2">{t('visitorFeedback')}</h3>
-      <p className="text-muted-foreground mb-6">{t('shareExperience')}</p>
-      
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        <div>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <div>
           <Label htmlFor="visitor-name">{t('yourName')} *</Label>
           <Input
             id="visitor-name"
@@ -234,7 +235,6 @@ const VisitorFeedbackForm = () => {
           {isSubmitting ? t('submitting') : t('submitFeedback')}
         </Button>
       </form>
-    </div>
   );
 };
 
