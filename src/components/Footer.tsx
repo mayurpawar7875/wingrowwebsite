@@ -1,6 +1,5 @@
-import { Facebook, Instagram, Twitter, Mail, Leaf, MapPin, Phone, Youtube, ChevronRight } from "lucide-react";
+import { Facebook, Instagram, Twitter, Mail, Leaf, Phone, Youtube } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Link } from "react-router-dom";
 import wingrowLogo from "@/assets/wingrow-logo.png";
 import farmingBg from "@/assets/footer-farming-bg.jpg";
 
@@ -61,57 +60,6 @@ const Footer = () => {
               </a>
             </div>
           </div>
-
-          {/* Quick Links */}
-          {/* <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h4 className="font-bold text-base mb-3">{t('quickLinks')}</h4>
-            <ul className="space-y-2">
-              {[
-                { label: t('home'), path: '/' },
-                { label: t('markets'), path: '/markets' },
-                { label: t('bookAStall'), path: '/contact' },
-                { label: t('contactUs'), path: '/contact' },
-              ].map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all hover:translate-x-1"
-                  >
-                    <ChevronRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="relative">
-                      {link.label}
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div> */}
-
-          /* {/* Markets */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <h4 className="font-bold text-base mb-3">{t('markets')}</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/markets"
-                  className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all"
-                >
-                  <MapPin className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-                  <span>Pune (24 Markets)</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/markets"
-                  className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all"
-                >
-                  <MapPin className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-                  <span>Mumbai (23 Markets)</span>
-                </Link>
-              </li>
-            </ul>
-          </div> */
 
           {/* Follow Us / Contact */}
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
