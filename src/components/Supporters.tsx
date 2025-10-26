@@ -35,14 +35,14 @@ const Supporters = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
           {supporters.map((supporter, index) => (
             <div
               key={index}
-              className="bg-card rounded-[2rem] p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-fade-in border border-border/50"
+              className="bg-card rounded-[3rem] p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-fade-in border border-border/50 aspect-[2/1]"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex items-center justify-center h-24">
+              <div className="flex items-center justify-center h-full">
                 <img
                   src={supporter.logo}
                   alt={supporter.name}
