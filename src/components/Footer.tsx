@@ -7,10 +7,10 @@ const Footer = () => {
   const { t } = useTranslation();
 
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com", label: "Facebook", color: "hover:bg-blue-600" },
-    { icon: Instagram, href: "https://instagram.com", label: "Instagram", color: "hover:bg-pink-600" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter", color: "hover:bg-sky-500" },
-    { icon: Youtube, href: "https://youtube.com", label: "YouTube", color: "hover:bg-red-600" },
+    { icon: Facebook, href: "https://www.facebook.com/wingrowagritech", label: "Facebook", color: "hover:bg-blue-600" },
+    { icon: Instagram, href: "https://www.instagram.com/wingrowmarket/", label: "Instagram", color: "hover:bg-pink-600" },
+    // { icon: Twitter, href: "https://twitter.com", label: "Twitter", color: "hover:bg-sky-500" },
+    { icon: Youtube, href: "https://www.youtube.com/@wingrow_wewinwegrow", label: "YouTube", color: "hover:bg-red-600" },
   ];
 
   return (
@@ -43,14 +43,13 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Phone className="h-4 w-4 text-primary" />
-              <a href="tel:+919876543210" className="hover:text-primary transition-colors">
-                +91 98765 43210
+              <a href="tel:+917776003700" className="hover:text-primary transition-colors">
               </a>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Mail className="h-4 w-4 text-primary" />
               <a href="mailto:info@wingrowmarket.com" className="hover:text-primary transition-colors">
-                info@wingrowmarket.com
+                connect@wingrowagritech.com
               </a>
             </div>
           </div>
