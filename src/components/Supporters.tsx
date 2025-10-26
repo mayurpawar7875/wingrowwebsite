@@ -26,7 +26,7 @@ const Supporters = () => {
     <section className="py-20 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-wide animate-bounce-in" style={{ animationDelay: '0.3s' }}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-wide animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
             SUPPORTERS & PARTNERS
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
