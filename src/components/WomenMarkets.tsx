@@ -108,7 +108,7 @@ const WomenMarkets = () => {
                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-clip-text text-transparent animate-scale-in">
                   {t('womenMarketBannerTitle')}
                 </h2>
-                <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
                   {t('womenMarketBannerSubtitle')}
                 </p>
               </div>
