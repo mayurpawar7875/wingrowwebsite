@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Search, Grid3x3, List, Navigation, Calendar } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import puneMarketBg from "@/assets/pune-market-bg.jpg";
+import mumbaiMarketBg from "@/assets/mumbai-market-bg.jpg";
 
 interface Market {
   nameKey: string;
@@ -575,24 +577,34 @@ const Markets = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Pune City Card */}
             <Card 
-              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden"
+              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden relative h-[400px]"
               onClick={() => setSelectedCity("pune")}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 
-                            group-hover:from-primary/10 group-hover:via-primary/20 group-hover:to-primary/10 
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(${puneMarketBg})` }}
+              />
+              
+              {/* Overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30 
+                            group-hover:from-black/70 group-hover:via-black/40 group-hover:to-black/20
                             transition-all duration-500" />
+              
+              {/* Glowing border effect */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
                             bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 
                             blur-2xl transition-opacity duration-500 -z-10" />
-              <CardHeader className="text-center relative z-10 py-12">
-                <div className="mx-auto mb-4 p-6 rounded-full bg-primary/10 group-hover:bg-primary/20 
+              
+              <CardHeader className="text-center relative z-10 py-12 flex flex-col items-center justify-center h-full">
+                <div className="mx-auto mb-4 p-6 rounded-full bg-white/20 backdrop-blur-sm group-hover:bg-white/30 
                               group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 w-fit">
-                  <MapPin className="h-12 w-12 text-primary" />
+                  <MapPin className="h-12 w-12 text-white" />
                 </div>
-                <CardTitle className="text-3xl md:text-4xl font-bold group-hover:text-primary transition-colors duration-300">
+                <CardTitle className="text-3xl md:text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300 drop-shadow-lg">
                   Pune
                 </CardTitle>
-                <CardDescription className="text-lg mt-4">
+                <CardDescription className="text-lg mt-4 text-white/90 font-semibold drop-shadow-md">
                   {t("puneMarkets", { count: puneMarkets.length.toString() })}
                 </CardDescription>
               </CardHeader>
@@ -600,24 +612,34 @@ const Markets = () => {
 
             {/* Mumbai City Card */}
             <Card 
-              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden"
+              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden relative h-[400px]"
               onClick={() => setSelectedCity("mumbai")}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 
-                            group-hover:from-primary/10 group-hover:via-primary/20 group-hover:to-primary/10 
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(${mumbaiMarketBg})` }}
+              />
+              
+              {/* Overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30 
+                            group-hover:from-black/70 group-hover:via-black/40 group-hover:to-black/20
                             transition-all duration-500" />
+              
+              {/* Glowing border effect */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
                             bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 
                             blur-2xl transition-opacity duration-500 -z-10" />
-              <CardHeader className="text-center relative z-10 py-12">
-                <div className="mx-auto mb-4 p-6 rounded-full bg-primary/10 group-hover:bg-primary/20 
+              
+              <CardHeader className="text-center relative z-10 py-12 flex flex-col items-center justify-center h-full">
+                <div className="mx-auto mb-4 p-6 rounded-full bg-white/20 backdrop-blur-sm group-hover:bg-white/30 
                               group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 w-fit">
-                  <MapPin className="h-12 w-12 text-primary" />
+                  <MapPin className="h-12 w-12 text-white" />
                 </div>
-                <CardTitle className="text-3xl md:text-4xl font-bold group-hover:text-primary transition-colors duration-300">
+                <CardTitle className="text-3xl md:text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300 drop-shadow-lg">
                   Mumbai
                 </CardTitle>
-                <CardDescription className="text-lg mt-4">
+                <CardDescription className="text-lg mt-4 text-white/90 font-semibold drop-shadow-md">
                   {t("mumbaiMarkets", { count: mumbaiMarkets.length.toString() })}
                 </CardDescription>
               </CardHeader>
