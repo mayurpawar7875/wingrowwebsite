@@ -436,7 +436,6 @@ const Markets = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDay, setSelectedDay] = useState<string>("all");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
   const [visibleCount, setVisibleCount] = useState(9);
   const [selectedCity, setSelectedCity] = useState<"pune" | "mumbai" | null>(null);
@@ -448,10 +447,9 @@ const Markets = () => {
     return currentMarkets.filter((market) => {
       const matchesSearch = t(market.nameKey).toLowerCase().includes(searchQuery.toLowerCase());
       const matchesDay = selectedDay === "all" || market.day === selectedDay;
-      const matchesCategory = selectedCategory === "all" || market.category.includes(selectedCategory);
-      return matchesSearch && matchesDay && matchesCategory;
+      return matchesSearch && matchesDay;
     });
-  }, [currentMarkets, searchQuery, selectedDay, selectedCategory, t, selectedCity]);
+  }, [currentMarkets, searchQuery, selectedDay, t, selectedCity]);
 
   const visibleMarkets = filteredMarkets.slice(0, visibleCount);
 
@@ -721,7 +719,6 @@ const Markets = () => {
                   setSelectedCity(null);
                   setSearchQuery("");
                   setSelectedDay("all");
-                  setSelectedCategory("all");
                   setVisibleCount(9);
                 }}
                 className="hover:scale-105 transition-transform"
@@ -774,39 +771,6 @@ const Markets = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-2 items-center">
-                  <span className="text-sm font-medium">{t("filterByCategory")}:</span>
-                  <div className="flex gap-2 flex-wrap">
-                    <Badge
-                      variant={selectedCategory === "all" ? "default" : "outline"}
-                      className="cursor-pointer"
-                      onClick={() => setSelectedCategory("all")}
-                    >
-                      All
-                    </Badge>
-                    <Badge
-                      variant={selectedCategory === "Vegetables" ? "default" : "outline"}
-                      className="cursor-pointer"
-                      onClick={() => setSelectedCategory("Vegetables")}
-                    >
-                      {t("vegetables")}
-                    </Badge>
-                    <Badge
-                      variant={selectedCategory === "Fruits" ? "default" : "outline"}
-                      className="cursor-pointer"
-                      onClick={() => setSelectedCategory("Fruits")}
-                    >
-                      {t("fruits")}
-                    </Badge>
-                    <Badge
-                      variant={selectedCategory === "Millets" ? "default" : "outline"}
-                      className="cursor-pointer"
-                      onClick={() => setSelectedCategory("Millets")}
-                    >
-                      {t("millets")}
-                    </Badge>
-                  </div>
-                </div>
 
                 <div className="flex gap-2 ml-auto">
                   <Button
