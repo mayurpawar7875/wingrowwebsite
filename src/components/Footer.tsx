@@ -30,13 +30,13 @@ const Footer = () => {
         <Leaf className="h-16 w-16 text-accent rotate-45 animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
-      <div className="container px-4 pt-12 pb-8">
+      <div className="container px-4 pt-8 pb-6">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* About Wingrow Market */}
-          <div className="animate-fade-in space-y-4" style={{ animationDelay: '0.1s' }}>
-            <div className="mb-4">
-              <img src={wingrowLogo} alt="Wingrow Market" className="h-12 w-auto mb-3" />
+          <div className="animate-fade-in space-y-3" style={{ animationDelay: '0.1s' }}>
+            <div className="mb-3">
+              <img src={wingrowLogo} alt="Wingrow Market" className="h-10 w-auto mb-2" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               {t('connectingFarmers')}
@@ -57,8 +57,8 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h4 className="font-bold text-lg mb-4">{t('quickLinks')}</h4>
-            <ul className="space-y-3">
+            <h4 className="font-bold text-base mb-3">{t('quickLinks')}</h4>
+            <ul className="space-y-2">
               {[
                 { label: t('home'), path: '/' },
                 { label: t('markets'), path: '/markets' },
@@ -83,8 +83,8 @@ const Footer = () => {
 
           {/* Markets */}
           <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <h4 className="font-bold text-lg mb-4">{t('markets')}</h4>
-            <ul className="space-y-3">
+            <h4 className="font-bold text-base mb-3">{t('markets')}</h4>
+            <ul className="space-y-2">
               <li>
                 <Link
                   to="/markets"
@@ -108,8 +108,8 @@ const Footer = () => {
 
           {/* Follow Us / Contact */}
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <h4 className="font-bold text-lg mb-4">{t('followUs')}</h4>
-            <div className="flex flex-wrap gap-3 mb-6">
+            <h4 className="font-bold text-base mb-3">{t('followUs')}</h4>
+            <div className="flex flex-wrap gap-2 mb-4">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
@@ -134,7 +134,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-8">
+        <div className="border-t border-border pt-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p className="text-center md:text-left">
               &copy; {new Date().getFullYear()} Wingrow Market. {t('allRightsReserved')}
