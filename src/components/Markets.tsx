@@ -574,10 +574,10 @@ const Markets = () => {
 
         {/* City Selection - Show when no city is selected */}
         {!selectedCity && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {/* Pune City Card */}
             <Card 
-              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden relative h-[400px]"
+              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-2 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden relative h-[240px]"
               onClick={() => setSelectedCity("pune")}
             >
               {/* Background Image */}
@@ -596,15 +596,15 @@ const Markets = () => {
                             bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 
                             blur-2xl transition-opacity duration-500 -z-10" />
               
-              <CardHeader className="text-center relative z-10 py-12 flex flex-col items-center justify-center h-full">
-                <div className="mx-auto mb-4 p-6 rounded-full bg-white/20 backdrop-blur-sm group-hover:bg-white/30 
+              <CardHeader className="text-center relative z-10 py-6 flex flex-col items-center justify-center h-full">
+                <div className="mx-auto mb-3 p-4 rounded-full bg-white/20 backdrop-blur-sm group-hover:bg-white/30 
                               group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 w-fit">
-                  <MapPin className="h-12 w-12 text-white" />
+                  <MapPin className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-3xl md:text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300 drop-shadow-lg">
+                <CardTitle className="text-2xl md:text-3xl font-bold text-white group-hover:text-primary transition-colors duration-300 drop-shadow-lg">
                   Pune
                 </CardTitle>
-                <CardDescription className="text-lg mt-4 text-white/90 font-semibold drop-shadow-md">
+                <CardDescription className="text-base mt-2 text-white/90 font-semibold drop-shadow-md">
                   {t("puneMarkets", { count: puneMarkets.length.toString() })}
                 </CardDescription>
               </CardHeader>
@@ -612,7 +612,7 @@ const Markets = () => {
 
             {/* Mumbai City Card */}
             <Card 
-              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden relative h-[400px]"
+              className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-2 hover:scale-105 border-2 border-border hover:border-primary overflow-hidden relative h-[240px]"
               onClick={() => setSelectedCity("mumbai")}
             >
               {/* Background Image */}
@@ -631,15 +631,15 @@ const Markets = () => {
                             bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 
                             blur-2xl transition-opacity duration-500 -z-10" />
               
-              <CardHeader className="text-center relative z-10 py-12 flex flex-col items-center justify-center h-full">
-                <div className="mx-auto mb-4 p-6 rounded-full bg-white/20 backdrop-blur-sm group-hover:bg-white/30 
+              <CardHeader className="text-center relative z-10 py-6 flex flex-col items-center justify-center h-full">
+                <div className="mx-auto mb-3 p-4 rounded-full bg-white/20 backdrop-blur-sm group-hover:bg-white/30 
                               group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 w-fit">
-                  <MapPin className="h-12 w-12 text-white" />
+                  <MapPin className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-3xl md:text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300 drop-shadow-lg">
+                <CardTitle className="text-2xl md:text-3xl font-bold text-white group-hover:text-primary transition-colors duration-300 drop-shadow-lg">
                   Mumbai
                 </CardTitle>
-                <CardDescription className="text-lg mt-4 text-white/90 font-semibold drop-shadow-md">
+                <CardDescription className="text-base mt-2 text-white/90 font-semibold drop-shadow-md">
                   {t("mumbaiMarkets", { count: mumbaiMarkets.length.toString() })}
                 </CardDescription>
               </CardHeader>
