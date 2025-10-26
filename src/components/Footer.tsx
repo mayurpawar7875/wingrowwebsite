@@ -1,152 +1,79 @@
-import { Facebook, Instagram, Twitter, Mail, Leaf, MapPin, Phone, Youtube, ChevronRight } from "lucide-react";
+import { Facebook, Instagram, Mail, Phone, Youtube } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Link } from "react-router-dom";
 import wingrowLogo from "@/assets/wingrow-logo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
 
   const socialLinks = [
-    { icon: Facebook, href: "https://www.facebook.com/wingrowagritech", label: "Facebook", color: "hover:bg-blue-600" },
-    { icon: Instagram, href: "https://www.instagram.com/wingrowmarket/", label: "Instagram", color: "hover:bg-pink-600" },
-    // { icon: Twitter, href: "https://twitter.com", label: "Twitter", color: "hover:bg-sky-500" },
-    { icon: Youtube, href: "https://www.youtube.com/@wingrow_wewinwegrow", label: "YouTube", color: "hover:bg-red-600" },
+    { icon: Facebook, href: "https://www.facebook.com/wingrowagritech", label: "Facebook" },
+    { icon: Instagram, href: "https://www.instagram.com/wingrowmarket/", label: "Instagram" },
+    { icon: Youtube, href: "https://www.youtube.com/@wingrow_wewinwegrow", label: "YouTube" },
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-background via-muted/30 to-muted/50 overflow-hidden">
-      {/* Decorative wave separator */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
-        <svg className="relative block w-full h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-background"></path>
-        </svg>
-      </div>
-
-      {/* Floating decorative elements */}
-      <div className="absolute top-20 right-10 opacity-10">
-        <Leaf className="h-24 w-24 text-accent animate-pulse" />
-      </div>
-      <div className="absolute bottom-40 left-10 opacity-10">
-        <Leaf className="h-16 w-16 text-accent rotate-45 animate-pulse" style={{ animationDelay: '1s' }} />
-      </div>
-
-      <div className="container px-4 pt-8 pb-6">
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* About Wingrow Market */}
-          <div className="animate-fade-in space-y-3" style={{ animationDelay: '0.1s' }}>
-            <div className="mb-3">
-              <img src={wingrowLogo} alt="Wingrow Market" className="h-10 w-auto mb-2" />
-            </div>
+    <footer className="bg-muted/30">
+      <div className="container px-4 py-6">
+        {/* Compact grid: 2 cols on md+, stack on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          {/* About */}
+          <div className="space-y-3">
+            <img src={wingrowLogo} alt="Wingrow Market" className="h-8 w-auto" />
             <p className="text-muted-foreground text-sm leading-relaxed">
-              {t('connectingFarmers')}
+              {t("connectingFarmers")}
             </p>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Phone className="h-4 w-4 text-primary" />
-              <a href="tel:+917776003700" className="hover:text-primary transition-colors">
-              </a>
+            <div className="space-y-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-primary" />
+                <a href="tel:+917776003700" className="hover:text-primary transition-colors">
+                  +91 77760 03700
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-primary" />
+                <a href="mailto:info@wingrowmarket.com" className="hover:text-primary transition-colors">
+                  info@wingrowmarket.com
+                </a>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Mail className="h-4 w-4 text-primary" />
-              <a href="mailto:info@wingrowmarket.com" className="hover:text-primary transition-colors">
-                connect@wingrowagritech.com
-              </a>
-            </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h4 className="font-bold text-base mb-3">{t('quickLinks')}</h4>
-            <ul className="space-y-2">
-              {[
-                { label: t('home'), path: '/' },
-                { label: t('markets'), path: '/markets' },
-                { label: t('bookAStall'), path: '/contact' },
-                { label: t('contactUs'), path: '/contact' },
-              ].map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all hover:translate-x-1"
-                  >
-                    <ChevronRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="relative">
-                      {link.label}
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Markets */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <h4 className="font-bold text-base mb-3">{t('markets')}</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/markets"
-                  className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all"
-                >
-                  <MapPin className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-                  <span>Pune (24 Markets)</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/markets"
-                  className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all"
-                >
-                  <MapPin className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-                  <span>Mumbai (23 Markets)</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Follow Us / Contact */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <h4 className="font-bold text-base mb-3">{t('followUs')}</h4>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {socialLinks.map((social, index) => (
+          {/* Follow Us */}
+          <div>
+            <h4 className="font-semibold text-sm mb-3">{t("followUs")}</h4>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {socialLinks.map((s, i) => (
                 <a
-                  key={index}
-                  href={social.href}
+                  key={i}
+                  href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className={`group relative w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground transition-all duration-300 hover:scale-110 hover:shadow-lg ${social.color} hover:text-white`}
+                  aria-label={s.label}
+                  className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
                 >
-                  <social.icon className="h-5 w-5 relative z-10" />
+                  <s.icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
             <a
               href="mailto:info@wingrowmarket.com"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground text-sm transition-colors"
             >
               <Mail className="h-4 w-4" />
-              <span className="text-sm font-medium">{t('email')}</span>
+              <span className="font-medium">{t("email")}</span>
             </a>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-border pt-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        {/* Bottom bar */}
+        <div className="border-t border-border pt-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
             <p className="text-center md:text-left">
-              &copy; {new Date().getFullYear()} Wingrow Market. {t('allRightsReserved')}
+              &copy; {new Date().getFullYear()} Wingrow Market. {t("allRightsReserved")}
             </p>
-            <div className="flex gap-6">
-              <button className="relative hover:text-primary transition-colors group">
-                {t('privacyPolicy')}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-              </button>
-              <button className="relative hover:text-primary transition-colors group">
-                {t('termsConditions')}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-              </button>
+            <div className="flex gap-4">
+              <button className="hover:text-primary transition-colors">{t("privacyPolicy")}</button>
+              <button className="hover:text-primary transition-colors">{t("termsConditions")}</button>
             </div>
           </div>
         </div>
