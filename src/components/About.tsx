@@ -19,7 +19,7 @@ const About = () => {
     <section className="py-12 bg-background">
       <div className="container px-4">
         <div className="max-w-4xl mx-auto text-center mb-12 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 pb-2 leading-tight bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent animate-bounce-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 pb-2 leading-tight bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent animate-bounce-in" style={{ animationDelay: '0.3s' }}>
             {t('aboutTitle')}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">

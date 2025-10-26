@@ -86,17 +86,17 @@ export default {
         },
         "bounce-in": {
           "0%": {
-            transform: "scale(0.3)",
+            transform: "scale(0.5) translateY(-30px)",
             opacity: "0",
           },
           "50%": {
-            transform: "scale(1.05)",
+            transform: "scale(1.1) translateY(5px)",
           },
           "70%": {
-            transform: "scale(0.9)",
+            transform: "scale(0.95) translateY(-5px)",
           },
           "100%": {
-            transform: "scale(1)",
+            transform: "scale(1) translateY(0)",
             opacity: "1",
           },
         },
@@ -104,7 +104,7 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "bounce-in": "bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "bounce-in": "bounce-in 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
       },
     },
   },

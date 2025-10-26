@@ -49,7 +49,7 @@ const Hero = () => {
       ))}
 
       <div className="container relative z-10 px-4 py-24 md:py-20 text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-6 animate-bounce-in bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-6 animate-bounce-in bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent" style={{ animationDelay: '0.2s' }}>
           {t('heroTitle')}
         </h1>
         <p className="text-base sm:text-lg md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
