@@ -32,7 +32,6 @@ const Navigation = () => {
 
   const menuItems = [
     { label: t('home'), path: '/' },
-    { label: t('about'), path: '/about' },
     { label: t('markets'), path: '/markets' },
     { label: t('womenMarkets'), path: '/women-markets' },
     { label: t('testimonials'), path: '/testimonials' },

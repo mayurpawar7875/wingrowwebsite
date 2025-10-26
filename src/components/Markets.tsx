@@ -7,6 +7,19 @@ import { MapPin, Search, Grid3x3, List, Navigation, Calendar } from "lucide-reac
 import { useTranslation } from "@/hooks/useTranslation";
 import puneMarketBg from "@/assets/pune-market-bg.jpg";
 import mumbaiMarketBg from "@/assets/mumbai-market-bg.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import marketCarousel1 from "@/assets/market-carousel-1.jpg";
+import marketCarousel2 from "@/assets/market-carousel-2.jpg";
+import marketCarousel3 from "@/assets/market-carousel-3.jpg";
+import marketCarousel4 from "@/assets/market-carousel-4.jpg";
+import marketCarousel5 from "@/assets/market-carousel-5.jpg";
 
 interface Market {
   nameKey: string;
@@ -563,6 +576,39 @@ const Markets = () => {
   return (
     <section id="markets" className="py-20 bg-muted/30">
       <div className="container px-4">
+        {/* Carousel Section */}
+        <div className="mb-12 animate-fade-in">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
+            className="w-full max-w-5xl mx-auto"
+          >
+            <CarouselContent>
+              {[marketCarousel1, marketCarousel2, marketCarousel3, marketCarousel4, marketCarousel5].map((image, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
+                    <img
+                      src={image}
+                      alt={`Market scene ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
+        </div>
+
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-foreground to-primary bg-clip-text text-transparent animate-scale-in">
             {t("marketsTitle")}
