@@ -3,10 +3,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { MapPin, Search, Grid3x3, List, Navigation, Calendar } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import Autoplay from "embla-carousel-autoplay";
 import puneMarketBg from "@/assets/pune-market-bg.jpg";
 import mumbaiMarketBg from "@/assets/mumbai-market-bg.jpg";
+import heroMarket1 from "@/assets/hero-market.jpg";
+import heroMarket2 from "@/assets/hero-market-2.jpg";
+import heroMarket3 from "@/assets/hero-market-3.jpg";
+import heroMarket4 from "@/assets/hero-market-4.jpg";
+import heroMarket5 from "@/assets/hero-market-5.jpg";
+import heroMarket6 from "@/assets/hero-market-6.jpg";
+import heroMarket7 from "@/assets/hero-market-7.jpg";
+import heroMarket8 from "@/assets/hero-market-8.jpg";
 
 interface Market {
   nameKey: string;
@@ -186,6 +196,17 @@ const Markets = () => {
     </Card>
   );
 
+  const marketImages = [
+    heroMarket1,
+    heroMarket2,
+    heroMarket3,
+    heroMarket4,
+    heroMarket5,
+    heroMarket6,
+    heroMarket7,
+    heroMarket8,
+  ];
+
   return (
     <section id="markets" className="py-20 bg-muted/30">
       <div className="container px-4">
@@ -196,6 +217,35 @@ const Markets = () => {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {t("marketsSubtitle", { count: (puneMarkets.length + mumbaiMarkets.length).toString() })}
           </p>
+        </div>
+
+        {/* Market Carousel */}
+        <div className="mb-12 max-w-5xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <Carousel
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
+            className="w-full"
+          >
+            <CarouselContent>
+              {marketImages.map((image, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative h-[300px] md:h-[400px] rounded-xl overflow-hidden">
+                    <img
+                      src={image}
+                      alt={`Market scene ${index + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
         </div>
 
         {/* City Selection (unchanged layout) */}
