@@ -12,33 +12,22 @@ import heroImage6 from "@/assets/hero-market-6.jpg";
 import heroImage7 from "@/assets/hero-market-7.jpg";
 import heroImage8 from "@/assets/hero-market-8.jpg";
 
-const carouselImages = [
-  heroImage1,
-  heroImage2,
-  heroImage3,
-  heroImage4,
-  heroImage5,
-  heroImage6,
-  heroImage7,
-  heroImage8,
-];
+const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4, heroImage5, heroImage6, heroImage7, heroImage8];
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [animate, setAnimate] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-      setAnimate(false);
-      setTimeout(() => setAnimate(true), 100);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
 
+
   const openChatbot = () => {
-    const event = new CustomEvent("openChatbot");
+    const event = new CustomEvent('openChatbot');
     window.dispatchEvent(event);
   };
 
@@ -50,8 +39,8 @@ const Hero = () => {
           className="absolute inset-0 z-0 transition-opacity duration-1000"
           style={{
             backgroundImage: `url(${image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             opacity: currentSlide === index ? 1 : 0,
           }}
         >
@@ -60,44 +49,31 @@ const Hero = () => {
       ))}
 
       <div className="container relative z-10 px-4 py-24 md:py-20 text-center">
-        <h1
-          className={`text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent transform transition-all duration-1000 ${
-            animate ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-5 scale-95"
-          }`}
-        >
-          {t("heroTitle")}
+        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-6 animate-bounce-in bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+          {t('heroTitle')}
         </h1>
-
-        <p
-          className={`text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto transform transition-all duration-1000 delay-200 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-          }`}
-        >
-          {t("heroSubtitle")}
+        <p className="text-base sm:text-lg md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          {t('heroSubtitle')}
         </p>
-
-        <div
-          className={`flex flex-col sm:flex-row gap-4 justify-center items-center transform transition-all duration-1000 delay-300 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-          }`}
-        >
-          <Button
-            size="lg"
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <Button 
+            size="lg" 
             className="text-lg px-8 py-6 shadow-medium hover:scale-105 transition-transform"
             onClick={openChatbot}
           >
             <Calendar className="mr-2 h-5 w-5" />
-            {t("bookStall")}
+            {t('bookStall')}
           </Button>
-          <Button
-            size="lg"
-            variant="outline"
+          <Button 
+            size="lg" 
+            variant="outline" 
             className="text-lg px-8 py-6 shadow-soft hover:scale-105 transition-transform bg-card/80 backdrop-blur-sm"
             asChild
           >
             <Link to="/markets">
               <ShoppingBag className="mr-2 h-5 w-5" />
-              {t("visitMarkets")}
+              {t('visitMarkets')}
             </Link>
           </Button>
         </div>
@@ -108,7 +84,7 @@ const Hero = () => {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`h-2 rounded-full transition-all ${
-                currentSlide === index ? "w-8 bg-primary" : "w-2 bg-primary/30"
+                currentSlide === index ? 'w-8 bg-primary' : 'w-2 bg-primary/30'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
