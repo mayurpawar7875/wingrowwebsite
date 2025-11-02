@@ -590,53 +590,70 @@ const Markets = () => {
     { title: "Vibrant Market Community", subtitle: "Where farmers meet families" }
   ];
 
-  return (
-    <section id="markets" className="pt-24 pb-20 bg-muted/30">
-      <div className="container px-4">
-        {/* Carousel Section */}
-        <div className="mb-12 animate-fade-in">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 3000,
-              }),
-            ]}
-            className="w-full max-w-5xl mx-auto"
-          >
-            <CarouselContent>
-              {[marketCarousel1, marketCarousel2, marketCarousel3, marketCarousel4, marketCarousel5].map((image, index) => (
-                <CarouselItem key={index}>
-                  <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden group">
-                    <img
-                      src={image}
-                      alt={`Market scene ${index + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                    
-                    {/* Text Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                      <h3 className="text-2xl md:text-4xl font-bold mb-2 animate-fade-in drop-shadow-lg">
-                        {carouselTexts[index].title}
-                      </h3>
-                      <p className="text-sm md:text-lg text-white/90 drop-shadow-md animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                        {carouselTexts[index].subtitle}
-                      </p>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-4" />
-            <CarouselNext className="right-4" />
-          </Carousel>
-        </div>
+  const openChatbot = () => {
+    const event = new CustomEvent('openChatbot');
+    window.dispatchEvent(event);
+  };
 
-        <div className="text-center mb-12 animate-fade-in">
+  return (
+    <section id="markets" className="bg-muted/30 -mt-16 md:-mt-20">
+      {/* Carousel Section - Full Width at Top */}
+      <div className="animate-fade-in">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 4000,
+            }),
+          ]}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-0">
+            {[marketCarousel1, marketCarousel2, marketCarousel3, marketCarousel4, marketCarousel5].map((image, index) => (
+              <CarouselItem key={index} className="pl-0">
+                <div className="relative h-[100vh] min-h-[500px] overflow-hidden group">
+                  <img
+                    src={image}
+                    alt={`Market scene ${index + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+                  
+                  {/* Text Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16 text-white">
+                    <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 animate-fade-in drop-shadow-2xl">
+                      {carouselTexts[index].title}
+                    </h3>
+                    <p className="text-lg md:text-2xl lg:text-3xl text-white/95 drop-shadow-lg mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+                      {carouselTexts[index].subtitle}
+                    </p>
+                    
+                    {/* Book Your Stall Button */}
+                    <Button 
+                      onClick={openChatbot}
+                      size="lg" 
+                      className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-10 py-8 text-lg md:text-xl lg:text-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110"
+                    >
+                      <Calendar className="mr-3 h-6 w-6" />
+                      Book Your Stall
+                    </Button>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-8 h-12 w-12" />
+          <CarouselNext className="right-8 h-12 w-12" />
+        </Carousel>
+      </div>
+
+      {/* Markets Content */}
+      <div className="container px-4 py-12">
+
+        <div className="text-center mb-12 mt-8 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-foreground to-primary bg-clip-text text-transparent animate-scale-in">
             {t("marketsTitle")}
           </h2>

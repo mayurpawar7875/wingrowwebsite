@@ -44,7 +44,7 @@ const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
+          ? "bg-background/20 backdrop-blur-md shadow-lg border-b border-border/30"
           : "bg-transparent"
       }`}
     >
@@ -67,8 +67,8 @@ const Navigation = () => {
                 key={index}
                 variant="ghost"
                 asChild
-                className={`text-foreground hover:text-primary hover:bg-primary/10 transition-colors ${
-                  isActivePath(item.path) ? 'text-primary bg-primary/10' : ''
+                className={`text-foreground font-semibold hover:text-primary hover:bg-primary/10 transition-colors ${
+                  isActivePath(item.path) ? 'text-pink-600 bg-pink-50 font-bold' : 'text-slate-700'
                 }`}
               >
                 <Link to={item.path}>{item.label}</Link>
@@ -114,8 +114,8 @@ const Navigation = () => {
                   key={index}
                   variant="ghost"
                   asChild
-                  className={`w-full justify-start text-foreground hover:text-primary hover:bg-primary/10 ${
-                    isActivePath(item.path) ? 'text-primary bg-primary/10' : ''
+                  className={`w-full justify-start font-semibold hover:text-primary hover:bg-primary/10 ${
+                    isActivePath(item.path) ? 'text-pink-600 bg-pink-50 font-bold' : 'text-slate-700'
                   }`}
                   onClick={closeMobileMenu}
                 >
