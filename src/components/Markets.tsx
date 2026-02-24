@@ -469,7 +469,7 @@ const Markets = () => {
     // Fallback: Google Maps App short link
     const gmapsShort = `https://maps.app.goo.gl/?link=https://www.google.com/maps/?q=${lat},${lng}`;
     // iOS: Apple Maps
-    const appleMaps = `http://maps.apple.com/?daddr=${lat},${lng}`;
+    const appleMaps = `https://maps.apple.com/?daddr=${lat},${lng}`;
     // Android: geo intent
     const androidGeo = `geo:${lat},${lng}?q=${lat},${lng}`;
     // No-Google fallback: OpenStreetMap
