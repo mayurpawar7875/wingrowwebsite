@@ -1,7 +1,7 @@
 // @ts-nocheck
 // Supabase edge functions run on Deno. Type checking in the editor can flag Deno globals
 // and remote module imports; disable TS checking for this file to avoid editor errors.
-import { serve } from 'https://deno.fresh.run/std@0.168.0/http/server.ts'
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 
 const GOOGLE_PLACES_API_KEY = Deno.env.get('GOOGLE_PLACES_API_KEY')
 const WINGROW_PLACE_ID = Deno.env.get('WINGROW_PLACE_ID')
