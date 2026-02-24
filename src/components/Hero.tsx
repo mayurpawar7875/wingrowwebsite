@@ -1,39 +1,51 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, ShoppingBag } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Link } from "react-router-dom";
 import heroImage1 from "@/assets/hero-market.jpg";
-import heroImage2 from "@/assets/hero-market-2.jpg";
-import heroImage3 from "@/assets/hero-market-3.jpg";
-import heroImage4 from "@/assets/hero-market-4.jpg";
-import heroImage5 from "@/assets/hero-market-5.jpg";
-import heroImage6 from "@/assets/hero-market-6.jpg";
-import heroImage7 from "@/assets/hero-market-7.jpg";
-import heroImage8 from "@/assets/hero-market-8.jpg";
 
-const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4, heroImage5, heroImage6, heroImage7, heroImage8];
+// Lazy load remaining images only when needed
+const lazyImages = [
+  () => import("@/assets/hero-market-2.jpg"),
+  () => import("@/assets/hero-market-3.jpg"),
+  () => import("@/assets/hero-market-4.jpg"),
+  () => import("@/assets/hero-market-5.jpg"),
+  () => import("@/assets/hero-market-6.jpg"),
+  () => import("@/assets/hero-market-7.jpg"),
+  () => import("@/assets/hero-market-8.jpg"),
+];
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<string[]>([heroImage1]);
   const { t } = useTranslation();
 
+  // Preload next images after first paint
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    const timer = setTimeout(() => {
+      Promise.all(lazyImages.map(fn => fn())).then(modules => {
+        setLoadedImages([heroImage1, ...modules.map(m => m.default)]);
+      });
+    }, 1000); // Delay 1s to prioritize first paint
+    return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (loadedImages.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % loadedImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [loadedImages.length]);
 
-  const openChatbot = () => {
-    const event = new CustomEvent('openChatbot');
-    window.dispatchEvent(event);
-  };
+  const openChatbot = useCallback(() => {
+    window.dispatchEvent(new CustomEvent('openChatbot'));
+  }, []);
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {carouselImages.map((image, index) => (
+      {loadedImages.map((image, index) => (
         <div
           key={index}
           className="absolute inset-0 z-0 transition-opacity duration-1000"
@@ -79,7 +91,7 @@ const Hero = () => {
         </div>
 
         <div className="flex gap-2 justify-center mt-8">
-          {carouselImages.map((_, index) => (
+          {loadedImages.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
