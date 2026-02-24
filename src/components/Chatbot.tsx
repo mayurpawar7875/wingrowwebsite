@@ -220,22 +220,36 @@ const Chatbot = () => {
     const refId = generateReferenceId();
 
     try {
-      const { error } = await supabase.functions.invoke('send-booking-email', {
-        body: {
-          referenceId: refId,
-          name: formData.farmerName,
-          phone: formData.phone,
-          email: formData.phone, // using phone as contact since no email field in form
-          city: formData.city,
-          market: formData.market,
-          stallSize: formData.stallType,
-          preferredDates: formData.preferredDate ? format(formData.preferredDate, "yyyy-MM-dd") : "",
-          hasElectricity: false,
-          additionalRequirements: `Address: ${formData.address}\nProducer Type: ${formData.producerType}\n${formData.notes}`
-        }
-      });
+      const bookingPayload = {
+        referenceId: refId,
+        name: formData.farmerName,
+        phone: formData.phone,
+        city: formData.city,
+        market: formData.market,
+        stallType: formData.stallType,
+        producerType: formData.producerType,
+        preferredDate: formData.preferredDate ? format(formData.preferredDate, "yyyy-MM-dd") : "",
+        address: formData.address,
+        notes: formData.notes,
+      };
 
-      if (error) throw error;
+      // Send email and WhatsApp in parallel
+      const [emailResult, whatsappResult] = await Promise.allSettled([
+        supabase.functions.invoke('send-booking-email', {
+          body: {
+            ...bookingPayload,
+            email: formData.phone,
+            stallSize: formData.stallType,
+            preferredDates: bookingPayload.preferredDate,
+            hasElectricity: false,
+            additionalRequirements: `Address: ${formData.address}\nProducer Type: ${formData.producerType}\n${formData.notes}`
+          }
+        }),
+        supabase.functions.invoke('send-whatsapp-booking', { body: bookingPayload })
+      ]);
+
+      console.log("Email result:", emailResult);
+      console.log("WhatsApp result:", whatsappResult);
 
       setReferenceId(refId);
       setShowSuccess(true);
