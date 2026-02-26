@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-admin-password",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-admin-password, x-admin-username",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
 };
 
@@ -17,15 +17,18 @@ serve(async (req) => {
   const supabase = createClient(supabaseUrl, serviceRoleKey);
 
   const adminPassword = req.headers.get("x-admin-password") || "";
+  const adminUsername = req.headers.get("x-admin-username") || "";
 
-  // Verify admin password
-  const { data: setting } = await supabase
+  // Verify admin credentials
+  const { data: settings } = await supabase
     .from("admin_settings")
-    .select("setting_value")
-    .eq("setting_key", "admin_password")
-    .single();
+    .select("setting_key, setting_value")
+    .in("setting_key", ["admin_password", "admin_username"]);
 
-  if (!setting || adminPassword !== setting.setting_value) {
+  const stored: Record<string, string> = {};
+  settings?.forEach((s: any) => { stored[s.setting_key] = s.setting_value; });
+
+  if (adminUsername !== stored.admin_username || adminPassword !== stored.admin_password) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
