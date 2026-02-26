@@ -20,6 +20,7 @@ type Market = {
 };
 
 const AdminPage = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [markets, setMarkets] = useState<Market[]>([]);
@@ -33,11 +34,12 @@ const AdminPage = () => {
   const [filterCity, setFilterCity] = useState("all");
 
   const storedPassword = () => sessionStorage.getItem("admin_pw") || password;
+  const storedUsername = () => sessionStorage.getItem("admin_un") || username;
 
   const apiCall = async (method: string, body?: any) => {
     const res = await supabase.functions.invoke("admin-markets", {
       method: method as any,
-      headers: { "x-admin-password": storedPassword() },
+      headers: { "x-admin-password": storedPassword(), "x-admin-username": storedUsername() },
       body: body || undefined,
     });
     if (res.error) throw new Error(res.error.message);
@@ -49,6 +51,7 @@ const AdminPage = () => {
     try {
       const data = await apiCall("GET");
       sessionStorage.setItem("admin_pw", password);
+      sessionStorage.setItem("admin_un", username);
       setIsAuthenticated(true);
       setMarkets(data);
       toast.success("Logged in successfully");
@@ -127,8 +130,10 @@ const AdminPage = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("admin_pw");
+    sessionStorage.removeItem("admin_un");
     setIsAuthenticated(false);
     setPassword("");
+    setUsername("");
   };
 
   const cities = [...new Set(markets.map((m) => m.city))].sort();
@@ -143,9 +148,19 @@ const AdminPage = () => {
               <ShieldCheck className="h-6 w-6 text-primary" />
             </div>
             <CardTitle className="text-2xl">Admin Dashboard</CardTitle>
-            <p className="text-muted-foreground text-sm">Enter admin password to continue</p>
+            <p className="text-muted-foreground text-sm">Enter your credentials to continue</p>
           </CardHeader>
           <CardContent className="space-y-4">
+            <div>
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                type="email"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter username"
+              />
+            </div>
             <div>
               <Label htmlFor="password">Password</Label>
               <Input
@@ -154,7 +169,7 @@ const AdminPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-                placeholder="Enter admin password"
+                placeholder="Enter password"
               />
             </div>
             <Button onClick={handleLogin} disabled={loading} className="w-full">
