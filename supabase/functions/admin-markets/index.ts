@@ -36,10 +36,77 @@ serve(async (req) => {
   }
 
   const url = new URL(req.url);
+  const resource = url.searchParams.get("resource") || "markets";
   const method = req.method;
 
   try {
-    // GET - list all markets (including inactive)
+    // ---- WOMEN MARKET SCHEDULE ----
+    if (resource === "women_schedule") {
+      if (method === "GET") {
+        const { data, error } = await supabase
+          .from("women_market_schedule")
+          .select("*")
+          .order("city")
+          .order("date");
+        if (error) throw error;
+        return new Response(JSON.stringify(data), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      const body = await req.json();
+
+      if (method === "POST") {
+        const { data, error } = await supabase
+          .from("women_market_schedule")
+          .insert({
+            city: body.city,
+            date: body.date,
+            day: body.day,
+            venue: body.venue,
+            slots_total: body.slots_total ?? 40,
+            slots_remaining: body.slots_remaining ?? 40,
+            is_active: body.is_active ?? true,
+          })
+          .select()
+          .single();
+        if (error) throw error;
+        return new Response(JSON.stringify(data), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      if (method === "PUT") {
+        const { data, error } = await supabase
+          .from("women_market_schedule")
+          .update({
+            city: body.city,
+            date: body.date,
+            day: body.day,
+            venue: body.venue,
+            slots_total: body.slots_total,
+            slots_remaining: body.slots_remaining,
+            is_active: body.is_active,
+          })
+          .eq("id", body.id)
+          .select()
+          .single();
+        if (error) throw error;
+        return new Response(JSON.stringify(data), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      if (method === "DELETE") {
+        const { error } = await supabase.from("women_market_schedule").delete().eq("id", body.id);
+        if (error) throw error;
+        return new Response(JSON.stringify({ success: true }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
+
+    // ---- MARKETS (default) ----
     if (method === "GET") {
       const { data, error } = await supabase
         .from("markets")
@@ -55,7 +122,6 @@ serve(async (req) => {
 
     const body = await req.json();
 
-    // POST - add market
     if (method === "POST") {
       const { data, error } = await supabase
         .from("markets")
@@ -69,7 +135,6 @@ serve(async (req) => {
       });
     }
 
-    // PUT - update market
     if (method === "PUT") {
       const { data, error } = await supabase
         .from("markets")
@@ -84,7 +149,6 @@ serve(async (req) => {
       });
     }
 
-    // DELETE - delete market
     if (method === "DELETE") {
       const { error } = await supabase.from("markets").delete().eq("id", body.id);
       if (error) throw error;

@@ -140,6 +140,42 @@ export type Database = {
         }
         Relationships: []
       }
+      women_market_schedule: {
+        Row: {
+          city: string
+          created_at: string
+          date: string
+          day: string
+          id: string
+          is_active: boolean
+          slots_remaining: number
+          slots_total: number
+          venue: string
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          date: string
+          day: string
+          id?: string
+          is_active?: boolean
+          slots_remaining?: number
+          slots_total?: number
+          venue: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          date?: string
+          day?: string
+          id?: string
+          is_active?: boolean
+          slots_remaining?: number
+          slots_total?: number
+          venue?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
