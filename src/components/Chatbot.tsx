@@ -16,20 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 
 
-const cityMarkets = {
-  Pune: [
-    "Kharadi", "Hadapsar", "Magarpatta", "Ivy Estate", "Baner", "Wakad", "Aundh",
-    "Pimple Saudagar", "Kalyani Nagar", "Viman Nagar", "Kothrud", "Shivaji Nagar",
-    "Katraj", "Warje", "Undri", "Kondhwa", "Hinjewadi", "Pashan", "Bavdhan",
-    "Sus", "Pimpri", "Chinchwad", "Nigdi"
-  ],
-  Mumbai: [
-    "Dombivli", "Thane", "Mulund", "Ghatkopar", "Borivali", "Chembur", "Andheri",
-    "Kandivali", "Malad", "Goregaon", "Dahisar", "Mira Road", "Bhandup", "Vikhroli",
-    "Powai", "Kurla", "Vashi", "Kharghar", "Panvel", "Nerul", "Airoli",
-    "Sanpada", "Kopar Khairane"
-  ]
-};
+// Markets are now fetched from the database
 
 const TOTAL_STEPS = 10;
 
@@ -41,6 +28,7 @@ const Chatbot = () => {
   const [referenceId, setReferenceId] = useState("");
   const { t } = useTranslation();
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const [cityMarkets, setCityMarkets] = useState<Record<string, string[]>>({});
   
   const [formData, setFormData] = useState({
     farmerName: "",
@@ -56,6 +44,22 @@ const Chatbot = () => {
   });
 
   const [stepError, setStepError] = useState("");
+
+  // Fetch markets from database
+  useEffect(() => {
+    const fetchMarkets = async () => {
+      const { data } = await supabase.from("markets").select("city, market_name").eq("is_active", true).order("market_name");
+      if (data) {
+        const grouped: Record<string, string[]> = {};
+        data.forEach((m: any) => {
+          if (!grouped[m.city]) grouped[m.city] = [];
+          grouped[m.city].push(m.market_name);
+        });
+        setCityMarkets(grouped);
+      }
+    };
+    fetchMarkets();
+  }, []);
 
   useEffect(() => {
     const handleOpenChatbot = (e?: CustomEvent) => {
@@ -373,8 +377,9 @@ const Chatbot = () => {
                 <SelectValue placeholder={t('chooseCity')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Pune">{t('pune')}</SelectItem>
-                <SelectItem value="Mumbai">{t('mumbai')}</SelectItem>
+                {Object.keys(cityMarkets).sort().map((city) => (
+                  <SelectItem key={city} value={city}>{city}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -389,7 +394,7 @@ const Chatbot = () => {
                 <SelectValue placeholder={t('chooseMarket')} />
               </SelectTrigger>
               <SelectContent className="max-h-[200px]">
-                {cityMarkets[formData.city as keyof typeof cityMarkets]?.map((market) => (
+                {(cityMarkets[formData.city] || []).map((market) => (
                   <SelectItem key={market} value={market}>{market}</SelectItem>
                 ))}
               </SelectContent>
