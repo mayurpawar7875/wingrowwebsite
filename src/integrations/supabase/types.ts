@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: string
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value: string
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: string
+        }
+        Relationships: []
+      }
       market_invitations: {
         Row: {
           additional_notes: string | null
@@ -59,6 +77,30 @@ export type Database = {
           phone_number?: string
           preferred_dates?: string
           venue_address?: string
+        }
+        Relationships: []
+      }
+      markets: {
+        Row: {
+          city: string
+          created_at: string
+          id: string
+          is_active: boolean
+          market_name: string
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          market_name: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          market_name?: string
         }
         Relationships: []
       }
